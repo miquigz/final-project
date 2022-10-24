@@ -1,6 +1,7 @@
 // const app = require('express')()
 const express = require('express')
 const { engine } = require('express-handlebars')
+const methodOverride = require('method-override')
 require('dotenv').config()
 
 const { dbConnection } = require('./database/config')
@@ -23,6 +24,7 @@ app.set('views', './views')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(methodOverride('_method'))
 
 
 

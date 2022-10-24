@@ -1,26 +1,18 @@
 const express = require('express')
-const Post = require('../models/posts')
 const routerPosts = express.Router()
 
+const { getPosts, newPost, createPost, showPost, deletePost, showPostFormEdit } = require('../controllers/posts')
 
-// Rutas de INDEX
-routerPosts.get('/posts', async (req, res) => {
-    
-    try {
-    
-        const posts = await Post.find({})
+// Rutas de Index
+routerPosts.get('/posts', getPosts)
+routerPosts.get('/posts/new', newPost)
+routerPosts.get('/posts/edit/:id', showPostFormEdit)
+routerPosts.get('/posts/:slug', showPost)
 
-        res.render('get',
-            {
-                title,
-                posts
-            }
-        )
+routerPosts.post('/posts', createPost)
 
-    } catch (error) {
-        console.log(error)
-    }
-})
+routerPosts.delete('/posts/:id', deletePost)
+
 
 module.exports = {
     routerPosts
