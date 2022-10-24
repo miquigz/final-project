@@ -84,11 +84,26 @@ const showPostFormEdit = async (req, res = response) => {
     }
 }
 
+const editPost = async (req, res = response) => {
+  try {
+    let post = await Post.findById(req.params.id);
+    //.lean() si ponemos este metodo no nos reconoce la funcion .save()
+      post.title = req.body.title;
+      post.body = req.body.body;
+    post = await post.save();
+    //res.redirect(`/posts/edit/${post._id}`);
+    res.redirect(`/posts`);
+  } catch (error) {
+    console.log('Edit ERORR', error)
+  }
+}
+
 module.exports = {
   getPosts,
   showPost,
   deletePost,
   createPost,
   newPost,
-  showPostFormEdit
+  showPostFormEdit,
+  editPost
 };
