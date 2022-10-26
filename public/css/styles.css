@@ -2,3 +2,29 @@
     font-family: 'Didact Gothic', sans-serif;
     /* font-family: 'Wire One', sans-serif; */
 }
+
+
+/* Animacion hover/unhover botones */
+.btn-effect{
+    transition: 0.2s;
+    transition-property: color;
+    color: #e2d5d5;
+}
+.btn-effect>svg{
+    fill:#e2d5d5;
+    transition: 0.2s;
+    transition-property: fill;
+}
+
+
+.btn-effect:hover{
+    transition: 0.3s;
+    transition-property: color;
+    color: #3d3333;
+}
+
+.btn-effect:hover>svg{
+    transition: 0.3s;
+    transition-property: fill;
+    fill: #221f1f;
+}

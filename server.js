@@ -21,20 +21,19 @@ app.set('view engine', 'hbs')
 app.set('views', './views')
 
 // Middlewares
-app.use(express.static('public'))
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
-app.use(methodOverride('_method'))
-
-
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(methodOverride('_method'));
 
 // Routes
 app.use('/', routerIndex)
 app.use('/', routerDev) // Solo para desarrollo
 app.use('/', routerPosts)
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 app.listen(PORT, err => {
-    if ( err ) throw new Error('Ocurrió un problema con el servidor: ', err)
-    console.log(`Servidor express escuchando en el puerto ${PORT}`)
+    if ( err )
+        throw new Error('Ocurrió un problema con el servidor: ', err);
+    console.log(`-- Servidor express escuchando en el puerto ${PORT}`);
 })

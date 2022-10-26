@@ -5,7 +5,7 @@
   <a href="/posts/new" class="btn btn-success">Crear Post</a>
 <hr>
 
-<table class="table">
+<table class="table border border-success rounded border-bottom-0">
   <thead>
     <tr>
       <th scope="col">Titulo</th>
@@ -29,10 +29,11 @@
                 </a>
 
                 <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
-                  <button class="btn btn-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                    </svg>
+                  <button class="btn btn-danger btn-effect">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                      width="16" height="20"
+                      viewBox="0 0 20 20"
+                      ><path d="M 10 2 L 9 3 L 5 3 C 4.448 3 4 3.448 4 4 C 4 4.552 4.448 5 5 5 L 7 5 L 17 5 L 19 5 C 19.552 5 20 4.552 20 4 C 20 3.448 19.552 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.105 5.895 22 7 22 L 17 22 C 18.105 22 19 21.105 19 20 L 19 7 L 5 7 z"></path></svg>
                     Eliminar
                   </button>
                 </form>

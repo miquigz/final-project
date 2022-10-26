@@ -1,5 +1,5 @@
 
-const statusModel = 'Todo fino!'
+const statusModel = 'Todo Ok!'
 
 module.exports = {
     statusModel
