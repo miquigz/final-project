@@ -18,18 +18,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 element.addEventListener('click', (e) => {
                     e.preventDefault();
                     swalWithBootstrapButtons.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
+                        title: '¿Estás seguro/a?',
+                        text: "No podrás revertir esto!",
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonText: 'Yes, delete it!',
-                        cancelButtonText: 'No, cancel!',
+                        confirmButtonText: 'Sí, borrar!',
+                        cancelButtonText: 'No, cancelar!',
                         reverseButtons: true
                     }).then((result) => {
                         if (result.isConfirmed) {
                             swalWithBootstrapButtons.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
+                                'Borrado!',
+                                'Su post ha sido eliminado.',
                                 'success'
                             )
                             setTimeout(() => {
