@@ -15,8 +15,9 @@
   </thead>
   <tbody>
     {{#each posts}}
+      {{#if isInRange( @index)}}
         <tr>
-            <td width="30%">{{this.title}}</td>
+            <td width="30%">{{@index}} - {{this.title}}</td>
             <td width="40%">{{this.body}}</td>
             <td>
                 <button id="botonDelete">borrarexample</button>
