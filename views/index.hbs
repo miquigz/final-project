@@ -15,12 +15,14 @@
   </thead>
   <tbody>
     {{#each posts}}
-      {{#if isInRange( @index)}}
+        {{!-- {{#if (isInRange index)}}
+        {{!-- {{#if posts includeZero=true}} --}}
+        {{!-- {{/if}}  --}}
         <tr>
             <td width="30%">{{@index}} - {{this.title}}</td>
             <td width="40%">{{this.body}}</td>
             <td>
-                <button id="botonDelete">borrarexample</button>
+                {{!-- <button id="botonDelete">borrarexample</button> --}}
                 <a href="/posts/{{this.slug}}" class="btn btn-secondary">Ver</a>
                 <a href="/posts/edit/{{this._id}}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -31,7 +33,7 @@
                 </a>
 
                 <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
-                  <button class="btn btn-danger btn-effect">
+                  <button id="botonDelete" class="btn btn-danger btn-effect botonDelete">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                       width="16" height="20"
                       viewBox="0 0 20 20"

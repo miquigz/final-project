@@ -1,10 +1,11 @@
 let rangeFirst = 0;
 let rangeLast = 9;
 
-let indiceActual;
+let indiceActual = 0;
+let Handlebars = require('handlebars');
 
 Handlebars.registerHelper('setIndice', function (value) {
-    return (value >= rangeFirst && value <= rangeLast);
+    return ( value >= rangeFirst && value <= rangeLast);
 });
 
 Handlebars.registerHelper('isInRange', function (value) {
