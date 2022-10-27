@@ -3,6 +3,16 @@
     /* font-family: 'Wire One', sans-serif; */
 }
 
+.bg-link{
+    background-color: rgba(127, 255, 212, 0.705);
+}
+
+.bg-link:hover{
+    transition: 0.4s;
+    transition-property: color, background-color;
+    background-color: aquamarine;
+    color: #FEFEFE;
+}
 
 /* Animacion hover/unhover botones */
 .btn-effect{
