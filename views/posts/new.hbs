@@ -1,0 +1,20 @@
+<div class="bg-secondary p-2 mt-2 rounded">
+    <h2 class="m-4">Crear nuevo Post</h2>
+
+    <form action="/posts" method="POST">
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Ingrese el título del post">
+        </div>
+        
+        <label for="body">Example textarea</label>
+        <textarea class="form-control" id="body" name="body" rows="3"  placeholder="Ingrese su descripcion"></textarea>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="guardarFecha" name="guardarFecha">
+            <label class="form-check-label" for="guardarFecha">Guardar fecha de creacion</label>
+        </div>            
+
+        <button type="submit" id="btnCrearPost" class="btn btn-success mt-3">Submit</button>
+        <a href="/posts/" type="reset" id="btnCancelCrear" class="btn btn-light mx-3 mt-3">Cancelar</a>
+    </form>
+</div>

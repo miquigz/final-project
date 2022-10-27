@@ -7,7 +7,7 @@ const getPosts = async (req, res = response) => {
     const posts = await Post.find({}).lean(); // Me deja un obj puro de JS
     //console.log(posts)
     const title = "InfoBlog - Listado de Post";
-    res.status(200).render("index", {
+    res.status(200).render("posts/index", {
       title,
       posts,
     });
@@ -22,7 +22,7 @@ const showPost = async (req, res = response) => {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
     if (post === null) res.redirect("/");
 
-    res.render("show", {
+    res.render("posts/show", {
       title: `InfoBlog - ${post.title}`,
       post,
     })
@@ -46,7 +46,7 @@ const deletePost = async (req, res = response) => {
 
 // NEW
 const newPost = (req, res = response) => {
-    res.status(200).render('new')
+    res.status(200).render('posts/new')
 }
 
 // CREATE
@@ -58,9 +58,12 @@ const createPost = async (req, res = response) => {
 
         post.title = req.body.title
         post.body = req.body.body
-
+        if (req.body.guardarFecha){
+          post.fecha = "Creado el: " + new Date().toLocaleString();
+        }
         post = await post.save()
-        res.redirect(`/posts/${post.slug}`)
+        
+        res.status(200).redirect(`/posts/${post.slug}`);
 
     } catch (error) {
         console.log('Error CREATE', error)
@@ -74,7 +77,7 @@ const showPostFormEdit = async (req, res = response) => {
     try {
         const post = await Post.findById(req.params.id).lean()
 
-        res.render('edit', {
+        res.render('posts/edit', {
             title: 'Editando Post',
             post
         })
@@ -90,6 +93,7 @@ const editPost = async (req, res = response) => {
     //.lean() si ponemos este metodo no nos reconoce la funcion .save()
       post.title = req.body.title;
       post.body = req.body.body;
+      post.fecha = "Editado el: " + new Date().toLocaleString();
     post = await post.save();
     //res.redirect(`/posts/edit/${post._id}`);
     res.redirect(`/posts`);

@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         background: "#444444",
         color: "#FEFEFE"
     })
-
     try {
             botones = document.querySelectorAll('.botonDelete');
             botones.forEach(element => {

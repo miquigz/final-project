@@ -15,6 +15,11 @@ const postSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true
+        },
+        fecha: {
+            type: String,
+            required: false,
+            unique: true
         }
     },
     {
