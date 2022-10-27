@@ -1,29 +1,26 @@
 
 <h2>Listado de Posts</h2>
 
-<hr>
+<hr class="bg-light">
   <a href="/posts/new" class="btn btn-success">Crear Post</a>
-<hr>
+<hr class="bg-success">
 
 <table class="table border border-success rounded border-bottom-0">
   <thead>
-    <tr>
-      <th scope="col">Titulo</th>
-      <th scope="col">Post</th>
-      <th scope="col">Acciones</th>
+    <tr class="">
+      <th scope="col h5"><p class="h5 text-bold text-center">Titulo</p></th>
+      <th scope="col h5"><p class="h5 text-bold text-center">Post</p></th>
+      <th scope="col h5"><p class="h5 text-bold text-center">Acciones</p></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="bg-secondary">
     {{#each posts}}
-        {{!-- {{#if (isInRange index)}}
-        {{!-- {{#if posts includeZero=true}} --}}
-        {{!-- {{/if}}  --}}
-        <tr>
-            <td width="30%">{{@index}} - {{this.title}}</td>
-            <td width="40%">{{this.body}}</td>
-            <td>
+        <tr class="border-success rounded">
+            <td class="border-success rounded" width="30%"> {{@index}} - <p class="h4">{{this.title}}</p></td>
+            <td width="45%">{{this.body}}</td>
+            <td class="d-flex flex-wrap border-success rounded">
                 {{!-- <button id="botonDelete">borrarexample</button> --}}
-                <a href="/posts/{{this.slug}}" class="btn btn-secondary">Ver</a>
+                <a href="/posts/{{this.slug}}" class="btn btn-light">Ver</a>
                 <a href="/posts/edit/{{this._id}}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>

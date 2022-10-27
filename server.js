@@ -1,6 +1,5 @@
 // const app = require('express')()
 const express = require('express')
-const { engine } = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
@@ -20,9 +19,30 @@ const app = express()
 dbConnection()
 
 // Template Engine
-app.engine('hbs', engine({extname: '.hbs'}))
+// app.engine('hbs', ))
+// app.set('view engine', 'hbs')
+// app.set('views', './views')
+
+// const { engine } = require('express-handlebars')
+
+
+
+
+let hbs = require('express-handlebars');
+hbs.create({
+    helpers: {
+        isInRange: function (value) {
+            return (value >= rangeFirst && value <= rangeLast);
+        },
+        sayHello: function(){
+            return alert('hello')
+        }
+    }
+});
+app.engine('hbs', hbs.engine({extname: '.hbs'}));
 app.set('view engine', 'hbs')
 app.set('views', './views')
+
 
 
 
