@@ -8,9 +8,6 @@ const generatePost = () => {
         body: faker.lorem.sentence(12),
         fecha: ''
     }
-
-    // testear
-    // console.log(post)
     
     return post
 }

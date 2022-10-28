@@ -1,25 +1,24 @@
-const { response } = require("express");
+const { request, response } = require("express");
 const Post = require("../models/posts");
 
 // INDEX
 const getPosts = async (req, res = response) => {
   try {
-    let desde = 0;
-    let hasta = 5;
     const postsArray = await Post.find({}).lean(); // Me deja un obj puro de JS
-    
-    const maximo = postsArray.length;
-    
-    let posts = postsArray.slice(desde, hasta); //desde..desde+5
 
-    console.log(posts.length);
+    let posts = postsArray.slice(0, 7);
     const title = "InfoBlog - Listado de Post";
+
+    const paginacion = {
+      desde:1,
+      hasta:7,
+      max:postsArray.length
+    }
+
     res.status(200).render("posts/index", {
       title,
       posts,
-      desde,
-      hasta,
-      maximo
+      paginacion
     });
   } catch (error) {
     console.log('Error INDEX', error)
@@ -28,9 +27,28 @@ const getPosts = async (req, res = response) => {
 
 const getPostsPaginacion = async (req, res = response)=>{
   try {
+    //TODO: Acortar busqueda mediante index propio de la db
+    const postsArray = await Post.find({}).lean();
+
+    // console.log(typeof(req.query.skip));
+
+    let valor = 5; //Valor a aumentar (de 5 en 5).
+    let posts = postsArray.slice(req.query.skip ,req.query.limit);
+    //let desde = parseInt(req.query.skip) + 1;
+    let maximo =  + 1;
+    const paginacion = {
+      desde: req.query.skip,
+      hasta: req.query.limit,
+      maximo: postsArray.length,
+      valor
+    }
+    res.status(200).render("posts/index", {
+      posts,
+      paginacion
+    });
 
   } catch (error) {
-      console.log("Error en paginacion");
+      console.log("Error en paginacion", error);
   }
 
 }
@@ -47,7 +65,6 @@ const showPost = async (req, res = response) => {
     res.render("posts/show", {
       title: `InfoBlog - ${post.title}`,
       post,
-      desde
     })
 
   } catch (error) {
@@ -56,12 +73,12 @@ const showPost = async (req, res = response) => {
 };
 
 // DELETE
-const deletePost = async (req, res = response) => {
+const deletePost = async (req = request, res = response) => {
     try {
         await Post.findByIdAndDelete(req.params.id)
 
-        res.redirect('/posts')
-
+        console.log(req.headers.referer)
+        res.redirect(req.headers.referer);
     } catch (error) {
         console.log('Error DELETE', error)
     }
@@ -85,9 +102,8 @@ const createPost = async (req, res = response) => {
           post.fecha = "Creado el: " + new Date().toLocaleString();
         }
         post = await post.save()
-        
+        console.log(req);
         res.status(200).redirect(`/posts/${post.slug}`);
-
     } catch (error) {
         console.log('Error CREATE', error)
     }
@@ -132,5 +148,6 @@ module.exports = {
   createPost,
   newPost,
   showPostFormEdit,
-  editPost
+  editPost,
+  getPostsPaginacion
 };

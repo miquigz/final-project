@@ -55,19 +55,11 @@ const { routerHome } = require('./routes/home')
 //     }
 // }}));
 
-app.engine('hbs', hbs({
-    helpers: {
-        inc: function (value, options) {
-            return parseInt(value) + 1;
-        }
-    },
-    extname: 'hbs',
-    defaultLayout: 'layout',
-    layoutsDIR: __dirname + '/views/layout/',
-    partialsDIR: __dirname + '/views/partials/'
-}))
-
-// app.engine('hbs', hbs.engine({extname: '.hbs'}));
+const helpers = require('handlebars-helpers')();
+app.engine('hbs', hbs.engine({
+    helpers: helpers,
+    extname: '.hbs'
+}));
 app.set('view engine', 'hbs')
 app.set('views', './views')
 
@@ -95,6 +87,7 @@ app.use('/', routerAuth);
 app.use('/', routerDev); // Solo para desarrollo
 app.use('/', routerPosts);
 app.use('/', routerHome);
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, err => {

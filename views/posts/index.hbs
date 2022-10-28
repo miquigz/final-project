@@ -2,8 +2,12 @@
 <h2>Listado de Posts</h2>
 
 <hr class="bg-light">
-  <a href="/posts/new" class="btn btn-success">Crear Post</a>
-<hr class="bg-success">
+<div class="d-flex justify-content-center">
+    <a href="/posts/new" class="btn btn-success">Crear Post</a>
+    <p class="mx-5 h3">Total de Posts: {{paginacion.maximo}}</p>
+</div>
+
+<hr class="bg-light">
 
 <table class="table border border-success rounded border-bottom-0">
   <thead>
@@ -16,7 +20,7 @@
   <tbody class="bg-secondary">
     {{#each posts}}
         <tr>
-            <td class="border-success rounded" width="30%"><p class="h4">{{this.title}}</p></td>
+            <td class="border-success rounded" width="30%">{{add paginacion.desde @index}}<p class="h4">{{this.title}}</p></td>
             <td width="45%"><p>{{this.body}}</p>{{#if this.fecha}} <small class="text-light">{{this.fecha}} </small>{{/if}} </td>
             <td class="d-flex flex-wrap border-success rounded">
                 {{!-- <button id="botonDelete">borrarexample</button> --}}
@@ -28,7 +32,6 @@
                     </svg>
                     Editar
                 </a>
-
                 <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
                   <button id="botonDelete" class="btn btn-danger btn-effect botonDelete">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -41,14 +44,16 @@
 
             </td>
         </tr>
-        {{@index "+" 1}}
-    {{/each}}
+{{/each}}
   </tbody>
-  <h1> {{desde}} - {{hasta}}</h1>
-          <a href="#" {{#if desde includeZero=true}}class="btn disabled"{{/if}} class="btn-secondary">Atras</a>
-          {{!-- <a href="#" {{#if hasta }} --}}
+  <div class="d-flex w-100 justify-content-center my-2">
+    <a href="/posts/pag/?skip={{abs paginacion.desde paginacion.valor}}&limit={{abs paginacion.hasta paginacion.valor}}" {{#if paginacion.desde includeZero=true}}class="btn btn-info disabled"{{/if}} class="btn btn-info">Atras</a>
+    <p class="h3 mx-5">{{add paginacion.desde 1}} - {{paginacion.hasta}}</p>
+    <a href="/posts/pag/?skip={{add paginacion.desde paginacion.valor}}&limit={{add paginacion.hasta paginacion.valor}}" {{#if (gt (add paginacion.hasta 5) paginacion.maximo)}}class="btn btn-info disabled"{{/if}}class="btn btn-info">Siguiente</a>  
+  </div>
           
         
+  <hr class="bg-success">
 </table>
 
 
