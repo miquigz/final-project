@@ -4,27 +4,50 @@ const Post = require("../models/posts");
 // INDEX
 const getPosts = async (req, res = response) => {
   try {
-    const posts = await Post.find({}).lean(); // Me deja un obj puro de JS
-    //console.log(posts)
+    let desde = 0;
+    let hasta = 5;
+    const postsArray = await Post.find({}).lean(); // Me deja un obj puro de JS
+    
+    const maximo = postsArray.length;
+    
+    let posts = postsArray.slice(desde, hasta); //desde..desde+5
+
+    console.log(posts.length);
     const title = "InfoBlog - Listado de Post";
     res.status(200).render("posts/index", {
       title,
       posts,
+      desde,
+      hasta,
+      maximo
     });
   } catch (error) {
     console.log('Error INDEX', error)
   }
 };
 
+const getPostsPaginacion = async (req, res = response)=>{
+  try {
+
+  } catch (error) {
+      console.log("Error en paginacion");
+  }
+
+}
+
+
 // SHOW
+
 const showPost = async (req, res = response) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
+    
     if (post === null) res.redirect("/");
 
     res.render("posts/show", {
       title: `InfoBlog - ${post.title}`,
       post,
+      desde
     })
 
   } catch (error) {

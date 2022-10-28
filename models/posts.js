@@ -19,7 +19,7 @@ const postSchema = new mongoose.Schema(
         fecha: {
             type: String,
             required: false,
-            unique: true
+            unique: false
         }
     },
     {

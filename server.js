@@ -29,17 +29,45 @@ dbConnection()
 
 
 let hbs = require('express-handlebars');
-hbs.create({
+const { routerHome } = require('./routes/home')
+// hbs.create({
+//     helpers: {
+//         isInRange: function (value) {
+//             return (value >= rangeFirst && value <= rangeLast);
+//         },
+//         sayHello: function(){
+//             return alert('hello')
+//         }
+//     }
+// });
+// app.engine('handlebars', hbs.create({
+//     helpers:{
+//     math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue){
+//         rvalue = parseFloat(rvalue);
+//         return {
+//             "+": lvalue + rvalue,
+//             "-": lvalue - rvalue,
+//             "*": lvalue * rvalue,
+//             "/": lvalue / rvalue,
+//             "%": lvalue % rvalue
+//         }[operator];
+//     }
+//     }
+// }}));
+
+app.engine('hbs', hbs({
     helpers: {
-        isInRange: function (value) {
-            return (value >= rangeFirst && value <= rangeLast);
-        },
-        sayHello: function(){
-            return alert('hello')
+        inc: function (value, options) {
+            return parseInt(value) + 1;
         }
-    }
-});
-app.engine('hbs', hbs.engine({extname: '.hbs'}));
+    },
+    extname: 'hbs',
+    defaultLayout: 'layout',
+    layoutsDIR: __dirname + '/views/layout/',
+    partialsDIR: __dirname + '/views/partials/'
+}))
+
+// app.engine('hbs', hbs.engine({extname: '.hbs'}));
 app.set('view engine', 'hbs')
 app.set('views', './views')
 
@@ -64,8 +92,9 @@ app.use(passport.session())
 
 // Routes
 app.use('/', routerAuth);
-app.use('/', routerDev) // Solo para desarrollo
-app.use('/', routerPosts)
+app.use('/', routerDev); // Solo para desarrollo
+app.use('/', routerPosts);
+app.use('/', routerHome);
 
 const PORT = process.env.PORT;
 app.listen(PORT, err => {
