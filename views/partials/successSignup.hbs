@@ -1,0 +1,20 @@
+<script>
+    const signupSuccess = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 3500,
+    timerProgressBar: true,
+    background: "#545454f1",
+    color: "rgba(127, 255, 212, 0.705)",
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    })
+
+    signupSuccess.fire({
+    icon: 'success',
+    title: 'Registrado correctamente!'
+    })
+</script>

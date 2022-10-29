@@ -100,7 +100,6 @@ const createPost = async (req, res = response) => {
           post.fecha = "Creado el: " + new Date().toLocaleString();
         }
         post = await post.save()
-        console.log(req);
         res.status(200).redirect(`/posts/${post.slug}`);
     } catch (error) {
         console.log('Error CREATE', error)
@@ -133,7 +132,7 @@ const editPost = async (req, res = response) => {
       post.fecha = "Editado el: " + new Date().toLocaleString();
     post = await post.save();
     //res.redirect(`/posts/edit/${post._id}`);
-    res.redirect(`/posts`);
+    res.redirect(`/posts/${post.slug}`);
   } catch (error) {
     console.log('Edit ERORR', error)
   }

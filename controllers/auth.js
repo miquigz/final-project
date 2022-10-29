@@ -8,6 +8,7 @@ const showAuthFormSignUp  = (req, res = response) => {
 const signUp = async (req, res = response) => {
 //TODO: Validaciones en controller, evitamos escribir en ROUTER validaciones:
 //TODO: Evitar tantos return
+//TODO: Hacer trycatch
 
     const errors = [];
     const { name, email, password, confirmPassword } = req.body;
@@ -36,8 +37,8 @@ const signUp = async (req, res = response) => {
     //Encriptamos el password q escribe el usuario para registrarse(signUp)
     newUser.password = await newUser.passwordEncrypt(password);
     await newUser.save()
-    
-    req.flash("TODO_BIEN", "Se registro correctamente!")
+
+    req.flash("signup_bien", "Se registro correctamente!")
     
     // await newUser.update()  otras opciones
     // await newUser.insertOne

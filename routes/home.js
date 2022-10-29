@@ -4,7 +4,7 @@ const routerHome = express.Router()
 
 
 
-routerHome.get('/home', showHomeAllPosts);
+routerHome.get('/home/', showHomeAllPosts);
 routerHome.get('/home/:id', showHomePostById);
 
 module.exports = {

@@ -1,7 +1,88 @@
-<h2>{{title}}</h2>
-{{#each posts}}
 
-    
-    {{this.title}}
+<h2 class="text-center">Posts mas recientes:</h2>
 
+<h1>{{this.posts.[posts.lenght].title}}</h1>
+
+{{!-- {{posts.[(posts.lenght)].title}} --}}
+<hr class="bg-light">
+<div id="carouselExampleIndicators" class="carousel slide my-3" style="height: 250px;" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <h1>{{masRecientes.last.title}}</h1>
+            <p>{{masRecientes.last.body}}</p>
+        </div>
+        <div class="carousel-item">
+            <h1>{{masRecientes.last2.title}}</h1>
+            <p>{{masRecientes.last2.body}}</p>
+        </div>
+        <div class="carousel-item">
+            <h1>{{masRecientes.last3.title}}</h1>
+            <p>{{masRecientes.last3.body}}</p>
+            {{!-- <img src="..." class="d-block w-100" alt="..."> --}}
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<hr class="bg-light text-center">
+
+
+<h3 class="text-center">{{title}}</h3>
+
+<div class="row justify-content-center mx-auto bg-secondary p-4 border border-success rounded mt-3">
+    {{#each posts}}
+    <div class="col-sm-6 col-lg-3 col-md-6 card text-white bg-success mb-3 mx-1 border border-dark">
+
+        <div class="card-header w-100 bg-dark rounded text-center">Post - {{add @index 1}}</div>
+        <div class="card-body">
+            <h4 class="card-title">{{this.title}}</h4>
+            <p class="card-text">{{this.body}}</p>
+        </div>
+        {{#if this.fecha}}
+            <small>{{this.fecha}}</small>
+        {{/if}}
+        <a href="/posts/{{this.slug}}" class="btn btn-light my-2 text-weight-bold">Ver mas</a>
+        {{!-- <div class="" style="max-width: 20rem;"></div>
+    </div> --}}
+</div>
 {{/each}}
+
+</div>
+<div class="d-flex justify-content-center mt-1">
+    <ul class="pagination">
+        <li {{#if (lte paginacion.desde 0)}} class="page-item disabled"{{else}} class="page-item"{{/if}}>
+            <a class="page-link" 
+            href="/home/?skip={{minus paginacion.desde paginacion.valor}}&limit={{minus paginacion.hasta paginacion.valor}}">&laquo;</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">4</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">5</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#">&raquo;</a>
+        </li>
+    </ul>
+</div>

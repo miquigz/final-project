@@ -1,18 +1,24 @@
-<form action="/auth/signin" method="POST">
+{{#if signup_bien}}
+  {{> successSignup}}
+{{/if}}
+<div class="bg-secondary mt-4 p-4 rounded border border-success">
+  <h3 class="text-center text-success font-weight-bold">Iniciar Sesión</h3>
+  <form action="/auth/signin" method="POST">
   {{!-- Email --}}
   <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <label for="email">Direccion de Email</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingrese su Email">
   </div>
   {{!-- Password --}}
 <div class="form-group">
-    <label for="password">Password</label>
+    <label for="password">Contraseña</label>
     <input type="text" class="form-control" id="password" placeholder="Ingrese su Contraseña">
   </div>
   {{!-- <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div> --}}
-  <button type="submit" class="btn btn-primary">Sign In</button>
+  <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+  <a href="/home" class="btn btn-dark">Cancelar</a>
 </form>
+</div>

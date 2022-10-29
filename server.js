@@ -13,6 +13,7 @@ const { dbConnection } = require('./database/config')
 const { routerAuth } = require('./routes/auth')
 const { routerDev } = require('./routes/db')
 const { routerPosts } = require('./routes/posts')
+const { routerHome } = require('./routes/home')
 
 // Inicializo la aplicación de express
 const app = express()
@@ -20,52 +21,20 @@ const app = express()
 // Conectar a la DB
 dbConnection()
 
-// Template Engine
-// app.engine('hbs', ))
-// app.set('view engine', 'hbs')
-// app.set('views', './views')
-
-// const { engine } = require('express-handlebars')
 
 
 
-
+//----- HANDLEBARS & Helpers
 let hbs = require('express-handlebars');
-const { routerHome } = require('./routes/home')
-// hbs.create({
-//     helpers: {
-//         isInRange: function (value) {
-//             return (value >= rangeFirst && value <= rangeLast);
-//         },
-//         sayHello: function(){
-//             return alert('hello')
-//         }
-//     }
-// });
-// app.engine('handlebars', hbs.create({
-//     helpers:{
-//     math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue){
-//         rvalue = parseFloat(rvalue);
-//         return {
-//             "+": lvalue + rvalue,
-//             "-": lvalue - rvalue,
-//             "*": lvalue * rvalue,
-//             "/": lvalue / rvalue,
-//             "%": lvalue % rvalue
-//         }[operator];
-//     }
-//     }
-// }}));
 
 const helpers = require('handlebars-helpers')();
+
 app.engine('hbs', hbs.engine({
     helpers: helpers,
     extname: '.hbs'
 }));
 app.set('view engine', 'hbs')
 app.set('views', './views')
-
-
 
 
 // Middlewares
@@ -85,8 +54,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
+//Variables de entorno
 app.use((req, res, next)=>{
-    res.locals.TODO_BIEN  = req.flash('Todo bien');
+    res.locals.signup_bien  = req.flash('signup_bien');
     next();
 })
 

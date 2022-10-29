@@ -1,30 +1,39 @@
-<form action="/auth/signup" method="POST">
-    {{!-- NOmbre --}}
-  <div class="form-group">
-    <label for="name">Nombre</label>
-    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  {{!-- Email --}}
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  {{!-- Password --}}
-  <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" id="password">
-    </div>
-    {{!-- Confirm Password --}}
-  <div class="form-group">
-      <label for="confirmPassword">Repita su contrasenia</label>
-      <input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
-    </div>
 
-  {{!-- <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div> --}}
-  <button type="submit" class="btn btn-primary">SignUp</button>
-</form>
+<div class="bg-secondary mt-4 p-4 rounded border border-success">
+  <h3 class="text-center text-success font-weight-bold">Registrarse</h3>
+  <form action="/auth/signup" method="POST">
+      {{!-- NOmbre --}}
+    <div class="form-group">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABaElEQVRIic2UvUoDQRSFvzubiFVaEX9eIK1aCLqT2gfYYGeTUkGSt0ha0VKw0RewMxPESuzUWoiFbyCYZK6FIHE3TjaJYA5MMffMuWfOZRiYJ8QuubOuejuJpjDJYYFt0IkuJelC5aa6p0bPgJU05+ylAFiXjHDRV0VqHXt5PVzNJFDjT0EyzQFsu2pVGIxOIasCZ8B60ABkdVTzL0rbmcg/sZYumPD52TFHBqJN1C9/LVp5ZXmfqXPxVWNoX49dsimwO06YL4HykC6Jcp9Hms/AyEamJmzlkeYbkWocu6TlTbEJUPAfDYWdvzMABI4j3zsG0OwH8CvyjOhR4TAyvtwrvJd6hfdSZHxZkCPgaZx4TAK5QN8OOhXXTxHPwLNt2xOVpXOB/akSRH2pu2zzb7iK63tTrId6BA1UZDHEAxR7fiHEB0fko8GLdUnQwDMI8v/xF+nrDP26Yw0UqU1p0kVNbaprzTU+AVWFaogsHiu0AAAAAElFTkSuQmCC">
+      <label for="name">Nombre</label>
+      <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Ingrese su nombre">
+    </div>
+    {{!-- Email --}}
+    <div class="form-group"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #40C057"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="m22 6-10 7L2 6"></path></svg>
+      <label for="email">E-mail</label>
+      <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingrese su email">
+      <small id="emailHelp" class="form-text text-muted">Usarás esta información cuando entres a tu cuenta.</small>
+    </div>
+    {{!-- Password --}}
+    <div class="form-group">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAB2klEQVQ4jaWSP2hTURjFz/leYkWQLhYnFayDuImbQ5toBmmwFvTpUygORfeKuAlVigo6Kiq4FDrEFh3aRoSC8YmDf0YddHI3iAhqMebd4/Jonkn6XqJn++B8v/u73EvEKa36g82cNy3KJ7BbwE8SbyXdCQsLy+gxBIDDL/x9kbMnAHZ1bYlzQ/VoavHkYpQFtNKqP5iACcBHAY2/j9XZ+nab7cXQmjlvet1MvPS88HCvOY51SAoXSi/9nZlAUCcSKu8BID+Qf9deJLDpd9OOZQFzAIZbW+52oRbcazQbE93KVKKbAlwDsDmeh0HdhDZoG9aygAbodVZp3TDCq0wgaXd75H2ip6/FZ0E5FVgbrSxBnEsrCWjQ8VwkXpfpURrUAGCoHk2BuNHx/2IzcxwTMUngIICBNCiTw0gY7KA0AWiPwX5I7o2IbwBnY9gvEmckPACwhY7Ha4cq1Q2BnXedsWL4YV7Q6daGqga75qSVblBLBXLGbfscTQKcbx3CspO7LLgywO/O9LgYBuO9GbalGAbnJd2PyU8FXSW8ZUFbjfRro5WlXD/ANv0jJCIDxp2wImlhJDy1vy/DLFNIt/7DMGEKQIiOgnbxnwy7mlJViVfSX7mfiAfynvflDySOzMZDkQGsAAAAAElFTkSuQmCC">
+        <label for="password">Contraseña</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Ingrese su contraseña">
+        <small id="passHelp" class="form-text text-muted">Asegúrese de ingresar más de 4 caracteres.</small>
+    </div>
+    
+      {{!-- Confirm Password --}}
+    <div class="form-group">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAACWElEQVQ4jaWTsWsTYRiHf+/3XZL2hFYLCUI3N+ng0klb7xIoGttCQS6NVkFQExAnoSAZFJS6KN1bF6VSL70iUrSD0NyFlrq4Cv4HFlOoODRp2vtehxgMadJL9TceD889L9wR/iy5moxU9N4sE6cA6gIAMMpgzkdjat4ZcKroYAIAEmtWf1nv8RQ4ArU35hn2oGfYg+DKOBHrpZL0EmtWfydCSq4mI2W9x2OoB0XT+Wy61mkA8OLOVh1KFNPnFeNFNOqbQaWiovdmGXhXk6VuQIhlCLFsFien6lDBsDfBvFLalncDT2biFPHey1ov3daqahRqbwyMO43ggSbnwEgHCgHq8uLvfwIAAe5+SM4SRWYZVGgEN4YXd0Do7kD4d66ZfyKJ80Swi6b99BDNLA49a5oGRtl0J07WKwtG/lMr8NKm1VepohxYyOAlonAmCKxUKUvAmXghPXqkUN/9Nc8QE/FC6kI7yHStIYDGwqHwOSU4d5SUgNqHraR0wLxyoMm5jeHFHaB+JmUJYtwX2tX1i2++D61fPyV9/4NQ9MxN2B9bCgHA+mqFSz9EBoQUiHQw7zPQB2ArFlUjzoBTTa4mI7t6z2JIyul9319oJaXmNzTOWrJkKSZfgfibZ+RnaudfuwxSjzUppw589ZoIz13DXulIWJdux+QCg8+CyGfGjFCoKsG5kJQ3m0sDhY2LF9MZAHANe75d6bGFzJwD0fbhUvWWiW8dS9i+lB8RYCuoE4G/Ursxc84spr8wcTcpzDD4HkFc+afC1qWT90F4qP2PsKE0A2ZdEUZ+A7P1JLg7Y/ATAAAAAElFTkSuQmCC">
+        <label for="confirmPassword" class="align-middle text-center">Repita su contraseña</label>
+        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Ingrese nuevamente su contraseña ">
+    </div>
+    
+    <div class="mt-2">
+      <button type="submit" class="btn btn-success">SignUp</button>
+      <button type="reset" class="btn btn-light">Reset</button>
+      <a href="/home" class="btn btn-dark">Cancelar</a>
+    </div>
+    
+  </form>
+</div>
