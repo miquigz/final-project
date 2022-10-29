@@ -7,6 +7,8 @@ const passport = require('passport')
 require('dotenv').config()
 require('./config/passport')
 
+const flash = require('connect-flash');
+
 const { dbConnection } = require('./database/config')
 const { routerAuth } = require('./routes/auth')
 const { routerDev } = require('./routes/db')
@@ -81,12 +83,19 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash())
+
+app.use((req, res, next)=>{
+    res.locals.TODO_BIEN  = req.flash('Todo bien');
+    next();
+})
 
 // Routes
 app.use('/', routerAuth);
 app.use('/', routerDev); // Solo para desarrollo
 app.use('/', routerPosts);
 app.use('/', routerHome);
+
 
 
 const PORT = process.env.PORT;

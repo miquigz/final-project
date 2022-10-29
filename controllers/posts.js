@@ -35,14 +35,13 @@ const getPostsPaginacion = async (req, res = response)=>{
     let valor = 5; //Valor a aumentar (de 5 en 5).
     let posts = postsArray.slice(req.query.skip ,req.query.limit);
     //let desde = parseInt(req.query.skip) + 1;
-    let maximo =  + 1;
     const paginacion = {
       desde: req.query.skip,
       hasta: req.query.limit,
       maximo: postsArray.length,
       valor
     }
-    res.status(200).render("posts/index", {
+    res.render("posts/index", {
       posts,
       paginacion
     });
@@ -53,7 +52,6 @@ const getPostsPaginacion = async (req, res = response)=>{
 
 }
 
-
 // SHOW
 
 const showPost = async (req, res = response) => {
@@ -63,7 +61,7 @@ const showPost = async (req, res = response) => {
     if (post === null) res.redirect("/");
 
     res.render("posts/show", {
-      title: `InfoBlog - ${post.title}`,
+      // title: `InfoBlog - ${post.title}`,
       post,
     })
 
@@ -142,7 +140,6 @@ const editPost = async (req, res = response) => {
 }
 
 module.exports = {
-  getPosts,
   showPost,
   deletePost,
   createPost,

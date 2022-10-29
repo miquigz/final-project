@@ -17,6 +17,7 @@ const signUp = async (req, res = response) => {
     }
 
     if (password.length < 4){
+        console.log("La contrasenia debe tener al menos 4 caracteres")
         errors.push({ msg: 'Password must be at least 4 characters'} );
     }
 
@@ -35,6 +36,9 @@ const signUp = async (req, res = response) => {
     //Encriptamos el password q escribe el usuario para registrarse(signUp)
     newUser.password = await newUser.passwordEncrypt(password);
     await newUser.save()
+    
+    req.flash("TODO_BIEN", "Se registro correctamente!")
+    
     // await newUser.update()  otras opciones
     // await newUser.insertOne
     res.redirect('/auth/signin'); //finalmente registramos el user
