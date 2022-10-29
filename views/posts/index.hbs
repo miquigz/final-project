@@ -1,6 +1,3 @@
-
-<h2>Listado de Posts</h2>
-
 <hr class="bg-light">
 <div class="d-flex justify-content-center">
     <a href="/posts/new" class="btn btn-success">Crear Post</a>
@@ -47,9 +44,11 @@
 {{/each}}
   </tbody>
   <div class="d-flex w-100 justify-content-center my-2">
-    <a href="/posts/pag/?skip={{abs paginacion.desde paginacion.valor}}&limit={{abs paginacion.hasta paginacion.valor}}" {{#if paginacion.desde includeZero=true}}class="btn btn-info disabled"{{/if}} class="btn btn-info">Atras</a>
+    <a href="/posts/?skip={{minus paginacion.desde paginacion.valor}}&limit={{minus paginacion.hasta paginacion.valor}}" 
+    {{#if (lte paginacion.desde 0)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}>Atras</a>
     <p class="h3 mx-5">{{add paginacion.desde 1}} - {{paginacion.hasta}}</p>
-    <a href="/posts/pag/?skip={{add paginacion.desde paginacion.valor}}&limit={{add paginacion.hasta paginacion.valor}}" {{#if (gt (add paginacion.hasta 5) paginacion.maximo)}}class="btn btn-info disabled"{{/if}}class="btn btn-info">Siguiente</a>  
+    <a href="/posts/?skip={{add paginacion.desde paginacion.valor}}&limit={{add paginacion.hasta paginacion.valor}}"
+    {{#if (gt (add paginacion.desde 5) paginacion.maximo)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}>Siguiente</a>  
   </div>
           
         
