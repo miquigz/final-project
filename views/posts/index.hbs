@@ -1,7 +1,8 @@
 <hr class="bg-light">
 <div class="d-flex justify-content-center">
     <a href="/posts/new" class="btn btn-success btn-lg">Crear Post</a>
-    <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-success font-weight-bold"> {{paginacion.maximo}}</label></p>
+    {{!-- <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-success font-weight-bold"> {{paginacion.maximo}}</label></p> --}}
+    {{>totalPosts paginacion = this.paginacion}}
 </div>
 
 <hr class="bg-light">
@@ -44,7 +45,6 @@
                       Eliminar
                     </button>
                   </form>
-
               </td>
           </tr>
     {{/each}}
@@ -52,10 +52,10 @@
   </tbody>
   <div class="d-flex w-100 justify-content-center my-2">
     <a href="/posts/?skip={{minus paginacion.desde paginacion.valor}}&limit={{minus paginacion.hasta paginacion.valor}}" 
-    {{#if (lte paginacion.desde 0)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}>Atras</a>
+    {{#if (lte paginacion.desde 0)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg=="> Atras</a>
     <p class="h4 mx-5">{{add paginacion.desde 1}} - {{paginacion.hasta}}</p>
     <a href="/posts/?skip={{add paginacion.desde paginacion.valor}}&limit={{add paginacion.hasta paginacion.valor}}"
-    {{#if (gte (add paginacion.desde 5) paginacion.maximo)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}>Siguiente</a>  
+    {{#if (gte (add paginacion.desde 5) paginacion.maximo)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}>Siguiente <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>  
   </div>
           
         

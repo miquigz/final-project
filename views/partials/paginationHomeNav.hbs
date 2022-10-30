@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center my-2">
+    <ul class="pagination">
+        <li {{#if (gte 0 paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 0))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link" href="/home/?skip=0&limit={{paginacion.valor}}">1</a>
+        </li>
+        <li {{#if (gte (multiply 1 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 1))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a href="/home/?skip={{multiply 1 paginacion.valor}}&limit={{multiply 2 paginacion.valor}}" class="page-link" >2</a>
+        </li>
+        <li {{#if (gte (multiply 2 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 2))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 2 paginacion.valor}}&limit={{multiply 3 paginacion.valor}}">3</a>
+        </li>
+        <li {{#if (gte (multiply 3 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 3))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 3 paginacion.valor}}&limit={{multiply 4 paginacion.valor}}">4</a>
+        </li>
+        <li {{#if (gte (multiply 4 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 4))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 4 paginacion.valor}}&limit={{multiply 5 paginacion.valor}}">5</a>
+        </li>
+        <li {{#if (gte (multiply 5 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 5))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 5 paginacion.valor}}&limit={{multiply 6 paginacion.valor}}">6</a>
+        </li>
+        <li {{#if (gte (multiply 6 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 6))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 6 paginacion.valor}}&limit={{multiply 7 paginacion.valor}}">7</a>
+        </li>
+        <li {{#if (gte (multiply 7 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 7))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 7 paginacion.valor}}&limit={{multiply 8 paginacion.valor}}">8</a>
+        </li>
+        <li {{#if (gte (multiply 8 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 8))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 8 paginacion.valor}}&limit={{multiply 9 paginacion.valor}}">9</a>
+        </li>
+        <li {{#if (gte (multiply 9 paginacion.valor) paginacion.maximo)}}class="page-item disabled"{{/if}}
+        {{#if (compare paginacion.desde '==' (multiply paginacion.valor 9))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>
+            <a class="page-link"
+                href="/home/?skip={{multiply 9 paginacion.valor}}&limit={{multiply 10 paginacion.valor}}">10</a>
+        </li>
+    </ul>
+</div>

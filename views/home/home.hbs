@@ -89,137 +89,34 @@
 
 {{#if homePagination}}
 
-<h3 class="text-center">{{title}}</h3>
-<div class="d-flex justify-content-center align-items-center">
-    <a class="btn-light btn mx-4" href="/home">Ver Todos los posts:</a>
-    <small class="text-success font-weight-bold">Total Posts: <label
-            class="h4 mx-2 bg-secondary p-1 rounded">{{paginacion.maximo}}</label></small>
-</div>
+    <h3 class="text-center">{{title}}</h3>
+    <div class="d-flex justify-content-center align-items-center">
+        <a class="btn-light btn mx-4" href="/home">Ver Todos los posts:</a>
+        {{>totalPosts paginacion = this.paginacion}}
+    </div>
+    <hr class="bg-success">
 
-<hr class="bg-success">
-<div class="d-flex justify-content-center mt-5">
-    <ul class="pagination">
-        <li {{#if (gte 0 paginacion.maximo)}}class="page-item disabled" {{else}} class="page-item" {{/if}}>
-            <a class="page-link" href="/home/?skip=0&limit={{paginacion.valor}}">1</a>
-        </li>
-        <li {{#if (gte (multiply 1 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item active" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 1 paginacion.valor}}&limit={{multiply 2 paginacion.valor}}">2</a>
-        </li>
-        <li {{#if (gte (multiply 2 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 2 paginacion.valor}}&limit={{multiply 3 paginacion.valor}}">3</a>
-        </li>
-        <li {{#if (gte (multiply 3 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 3 paginacion.valor}}&limit={{multiply 4 paginacion.valor}}">4</a>
-        </li>
-        <li {{#if (gte (multiply 4 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 4 paginacion.valor}}&limit={{multiply 5 paginacion.valor}}">5</a>
-        </li>
-        <li {{#if (gte (multiply 5 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 5 paginacion.valor}}&limit={{multiply 6 paginacion.valor}}">6</a>
-        </li>
-        <li {{#if (gte (multiply 6 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 6 paginacion.valor}}&limit={{multiply 7 paginacion.valor}}">7</a>
-        </li>
-        <li {{#if (gte (multiply 7 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 7 paginacion.valor}}&limit={{multiply 8 paginacion.valor}}">8</a>
-        </li>
-        <li {{#if (gte (multiply 8 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 8 paginacion.valor}}&limit={{multiply 9 paginacion.valor}}">9</a>
-        </li>
-        <li {{#if (gte (multiply 9 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 9 paginacion.valor}}&limit={{multiply 10 paginacion.valor}}">10</a>
-        </li>
-    </ul>
-</div>
-<div class="row justify-content-center mx-auto bg-secondary p-4 border border-success rounded">
-    {{#each posts}}
-    <div class="col-sm-6 col-lg-3 col-md-6 card text-white bg-success my-3 mx-1 border border-dark">
+    {{>paginationHomeNav paginacion = this.paginacion}}
 
-        <div class="card-header w-100 bg-dark rounded text-center">- Post -</div>
-        <div class="card-body">
-            <h4 class="card-title">{{this.title}}</h4>
-            <p class="card-text">{{this.body}}</p>
-        </div>
-        {{!-- {{#if this.fecha}}
-        <small>{{this.fecha}}</small>
-        {{/if}} --}}
-        <a href="/posts/{{this.slug}}" class="btn btn-dark my-2 font-weight-bold">Ver mas</a>
-        {{!-- <div class="" style="max-width: 20rem;"></div>
-    </div> --}}
-</div>
-{{/each}}
-</div>
+    <div class="row justify-content-center mx-auto bg-secondary p-4 border border-success rounded">
+        {{#each posts}}
+            <div class="col-sm-6 col-lg-3 col-md-6 card text-white bg-success my-3 mx-1 border border-dark">
 
-<div class="d-flex justify-content-center mt-3">
-    <ul class="pagination">
-        <li {{#if (gte 0 paginacion.maximo)}}class="page-item disabled" {{else}} class="page-item" {{/if}}>
-            <a class="page-link" href="/home/?skip=0&limit={{paginacion.valor}}">1</a>
-        </li>
-        <li {{#if (gte (multiply 1 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 1 paginacion.valor}}&limit={{multiply 2 paginacion.valor}}">2</a>
-        </li>
-        <li {{#if (gte (multiply 2 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 2 paginacion.valor}}&limit={{multiply 3 paginacion.valor}}">3</a>
-        </li>
-        <li {{#if (gte (multiply 3 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 3 paginacion.valor}}&limit={{multiply 4 paginacion.valor}}">4</a>
-        </li>
-        <li {{#if (gte (multiply 4 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 4 paginacion.valor}}&limit={{multiply 5 paginacion.valor}}">5</a>
-        </li>
-        <li {{#if (gte (multiply 5 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 5 paginacion.valor}}&limit={{multiply 6 paginacion.valor}}">6</a>
-        </li>
-        <li {{#if (gte (multiply 6 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 6 paginacion.valor}}&limit={{multiply 7 paginacion.valor}}">7</a>
-        </li>
-        <li {{#if (gte (multiply 7 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 7 paginacion.valor}}&limit={{multiply 8 paginacion.valor}}">8</a>
-        </li>
-        <li {{#if (gte (multiply 8 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 8 paginacion.valor}}&limit={{multiply 9 paginacion.valor}}">9</a>
-        </li>
-        <li {{#if (gte (multiply 9 paginacion.valor) paginacion.maximo)}}class="page-item disabled" {{else}}
-            class="page-item" {{/if}}>
-            <a class="page-link"
-                href="/home/?skip={{multiply 9 paginacion.valor}}&limit={{multiply 10 paginacion.valor}}">10</a>
-        </li>
-    </ul>
-</div>
+                <div class="card-header w-100 bg-dark rounded text-center">- Post -</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{this.title}}</h4>
+                    <p class="card-text">{{this.body}}</p>
+                </div>
+                {{!-- {{#if this.fecha}}
+                <small>{{this.fecha}}</small>
+                {{/if}} --}}
+                <a href="/posts/{{this.slug}}" class="btn btn-dark my-2 font-weight-bold">Ver mas</a>
+            </div>
+        {{/each}}
+    </div>
+
+    {{>paginationHomeNav paginacion = this.paginacion}}
+
 {{else}}
 
 <h2 class="text-center text-success my-2">{{title}} - Total de Posts</h2>
