@@ -1,18 +1,18 @@
-<hr class="bg-light">
-<div class="d-flex justify-content-center">
+<hr class="rounded bg-success mt-4 font-weight-bold shadow-box">
+<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light">
     <a href="/posts/new" class="btn btn-success btn-lg">Crear Post</a>
     {{!-- <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-success font-weight-bold"> {{paginacion.maximo}}</label></p> --}}
-    {{>totalPosts paginacion = this.paginacion}}
+      {{>totalPosts paginacion = this.paginacion}}
 </div>
 
-<hr class="bg-light">
+<hr class="rounded bg-dark mt-4 font-weight-bold shadow-box">
 
-<table class="table border border-success rounded border-bottom-0">
+<table class="table border border-success rounded border-bottom-0 shadow-box">
   <thead>
-    <tr class="">
-      <th scope="col h5"><p class="h5 text-bold text-center">Titulo</p></th>
-      <th scope="col h5"><p class="h5 text-bold text-center">Post</p></th>
-      <th scope="col h5"><p class="h5 text-bold text-center">Acciones</p></th>
+    <tr class="bg-dark rounded">
+      <th scope="col h5"><p class="h4 text-bold text-center bg-dark">Titulo</p></th>
+      <th scope="col h5"><p class="h4 text-bold text-center bg-dark">Post</p></th>
+      <th scope="col h5"><p class="h4 text-bold text-center bg-dark">Acciones</p></th>
     </tr>
   </thead>
   <tbody class="bg-secondary">
@@ -23,9 +23,9 @@
     {{else}}
       {{#each posts}}
           <tr>
-              <td class="border-success rounded" width="30%">{{add paginacion.desde @index}}<p class="h4">{{this.title}}</p></td>
-              <td width="45%"><p>{{this.body}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-success">{{this.user}}</label></small>{{/if}} </td>
-              <td class="d-flex flex-wrap border-success rounded">
+              <td class="border-success rounded bg-dark" width="30%"><p class="h4">{{this.title}}</p></td>
+              <td width="45%" class="border-bottom border-dark"><p>{{this.body}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-success">{{this.user}}</label></small>{{/if}} </td>
+              <td class="d-flex flex-wrap border-success bg-dark rounded">
                   {{!-- <button id="botonDelete">borrarexample</button> --}}
 
                   <a href="/posts/{{this.slug}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-light btn-sm"{{else}} class="btn btn-light btn-sm disabled"{{/or}}>Ver</a>
@@ -50,16 +50,16 @@
     {{/each}}
 {{/isEmpty}}
   </tbody>
-  <div class="d-flex w-100 justify-content-center my-2">
+  <div class="d-flex w-100 justify-content-center my-2 bg-sec-opacity py-3 rounded border border-light">
     <a href="/posts/?skip={{minus paginacion.desde paginacion.valor}}&limit={{minus paginacion.hasta paginacion.valor}}" 
-    {{#if (lte paginacion.desde 0)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg=="> Atras</a>
+    {{#if (lte paginacion.desde 0)}}class="btn btn-light disabled"{{else}}class="btn btn-light"{{/if}}><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg=="> Atras</a>
     <p class="h4 mx-5">{{add paginacion.desde 1}} - {{paginacion.hasta}}</p>
     <a href="/posts/?skip={{add paginacion.desde paginacion.valor}}&limit={{add paginacion.hasta paginacion.valor}}"
-    {{#if (gte (add paginacion.desde 5) paginacion.maximo)}}class="btn btn-primary disabled"{{else}}class="btn btn-primary"{{/if}}>Siguiente <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>  
+    {{#if (gte (add paginacion.desde 5) paginacion.maximo)}}class="btn btn-light disabled"{{else}}class="btn btn-light"{{/if}}>Siguiente <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>  
   </div>
           
         
-  <hr class="bg-success mb-4 font-weight-bold">
+  <hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
 </table>
-<hr class="bg-success mt-4 font-weight-bold">
+<hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
 

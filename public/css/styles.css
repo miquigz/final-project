@@ -8,6 +8,10 @@
     transition: 0.4s;
 }
 
+.shadow-box{
+    box-shadow: 10px 20px 33px 3px rgba(0,0,0,0.83);
+}
+
 /* background secondary with opacity */
 .bg-sec-opacity{
     background-color: #3d3333cb;
@@ -21,6 +25,7 @@ body{
     background-image: url('/img/paper-background.jpg');
     background-color: rgba(0,0,0,.4);
     background-blend-mode: darken;
+    
 
     /* background-image: url('/public/img/paper-background.jpg'); */
 }
