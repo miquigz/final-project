@@ -7,7 +7,7 @@
 
 {{!-- {{posts.[(posts.lenght)].title}} --}}
 <hr class="bg-light">
-<div id="carouselExampleIndicators" class="carousel slide my-3  border border-success py-2" style="height: 350px;" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide my-3 bg-sec-opacity rounded border border-success py-2" style="height: 350px;" data-ride="carousel">
     <ol class="carousel-indicators mt-5">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -88,14 +88,14 @@
 
 
 {{#if homePagination}}
-
-    <h3 class="text-center">{{title}}</h3>
-    <div class="d-flex justify-content-center align-items-center">
-        <a class="btn-light btn mx-4" href="/home">Ver Todos los posts:</a>
-        {{>totalPosts paginacion = this.paginacion}}
+    <div class="bg-sec-opacity rounded">
+        <h3 class="text-center">{{title}}</h3>
+        <div class="d-flex justify-content-center align-items-center">
+            <a class="btn-light btn mx-4" href="/home">Ver Todos los posts:</a>
+            {{>totalPosts paginacion = this.paginacion}}
+        </div>
     </div>
     <hr class="bg-success">
-
     {{>paginationHomeNav paginacion = this.paginacion}}
 
     <div class="row justify-content-center mx-auto bg-secondary p-4 border border-success rounded">

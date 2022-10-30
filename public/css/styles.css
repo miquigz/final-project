@@ -4,8 +4,17 @@
 }
 
 .bg-link{
-    background-color: rgba(127, 255, 212, 0.705);
+    background-color: rgb(127, 255, 212);
     transition: 0.4s;
+}
+
+/* background secondary with opacity */
+.bg-sec-opacity{
+    background-color: #3d3333cb;
+}
+
+.opacity-75{
+    opacity: 0.75;
 }
 
 body{
@@ -24,7 +33,7 @@ body{
 .bg-link:hover{
     transition: 0.4s;
     transition-property: color, background-color;
-    background-color: aquamarine;
+    background-color: rgb(116, 179, 158);
     color: #FEFEFE;
 }
 
