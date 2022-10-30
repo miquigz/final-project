@@ -1,11 +1,11 @@
-<hr class="rounded bg-success mt-4 font-weight-bold shadow-box">
+<hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
 <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light">
     <a href="/posts/new" class="btn btn-success btn-lg">Crear Post</a>
     {{!-- <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-success font-weight-bold"> {{paginacion.maximo}}</label></p> --}}
       {{>totalPosts paginacion = this.paginacion}}
 </div>
 
-<hr class="rounded bg-dark mt-4 font-weight-bold shadow-box">
+<hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
 
 <table class="table border border-success rounded border-bottom-0 shadow-box">
   <thead>
@@ -24,7 +24,7 @@
       {{#each posts}}
           <tr>
               <td class="border-success rounded bg-dark" width="30%"><p class="h4">{{this.title}}</p></td>
-              <td width="45%" class="border-bottom border-dark"><p>{{this.body}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-success">{{this.user}}</label></small>{{/if}} </td>
+              <td width="45%" class="border-bottom border-dark"><p>{{{this.body}}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-success">{{this.user}}</label></small>{{/if}} </td>
               <td class="d-flex flex-wrap border-success bg-dark rounded">
                   {{!-- <button id="botonDelete">borrarexample</button> --}}
 

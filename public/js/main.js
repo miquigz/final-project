@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', ()=>{
 
+    editor = new FroalaEditor('#textarea', {
+        // Set custom buttons.
+        toolbarButtons: [['bold', 'italic', 'underline', 'strikeThrough'], ['fontFamily', 'fontSize', 'textColor', 'backgroundColor']]
+    })
+
+
+    // new FroalaEditor('div#froala-editor', {
+    //     iconsTemplate: 'font_awesome_5'
+    
+    //     // If you want to use the regular/light icons, change the template to the following.
+    //     // iconsTemplate: 'font_awesome_5r'
+    //     // iconsTemplate: 'font_awesome_5l'
+    // })
+    
+
     console.log(document.querySelector('title').textContent);
 
     const swalDeleteConfirm = Swal.mixin({

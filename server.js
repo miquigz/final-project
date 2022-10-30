@@ -15,6 +15,7 @@ const { routerDev } = require('./routes/db')
 const { routerPosts } = require('./routes/posts')
 const { routerHome } = require('./routes/home')
 
+
 // Inicializo la aplicación de express
 const app = express()
 
@@ -29,6 +30,7 @@ const helpers = require('handlebars-helpers')();
 app.engine('hbs', hbs.engine({
     helpers: {
         helpers,
+        // inner: value => value.innerHTML
         // lean: value => value.lean()
     },
     extname: '.hbs'

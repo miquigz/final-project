@@ -2,29 +2,6 @@ const { request, response } = require("express");
 const Post = require("../models/posts");
 
 // INDEX
-// const getPosts = async (req, res = response) => {
-//   try {
-//     const postsArray = await Post.find({}).lean(); // Me deja un obj puro de JS
-
-//     let posts = postsArray.slice(0, 7);
-//     const title = "InfoBlog - Listado de Post";
-
-//     const paginacion = {
-//       desde:1,
-//       hasta:7,
-//       max:postsArray.length
-//     }
-
-//     res.status(200).render("posts/index", {
-//       title,
-//       posts,
-//       paginacion
-//     });
-//   } catch (error) {
-//     console.log('Error INDEX', error)
-//   }
-// };
-
 const getPostsPaginacion = async (req, res = response)=>{
   try {
     const postsArray = await Post.find({}).lean();
@@ -63,7 +40,7 @@ const getPostsPaginacion = async (req, res = response)=>{
 const showPost = async (req, res = response) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
-    
+    console.log(post.body);
     if (post === null) res.redirect("/");
 
     res.render("posts/show", {
