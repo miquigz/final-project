@@ -1,4 +1,18 @@
 
+{{#each errors}}
+<h1>{{this.msg}}</h1>
+{{!-- //TODO: Hacer partials de la alerta de c/u error --}}
+{{/each}}
+
+{{#if signup_userExist}}
+{{!-- //TODO: Llevar a partials --}}
+<div class="alert alert-dismissible alert-light mt-3 text-dark border border-warning" data-dismiss="alert">
+  <button type="button" class="close btn-close rounded btn-secondary btn text-warning btn-sm" data-bs-dismiss="alert" aria-label="Close">X</button>
+  <h4 class="alert-heading mt-1 font-weight-bold">E-mail ya en uso!</h4>
+  <p class="mb-0">{{signup_userExist}}</p>
+</div>
+{{/if}}
+
 <div class="bg-secondary mt-4 p-4 rounded border border-success">
   <h3 class="text-center text-success font-weight-bold">Registrarse</h3>
   <form action="/auth/signup" method="POST">
@@ -6,12 +20,16 @@
     <div class="form-group">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABaElEQVRIic2UvUoDQRSFvzubiFVaEX9eIK1aCLqT2gfYYGeTUkGSt0ha0VKw0RewMxPESuzUWoiFbyCYZK6FIHE3TjaJYA5MMffMuWfOZRiYJ8QuubOuejuJpjDJYYFt0IkuJelC5aa6p0bPgJU05+ylAFiXjHDRV0VqHXt5PVzNJFDjT0EyzQFsu2pVGIxOIasCZ8B60ABkdVTzL0rbmcg/sZYumPD52TFHBqJN1C9/LVp5ZXmfqXPxVWNoX49dsimwO06YL4HykC6Jcp9Hms/AyEamJmzlkeYbkWocu6TlTbEJUPAfDYWdvzMABI4j3zsG0OwH8CvyjOhR4TAyvtwrvJd6hfdSZHxZkCPgaZx4TAK5QN8OOhXXTxHPwLNt2xOVpXOB/akSRH2pu2zzb7iK63tTrId6BA1UZDHEAxR7fiHEB0fko8GLdUnQwDMI8v/xF+nrDP26Yw0UqU1p0kVNbaprzTU+AVWFaogsHiu0AAAAAElFTkSuQmCC">
       <label for="name">Nombre</label>
-      <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Ingrese su nombre">
+      <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" 
+      placeholder="Ingrese su nombre"
+      value="{{name}}">
     </div>
     {{!-- Email --}}
     <div class="form-group"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #40C057"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="m22 6-10 7L2 6"></path></svg>
       <label for="email">E-mail</label>
-      <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingrese su email">
+      <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" 
+      placeholder="Ingrese su email"
+      value="{{email}}">
       <small id="emailHelp" class="form-text text-muted">Usarás esta información cuando entres a tu cuenta.</small>
     </div>
     {{!-- Password --}}

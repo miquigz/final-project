@@ -1,3 +1,6 @@
+{{#if isAuthenticated_error}}
+  <h1>{{isAuthenticated_error}}</h1>  
+{{/if}}
 <h2 class="text-center text-success h3">Posts mas recientes:</h2>
 
 <h1>{{this.posts.[posts.lenght].title}}</h1>

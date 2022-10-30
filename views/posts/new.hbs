@@ -9,9 +9,18 @@
         
         <label for="body">Example textarea</label>
         <textarea class="form-control" id="body" name="body" rows="3"  placeholder="Ingrese su descripcion"></textarea>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="guardarFecha" name="guardarFecha">
-            <label class="form-check-label" for="guardarFecha">Guardar fecha de creacion</label>
+        <div class="form-group form-check row mt-2">
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="guardarFecha" name="guardarFecha">
+                <label class="form-check-label user-select-none" for="guardarFecha">Guardar fecha de creacion</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="guardarUser" name="guardarUser">
+                <label class="form-check-label user-select-none" for="guardarUser">Guardar nombre de usuario</label>
+                
+            </div>
+            <small id="userHelp" class="text-muted user-select-none">Si no guardas tu nombre, el <label class="text-success user-select-none">Post</label> podr'a ser editado/borrado por cualquier usuario registrado.</small>
+            
         </div>            
 
         <button type="submit" id="btnCrearPost" class="btn btn-success mt-3">Submit</button>

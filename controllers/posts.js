@@ -31,8 +31,15 @@ const getPostsPaginacion = async (req, res = response)=>{
 
     // console.log(typeof(req.query.skip));
 
-    let valor = 5; //Valor a aumentar (de 5 en 5).
-    let posts = postsArray.slice(req.query.skip ,req.query.limit);
+    const valor = 5; //Valor a aumentar (de 5 en 5).
+    let postsCortados = postsArray.slice(req.query.skip ,req.query.limit);
+
+    
+    postsCortados.forEach(element => {
+      element = Object.assign(element, {userActual:req.user.name});
+    });
+    const posts = postsCortados;
+    // console.log(posts);
     //let desde = parseInt(req.query.skip) + 1;
     const paginacion = {
       desde: req.query.skip,
@@ -82,26 +89,32 @@ const deletePost = async (req = request, res = response) => {
 }
 
 // NEW
-const newPost = (req, res = response) => {
+const newPost = async (req, res = response) => {
+  try {
     res.status(200).render('posts/new')
+  } catch (error) {
+    console.log("error en show(vista): new post", error);
+  }
 }
 
 // CREATE
 const createPost = async (req, res = response) => {
-
     try {
-        // console.log(req.body)
-        let post = new Post()
+        let post = new Post();
 
-        post.title = req.body.title
-        post.body = req.body.body
+        post.title = req.body.title;
+        post.body = req.body.body;
+
+        if (req.body.guardarUser)
+          post.user = req.user.name;
         if (req.body.guardarFecha){
           post.fecha = "Creado el: " + new Date().toLocaleString();
         }
+
         post = await post.save()
         res.status(200).redirect(`/posts/${post.slug}`);
     } catch (error) {
-        console.log('Error CREATE', error)
+        console.log('Error en CREATE Post', error);
     }
 }
 
@@ -110,13 +123,16 @@ const createPost = async (req, res = response) => {
 const showPostFormEdit = async (req, res = response) => {
 
     try {
-        const post = await Post.findById(req.params.id).lean()
-
-        res.render('posts/edit', {
+        const post = await Post.findById(req.params.id).lean();
+        if (post.user == null || post.user === req.user.name){
+          res.render('posts/edit', {
             title: 'Editando Post',
             post
-        })
-        
+          })
+        }else{
+          req.flash('isAuthenticated_error', "Acceso no autorizado, POST de otro usuario");
+          res.redirect('/home')
+        }
     } catch (error) {
         console.log('Show Edit Post', error)
     }
@@ -125,13 +141,15 @@ const showPostFormEdit = async (req, res = response) => {
 const editPost = async (req, res = response) => {
   try {
     let post = await Post.findById(req.params.id);
-    //.lean() si ponemos este metodo no nos reconoce la funcion .save()
+    if (post.user == null || post.user === req.user.name){
       post.title = req.body.title;
       post.body = req.body.body;
       post.fecha = "Editado el: " + new Date().toLocaleString();
-    post = await post.save();
+      post = await post.save();
     //res.redirect(`/posts/edit/${post._id}`);
     res.redirect(`/posts/${post.slug}`);
+    }
+      
   } catch (error) {
     console.log('Edit ERORR', error)
   }

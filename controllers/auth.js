@@ -6,30 +6,30 @@ const showAuthFormSignUp  = (req, res = response) => {
     res.render('auth/signup');
 }
 const signUp = async (req, res = response) => {
-//TODO: Validaciones en controller, evitamos escribir en ROUTER validaciones:
-//TODO: Evitar tantos return
-//TODO: Hacer trycatch
-
     const errors = [];
     const { name, email, password, confirmPassword } = req.body;
 
     if ( password !== confirmPassword){
         errors.push({ msg: 'Password do not match'});
+        console.log("Password do not match");
     }
 
-    if (password.length < 4){
-        console.log("La contrasenia debe tener al menos 4 caracteres")
+    if (password.length < 4 || confirmPassword.length < 4){
+        console.log("Password must be at least 4 characters")
         errors.push({ msg: 'Password must be at least 4 characters'} );
     }
 
     if(errors.length > 0){
         return res.render('auth/signup', {
-            errors
+            errors,
+            name,
+            email
         });
     }
 
     const userFound = await Auth.findOne({ email:email });
     if (userFound){
+        req.flash('signup_userExist', "El e-mail ingresado ya esta actualmente registrado.")
         return res.redirect('/auth/signup');
     }
 
@@ -50,8 +50,9 @@ const showAuthFormSignIn = (req, res = response) => {
 }
 
 const signin = passport.authenticate('local', {
-    successRedirect: '/posts',
+    successRedirect: '/home',
     failureRedirect: '/auth/signin' //Si falla redirigo de nuevo al signin
+    // ,failureFlash: true,
 })
 
 const logout = async(req, res = response, next) => {

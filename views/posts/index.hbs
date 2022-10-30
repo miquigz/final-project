@@ -15,33 +15,40 @@
     </tr>
   </thead>
   <tbody class="bg-secondary">
-    {{#each posts}}
-        <tr>
-            <td class="border-success rounded" width="30%">{{add paginacion.desde @index}}<p class="h4">{{this.title}}</p></td>
-            <td width="45%"><p>{{this.body}}</p>{{#if this.fecha}} <small class="text-light">{{this.fecha}} </small>{{/if}} </td>
-            <td class="d-flex flex-wrap border-success rounded">
-                {{!-- <button id="botonDelete">borrarexample</button> --}}
-                <a href="/posts/{{this.slug}}" class="btn btn-light btn-sm">Ver</a>
-                <a href="/posts/edit/{{this._id}}" class="btn btn-primary btn-sm mx-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                    </svg>
-                    Editar
-                </a>
-                <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
-                  <button class="btn btn-danger btn-effect btn-sm botonDelete">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                      width="16" height="20"
-                      viewBox="0 0 20 20"
-                      ><path d="M 10 2 L 9 3 L 5 3 C 4.448 3 4 3.448 4 4 C 4 4.552 4.448 5 5 5 L 7 5 L 17 5 L 19 5 C 19.552 5 20 4.552 20 4 C 20 3.448 19.552 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.105 5.895 22 7 22 L 17 22 C 18.105 22 19 21.105 19 20 L 19 7 L 5 7 z"></path></svg>
-                    Eliminar
-                  </button>
-                </form>
+    {{#isEmpty posts}}
+      <td class="text-success font-weight-bold h4">No hay posts para mostrar :/</td>
+      <td class="text-success h4">Intente creando uno!</td>
+      <td class="text-success"></td>
+    {{else}}
+      {{#each posts}}
+          <tr>
+              <td class="border-success rounded" width="30%">{{add paginacion.desde @index}}<p class="h4">{{this.title}}</p></td>
+              <td width="45%"><p>{{this.body}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-success">{{this.user}}</label></small>{{/if}} </td>
+              <td class="d-flex flex-wrap border-success rounded">
+                  {{!-- <button id="botonDelete">borrarexample</button> --}}
 
-            </td>
-        </tr>
-{{/each}}
+                  <a href="/posts/{{this.slug}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-light btn-sm"{{else}} class="btn btn-light btn-sm disabled"{{/or}}>Ver</a>
+                  <a href="/posts/edit/{{this._id}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-primary btn-sm mx-1"{{else}} class="btn btn-primary btn-sm mx-1 disabled"{{/or}}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+                      Editar
+                  </a>
+                  <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
+                    <button {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-danger btn-effect btn-sm botonDelete"{{else}} class="btn btn-danger botonDelete btn-sm disabled"{{/or}}>
+                      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                        width="16" height="20"
+                        viewBox="0 0 20 20"
+                        ><path d="M 10 2 L 9 3 L 5 3 C 4.448 3 4 3.448 4 4 C 4 4.552 4.448 5 5 5 L 7 5 L 17 5 L 19 5 C 19.552 5 20 4.552 20 4 C 20 3.448 19.552 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.105 5.895 22 7 22 L 17 22 C 18.105 22 19 21.105 19 20 L 19 7 L 5 7 z"></path></svg>
+                      Eliminar
+                    </button>
+                  </form>
+
+              </td>
+          </tr>
+    {{/each}}
+{{/isEmpty}}
   </tbody>
   <div class="d-flex w-100 justify-content-center my-2">
     <a href="/posts/?skip={{minus paginacion.desde paginacion.valor}}&limit={{minus paginacion.hasta paginacion.valor}}" 

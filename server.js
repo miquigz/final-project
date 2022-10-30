@@ -21,16 +21,16 @@ const app = express()
 // Conectar a la DB
 dbConnection()
 
-
-
-
 //----- HANDLEBARS & Helpers
 let hbs = require('express-handlebars');
 
 const helpers = require('handlebars-helpers')();
 
 app.engine('hbs', hbs.engine({
-    helpers: helpers,
+    helpers: {
+        helpers,
+        // lean: value => value.lean()
+    },
     extname: '.hbs'
 }));
 app.set('view engine', 'hbs')
@@ -54,9 +54,17 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
-//Variables de entorno
+// app.use((req, res, next)=>{
+//     console.log(req.user)
+//     next();
+// })
+
+//Variables de entorno (Globales)
 app.use((req, res, next)=>{
     res.locals.signup_bien  = req.flash('signup_bien');
+    res.locals.signup_userExist = req.flash('signup_userExist');
+    res.locals.isAuthenticated_error = req.flash('isAuthenticated_error');
+    res.locals.user = req.user || null; //si esto logged(existe req.user), guardo variable, sino null.
     next();
 })
 

@@ -1,9 +1,18 @@
-<h2>Post</h2>
+<h2 class="h1 mb-5">Informacion del Post</h2>
 
-<div>
-    <h3>{{ post.title }}</h3>
+<div class="mt-2 bg-secondary pt-5 pb-1 mx-5 rounded border border-success">
+    <h3 class="text-center text-success font-weight-bold">{{ post.title }}</h3>
     <div>
-        {{ post.body }}
+        <p class="text-center">{{ post.body }}</p>
     </div>
+    <div>
+
+    </div>
+    {{#if post.fecha}}
+        <p class="text-muted mx-2">{{post.fecha}}</p>
+    {{/if}}
+    {{#if post.user}}
+        <p class="text-muted mx-2">Creado por: <label class="text-success">{{post.user}}</label></p> 
+    {{/if}}
 </div>
 

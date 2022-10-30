@@ -20,6 +20,11 @@ const postSchema = new mongoose.Schema(
             type: String,
             required: false,
             unique: false
+        },
+        user: {
+            type:String,
+            unique:true,
+            required: false
         }
     },
     {
