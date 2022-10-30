@@ -52,13 +52,6 @@ const showHomeAllPosts = async (req, res = response)=>{
 }
 
 
-
-const showHomePostById = async (res, req = response)=>{
-
-
-}
-
 module.exports = {
-    showHomeAllPosts,
-    showHomePostById
+    showHomeAllPosts
 }

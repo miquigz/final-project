@@ -1,25 +1,25 @@
 {{#if signup_bien}}
   {{> successSignup}}
 {{/if}}
-{{!-- //TODO: Hacer alerta, sweet alert por ej, pasar a partials --}}
 {{#if isAuthenticated_error}}
-  <h1>{{isAuthenticated_error}}</h1>  
+  <h1 class="text-danger font-weight-bold text-center my-4">{{isAuthenticated_error}}</h1>
+  <p class="text-warning font-weight-bold text-center my-4">Identifiquese para continuar:</p>
 {{/if}}
-{{!-- {{#if failureFlash}}
-  <h1>FALLO EN LOGIN</h1>
-{{/if}} --}}
+{{#if signin_error}}
+  {{>alertPartial value = signin_error}}
+{{/if}}
 <div class="bg-secondary mt-4 p-4 rounded border border-success">
   <h3 class="text-center text-success font-weight-bold">Iniciar Sesión</h3>
   <form action="/auth/signin" method="POST">
   {{!-- Email --}}
   <div class="form-group">
     <label for="email">Direccion de Email</label>
-    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingrese su Email">
+    <input type="email" {{#if signin_error}}class="is-invalid form-control"{{/if}} class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingrese su Email">
   </div>
   {{!-- Password --}}
 <div class="form-group">
-    <label for="password">Contraseña</label>
-    <input type="password" name="password" class="form-control" id="password" placeholder="Ingrese su Contraseña">
+    <label for="password" >Contraseña</label>
+    <input type="password" name="password" {{#if signin_error}}class="is-invalid form-control"{{/if}} class="form-control" id="password" placeholder="Ingrese su Contraseña">
   </div>
   {{!-- <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">

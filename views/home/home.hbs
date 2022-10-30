@@ -1,5 +1,5 @@
 {{#if isAuthenticated_error}}
-  <h1>{{isAuthenticated_error}}</h1>  
+    <h1>{{isAuthenticated_error}}</h1>
 {{/if}}
 <h2 class="text-center text-success h3">Posts mas recientes:</h2>
 
@@ -23,7 +23,10 @@
                     <p class="card-text">{{masRecientes.last.post.body}}</p>
                 </div>
                 {{#if masRecientes.last.post.fecha}}
-                <small>{{masRecientes.last.post.fecha}}</small>
+                    <small>{{masRecientes.last.post.fecha}}</small>
+                {{/if}}
+                {{#if masRecientes.last.post.user}}
+                    <small class="text-muted">Creado por: <label class="text-success">{{masRecientes.last.post.user}}</label></small>
                 {{/if}}
                 <a href="/posts/{{masRecientes.last.post.slug}}" class="btn btn-light btn-sm my-2 text-weight-bold">Ver mas</a>
             </div>
@@ -40,6 +43,9 @@
                 {{#if masRecientes.last2.post.fecha}}
                 <small>{{masRecientes.last2.post.fecha}}</small>
                 {{/if}}
+                {{#if masRecientes.last2.post.user}}
+                    <small class="text-muted">Creado por: <label class="text-success">{{masRecientes.last2.post.user}}</label></small>
+                {{/if}}
                 <a href="/posts/{{masRecientes.last2.post.slug}}" class="btn btn-light btn-sm my-2 text-weight-bold">Ver mas</a>
                 </div>
             </div>            
@@ -53,7 +59,10 @@
                     <p class="card-text">{{masRecientes.last2.post.body}}</p>
                 </div>
                 {{#if masRecientes.last2.post.fecha}}
-                <small>{{masRecientes.last2.post.fecha}}</small>
+                    <small class="text-muted">{{masRecientes.last3.post.fecha}}</small>
+                {{/if}}
+                {{#if masRecientes.last3.post.user}}
+                    <small class="text-muted">Creado por: <label class="text-success">{{masRecientes.last3.post.user}}</label></small>
                 {{/if}}
                 <a href="/posts/{{masRecientes.last2.post.slug}}" class="btn btn-light btn-sm my-2 text-weight-bold">Ver mas</a>
             </div>
@@ -149,9 +158,9 @@
             <h4 class="card-title">{{this.title}}</h4>
             <p class="card-text">{{this.body}}</p>
         </div>
-        {{#if this.fecha}}
+        {{!-- {{#if this.fecha}}
         <small>{{this.fecha}}</small>
-        {{/if}}
+        {{/if}} --}}
         <a href="/posts/{{this.slug}}" class="btn btn-dark my-2 font-weight-bold">Ver mas</a>
         {{!-- <div class="" style="max-width: 20rem;"></div>
     </div> --}}
@@ -227,9 +236,9 @@
             <h4 class="card-title">{{this.title}}</h4>
             <p class="card-text">{{this.body}}</p>
         </div>
-        {{#if this.fecha}}
+        {{!-- {{#if this.fecha}}
         <small>{{this.fecha}}</small>
-        {{/if}}
+        {{/if}} --}}
         <a href="/posts/{{this.slug}}" class="btn btn-light my-2 font-weight-bold border border-dark rounded">Ver mas</a>
         {{!-- <div class="" style="max-width: 20rem;"></div>
     </div> --}}

@@ -1,7 +1,7 @@
 <hr class="bg-light">
 <div class="d-flex justify-content-center">
     <a href="/posts/new" class="btn btn-success btn-lg">Crear Post</a>
-    <p class="mx-5 h3">Total de Posts: {{paginacion.maximo}}</p>
+    <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-success font-weight-bold"> {{paginacion.maximo}}</label></p>
 </div>
 
 <hr class="bg-light">
@@ -36,7 +36,7 @@
                       Editar
                   </a>
                   <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
-                    <button {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-danger btn-effect btn-sm botonDelete"{{else}} class="btn btn-danger botonDelete btn-sm disabled"{{/or}}>
+                    <button {{#or (eq this.user this.userActual) (not this.user)}} class="btn btn-danger btn-effect btn-sm botonDelete"{{else}} class="btn btn-danger botonDelete btn-sm disabled" disabled="true"{{/or}}>
                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                         width="16" height="20"
                         viewBox="0 0 20 20"
@@ -59,7 +59,7 @@
   </div>
           
         
-  <hr class="bg-success">
+  <hr class="bg-success mb-4 font-weight-bold">
 </table>
-<hr class="bg-success">
+<hr class="bg-success mt-4 font-weight-bold">
 

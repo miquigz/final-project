@@ -1,6 +1,6 @@
 const { response } = require("express");
-const Auth = require("../models/auth");
 const passport = require('passport');
+const Auth = require('../models/auth');
 
 const showAuthFormSignUp  = (req, res = response) => {
     res.render('auth/signup');
@@ -51,8 +51,8 @@ const showAuthFormSignIn = (req, res = response) => {
 
 const signin = passport.authenticate('local', {
     successRedirect: '/home',
-    failureRedirect: '/auth/signin' //Si falla redirigo de nuevo al signin
-    // ,failureFlash: true,
+    failureRedirect: '/auth/signin', //Si falla redirigo de nuevo al signin
+    failureFlash: true
 })
 
 const logout = async(req, res = response, next) => {

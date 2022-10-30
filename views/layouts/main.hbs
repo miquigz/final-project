@@ -32,7 +32,7 @@
             <li class="nav-item mx-2"><a class="nav-link bg-link rounded text-dark px-2" href="/home/?skip=0&&limit=6">Home</a></li>
 
             <li class="nav-item mx-2"><a {{#if user}}class="nav-link bg-link rounded text-dark px-2"
-            {{else}} class="nav-link bg-link rounded text-dark px-2 disabled" {{/if}} href="/posts/?skip=0&limit=5">Posts</a></li>
+            {{else}} class="nav-link btn btn-success disabled rounded text-dark px-2 disabled" {{/if}} href="/posts/?skip=0&limit=5">Posts</a></li>
             {{#if user}}
                 <li class="nav-item mx-2"><a class="nav-link bg-link rounded text-dark px-2" href="/auth/logout">Cerrar sesion</a></li>
             {{else}}

@@ -79,10 +79,13 @@ const showPost = async (req, res = response) => {
 // DELETE
 const deletePost = async (req = request, res = response) => {
     try {
-        await Post.findByIdAndDelete(req.params.id)
-
-        console.log(req.headers.referer)
+        let postAborrar = await Post.findById(req.params.id);
+        if (postAborrar.user == null || postAborrar.user === req.user.name)
+          await Post.findByIdAndDelete(req.params.id)
+        else
+          console.log("No se puede borrar este elemento, verifique su usuario");
         res.redirect(req.headers.referer);
+        // console.log(req.headers.referer)
     } catch (error) {
         console.log('Error DELETE', error)
     }
@@ -144,10 +147,20 @@ const editPost = async (req, res = response) => {
     if (post.user == null || post.user === req.user.name){
       post.title = req.body.title;
       post.body = req.body.body;
-      post.fecha = "Editado el: " + new Date().toLocaleString();
+      if (post.user)
+        post.user = post.user;
+      if (req.body.guardarUser){
+        post.user = req.body.user;
+      }else{
+        post.user = null;
+      }
+      if (req.body.guardarFecha)
+        post.fecha = "Editado el: " + new Date().toLocaleString();
       post = await post.save();
-    //res.redirect(`/posts/edit/${post._id}`);
-    res.redirect(`/posts/${post.slug}`);
+      //res.redirect(`/posts/edit/${post._id}`);
+      res.redirect(`/posts/${post.slug}`);
+    }else{
+      console.log('Incapaz de editar el Post, verifique su usario');
     }
       
   } catch (error) {

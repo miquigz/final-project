@@ -13,19 +13,17 @@ passport.use(
             usernameField: 'email',
         },
         async(email, password, done) =>{
-//TODO: Evitar repetir return, utilizar variable aux (Repetir)
 
             const user = await Auth.findOne({ email:email })
             if (!user){
-                return done(null, false, { message: 'User not found!!'});
+                return done(null, false, { message: 'Usuario no encontrado!'});
             }
             //envio el password que escribio el usuario para hacer un check de match(si son iguales)
             const isMatch = await user.checkPassword(password);
             if (!isMatch){
-                return done(null, false, {message: 'PASSWORD ERROR'})
+                return done(null, false, {message: 'Contraseña incorrecta!'})
             }
-
-            return done(null, user);
+            return done(null, user);// null errors, y retorno user.
         }
     )
 )
