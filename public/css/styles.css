@@ -7,6 +7,15 @@
     background-color: rgba(127, 255, 212, 0.705);
     transition: 0.4s;
 }
+
+body{
+    background-image: url('/img/paper-background.jpg');
+    background-color: rgba(0,0,0,.4);
+    background-blend-mode: darken;
+
+    /* background-image: url('/public/img/paper-background.jpg'); */
+}
+
 .botonDelete>svg{
     fill:#e2d5d5;
     transition: 0.2s;
