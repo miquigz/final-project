@@ -51,7 +51,36 @@ const showHomeAllPosts = async (req, res = response)=>{
     }
 }
 
+const actualizarCondiciones = async (req, res)=>{
+    try {
+        const objAux = {
+            fecha: req.body.mostrarFechas ? true : false,
+            autor: req.body.mostrarAutores ? true : false,
+            emoji: req.body.mostrarEmojis ? true : false
+        };
+        // Object.assign(objAux, {fecha: );
+        // Object.assign(objAux, {});
+        // Object.assign(objAux, {});
+        res.app.locals.mostrar = objAux;
+        console.log(objAux);
+        console.log(res.app.locals.mostrar);
+        res.redirect('/home');
+    } catch (error) {
+        console.log("ERROR EN: Actualizar condiciones", error);
+    }
+}
+
+const actualizarTema = async (req, res)=>{
+    try {
+        console.log(req.body);
+        res.redirect('/home');
+    } catch (error) {
+        
+    }
+}
 
 module.exports = {
-    showHomeAllPosts
+    showHomeAllPosts,
+    actualizarCondiciones,
+    actualizarTema
 }

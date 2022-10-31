@@ -2,30 +2,13 @@
     {{>alert value = isAuthenticated_error value2 = 'edicion del post/accesso al post'}}
 {{/if}}
 
-<h1>{{this.posts.[posts.lenght].title}}</h1>
+<h1 id="#top">{{this.posts.[posts.lenght].title}}</h1>
 
 {{!-- {{posts.[(posts.lenght)].title}} --}}
-{{!-- req.app.locals.variable_you_need --}}
 
 {{>masRecientesCarrousel masRecientes = this.masRecientes}}
 
-<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
-    <form action="" method="POST" class="d-flex align-items-middle">
-        <div>
-            <input type="checkbox" autocomplete="off" name="mostrarEmojis" id="mostrarEmojis">
-            <label for="mostrarEmojis" class="user-select-none">Mostrar Emojis</label>
-        </div>
-        <div class="mx-2">
-            <input type="checkbox" name="mostrarFechas" id="mostrarFechas">
-            <label for="mostrarFechas" class="user-select-none">Mostrar Fechas</label>
-        </div>
-        <div class="mx-2">
-            <input type="checkbox" name="mostrarAutores" id="mostrarAutores">
-            <label for="mostrarAutores" class="user-select-none">Mostrar Autores</label>
-        </div>
-        <button type="submit" class="btn btn-dark text-success mx-2">Actualizar</button>
-    </form>
-</div>
+{{>configuracionPosts}}
 
 {{#if homePagination}}
     <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
@@ -38,23 +21,16 @@
     <hr class="bg-light shadow">
     {{>paginationHomeNav paginacion = this.paginacion}}
 
-    <div class="row justify-content-center mx-auto p-4 border-success rounded bg-sec-opacity shadow-box" >
-        {{#each posts}}
-            <div class="col-sm-6 col-lg-3 col-md-6 card text-white bg-success my-3 mx-1 border-2 border-dark" style="max-height:300px; overflow: hidden;">
+    {{!-- <h4>
+        {{@root.mostrar.autor}}
+    </h4> --}}
 
-                <div class="card-header w-100 bg-dark rounded text-center">- Post -</div>
-                <div class="card-body">
-                    {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}
-                    <h4 class="card-title">{{this.title}}</h4>
-                    <p class="card-text ">{{{this.body}}}</p>
-                </div>
-                {{!-- {{#if this.fecha}}
-                <small>{{this.fecha}}</small>
-                {{/if}} --}}
-                <a href="/posts/{{this.slug}}" class="btn btn-dark my-2 font-weight-bold">Ver mas</a>
-            </div>
+    <div class="row justify-content-center mx-auto p-4 border-success rounded bg-sec-opacity shadow-box" >
+        {{#each posts as |mostrar|}}
+            {{>mostrarPost post = this}}
         {{/each}}
     </div>
+    
 
     {{>paginationHomeNav paginacion = this.paginacion}}
 
@@ -69,6 +45,9 @@
 <hr class="bg-light text-center">
 
 <div class="row justify-content-center mx-auto p-4 border border-dark rounded mt-3 bg-sec-opacity shadow-box">
+    {{#each posts as |mostrar|}}
+        {{>mostrarPost post = this}}
+    {{/each}}
     {{#each posts}}
     <div class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success mb-3 mx-1 border border-dark" style="max-height: 300px;">
 
@@ -84,7 +63,12 @@
         <a href="/posts/{{this.slug}}" class="btn btn-light my-2 font-weight-bold border border-dark rounded">Ver mas</a>
         {{!-- <div class="" style="max-width: 20rem;"></div>
     </div> --}}
-</div>
-{{/each}}
+    </div>
+    {{/each}}
 </div>
 {{/if}}
+
+
+<div class="d-flex justify-content-end mt-4">
+    <p class="nav-link"><a href="#top"> Back to top</a></p>
+</div>

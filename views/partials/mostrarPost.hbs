@@ -1,0 +1,15 @@
+<div class="col-sm-6 col-lg-3 col-md-6 card text-white bg-dark border-light border my-3 mx-1"
+    style="max-height:500px; height:500px overflow: hidden;">
+    <div class="card-header rounded text-center bg-dark">
+        <a href="/posts/{{post.slug}}" class="nav-link bg-link rounded text-dark px-2">{{#if (and post.emoji @root.mostrar.emoji)}}{{{post.emoji}}}{{else}}- Post -{{/if}}</a>
+    </div>
+    <div class="card-body row">
+        <h5 class="card-title col-12 ">{{post.title}}</h5>
+        <p class="card-text col-12 ">{{{post.body}}}</p>
+        {{#if (and post.user @root.mostrar.autor)}}<small class="col-12 card-text"> {{post.user}}</small>{{/if}}
+        {{#if (and post.fecha @root.mostrar.fecha)}}<small class="col-12 card-text"> {{post.fecha}}</small>{{/if}}
+    </div>
+    
+</div>
+    {{!-- {{@root.locals.mostrar.fecha}} --}}
+    {{!-- {{@root.mostrar.fecha}} --}}

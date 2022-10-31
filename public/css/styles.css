@@ -45,7 +45,7 @@
 
 /* background secondary with opacity */
 .bg-sec-opacity{
-    background-color: #3d3333cb;
+    background-color: #2b1c1ccb;
 }
 
 .opacity-75{
@@ -96,11 +96,11 @@ body{
     fill: #221f1f;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"], input[type="radio"]{
     opacity: .3;
 }
 
-input[type="checkbox"]:checked {
+input[type="checkbox"]:checked, input[type="radio"]:checked {
     box-shadow: 3px 0 -3px 0 rgba(0,0,0,0.2);
     opacity: 1;
     filter: invert(100%) hue-rotate(2255deg) brightness(1.2);

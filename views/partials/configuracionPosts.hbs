@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center bg-sec-opacity py-4 rounded border border-light flex-wrap my-2">
+    <form action="/home/actualizarCondiciones" method="POST" class="d-flex align-items-middle">
+        <div>
+            <input type="checkbox" autocomplete="off" name="mostrarEmojis" id="mostrarEmojis"{{#if mostrar.emoji}}checked{{/if}}>
+            <label for="mostrarEmojis" class="user-select-none">Mostrar Emojis</label>
+        </div>
+        <div class="mx-2">
+            <input type="checkbox" name="mostrarFechas" id="mostrarFechas"{{#if mostrar.fecha}}checked{{/if}}>
+            <label for="mostrarFechas" class="user-select-none">Mostrar Fechas</label>
+        </div>
+        <div class="mx-2">
+            <input type="checkbox" name="mostrarAutores" id="mostrarAutores" {{#if mostrar.autor}}checked{{/if}}>
+            <label for="mostrarAutores" class="user-select-none">Mostrar Autores</label>
+        </div>
+            <button type="submit" class="btn btn-dark text-success mx-2 border border-light">Actualizar</button>
+    </form>
+</div>
+<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap my-2">
+    <h4 class="text-center w-100">Temas de Posts</h4>
+    <form action="" >
+        <div class="d-flex align-items-middle flex-wrap">
+            <div class="mx-2">
+                    <input class="" type="radio" name="themes" id="theme1" value="theme1">
+                    <label class="user-select-none" for="theme1">Theme1</label>
+                </div>
+                <div class="mx-2">
+                    <input class="" type="radio" name="themes" id="theme2">
+                    <label class="user-select-none" for="theme2" value="theme2">Theme2</label>
+                </div>
+                <div class="mx-2">
+                    <input class="" type="radio" name="themes" id="theme3">
+                    <label class="user-select-none" for="theme3" value="theme3">Theme3</label>
+                </div>
+                <div class="mx-2">
+                    <input class="disabled" type="radio" disabled="" name="themes">
+                    <label class="user-select-none disabled text-muted" for="theme4">Theme4</label>
+                </div>
+        </div>
+            
+        <button type="submit" class="btn btn-dark text-success mx-2 border border-light w-100">Actualizar Temas</button>
+    </form>
+</div>
