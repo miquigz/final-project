@@ -23,7 +23,8 @@ const getPostsPaginacion = async (req, res = response)=>{
     const paginacion = { desde, hasta, maximo: postsArray.length, valor }
     res.render("posts/index", {
       posts: postsCortados,
-      paginacion
+      paginacion,
+      title: `Edicion / vista de Posts`
     });
 
   } catch (error) {
@@ -34,7 +35,6 @@ const getPostsPaginacion = async (req, res = response)=>{
 const modificarPaginacion = async(req, res = response)=>{
   try {
     const postsArray = await Post.find({}).lean();
-    console.log(req.user.name);
     let maximoExcedido = false;
     paginacionBoolean = true;
     if (req.body.paginacionValor){
@@ -62,11 +62,9 @@ const modificarPaginacion = async(req, res = response)=>{
 const showPost = async (req, res = response) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
-    console.log(post.body);
     if (post === null) res.redirect("/");
-
     res.render("posts/show", {
-      // title: `InfoBlog - ${post.title}`,
+      title: `Informacion del Blog: ${post.title}`,
       post,
     })
 
