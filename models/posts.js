@@ -25,6 +25,11 @@ const postSchema = new mongoose.Schema(
             type:String,
             unique:true,
             required: false
+        },
+        emoji: {
+            type:String,
+            unique:false,
+            required:false
         }
     },
     {
