@@ -127,9 +127,8 @@ const createPost = async (req = request, res = response) => {
         valorBody = ''; valorTitle = '';
         let post = new Post();
         //Errores mostrar:
-        if (req.body.title == '' && req.body.body == ''){
-          res.status(400).render('posts/new', {
-            errorTitle:true, errorBody:true, valorBody, valorTitle });
+        if (req.body.title == '' && req.body.body == null){
+          res.status(400).render('posts/new', {errorTitle:true, errorBody:true, valorBody, valorTitle });
         }else if(req.body.title == ''){
           res.status(400).render('posts/new', {errorDuplicado, errorTitle:true, errorBody, valorBody:req.body.body , valorTitle });
         }else if (req.body.body == ''){
@@ -139,7 +138,7 @@ const createPost = async (req = request, res = response) => {
           res.status(400).render('posts/new', {errorDuplicado:true ,errorTitle, errorBody, valorTitle, valorBody: req.body.body});
         }
 //Creacion del POST
-        if (req.body.title && req.body.body && !(await tituloDuplicado(req.body.title))){
+        if (req.body.title && req.body.body && !(await tituloDuplicado(req.body.title)) ){
           post.title = req.body.title;
           post.body = req.body.body;
           //Casos opcionales guardar:
@@ -183,8 +182,17 @@ const editPost = async (req, res = response) => {
     let post = await Post.findById(req.params.id);
 
     if (post.user == null || post.user === req.user.name){
-      post.title = req.body.title;
+
+      if ((post.title != post.body.title) && !( await tituloDuplicado(req.body.title))){
+        post.title = req.body.title;
+      }else{
+        console.log("TITULOS DUPLICADOS") //TODO: llevar a alerta en front.
+        req.flash('isAuthenticated_error', "TITULOS DUPLICADOS, no se pudo editar");
+        res.redirect('/home')
+        // res.redirect(`/posts/edit/${req.params.id}`);
+      }
       post.body = req.body.body;
+
       //Si ya tiene postUser, y NO queremos guardar user:
       if (post.user && !req.body.guardarUser)
         post.user = post.user;

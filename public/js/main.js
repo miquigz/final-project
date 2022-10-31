@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         fontSize: ['8', '10', '12', '14', '18', '24', '30', '36', '42', '48'],
         theme: "dark",
         language: 'es',
-        charCounterMax: 150
+        charCounterMax: 150,
+        placeholderText: 'Ingrese el texto del post'
     })
 
     // new FroalaEditor('div#froala-editor', {
@@ -23,7 +24,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         quickInsertTags: [''],
         theme: "dark-emoji",
         emoticonsUseImage: false,
-        charCounterMax: 1
+        charCounterMax: 0,
+        placeholderText: 'Ingrese su emoji'
     })
     
 

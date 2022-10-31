@@ -66,6 +66,7 @@ app.use((req, res, next)=>{
     res.locals.isAuthenticated_error = req.flash('isAuthenticated_error');
     res.locals.user = req.user || null; //si esto logged(existe req.user), guardo variable, sino null.
     res.locals.signin_error = req.flash('error');
+    res.locals.mostrarEmojis = req.body.mostrar || false;
     //reqflash success?
     res.locals.signin_bien = req.flash('success');
     next();

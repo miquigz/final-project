@@ -1,15 +1,15 @@
 {{#if (and errorBody errorTitle)}}
-    {{>alertNewPost value='Por favor ingrese un titulo y texto para el post'}}
+    {{>alert value='Por favor ingrese un titulo y texto para el post' value2="creacion de post."}}
 {{else}}
     {{#if errorTitle}}
-        {{>alertNewPost value='Por favor ingrese un titulo para el post'}}
+        {{>alert value='Por favor ingrese un titulo para el post' value2="creacion de post."}}
     {{/if}}
     {{#if errorBody}}
-        {{>alertNewPost value='Por favor ingrese un texto para el post'}}
+        {{>alert value='Por favor ingrese un texto para el post' value2="creacion de post."}}
     {{/if}}
 {{/if}}
 {{#if errorDuplicado}}
-    {{>alertNewPost value='El titulo del post ya existe, ingrese otro.'}}
+    {{>alert value='El titulo del post ya existe, ingrese otro.' value2="creacion de post."}}
 {{/if}}
 
 <div class="bg-sec-opacity py-3 rounded border border-light p-2 mt-2 rounded">

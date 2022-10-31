@@ -6,10 +6,9 @@
     <h1 class="text-danger font-weight-bold text-center my-4">{{isAuthenticated_error}}</h1>
     <p class="text-warning font-weight-bold text-center my-4">Identifiquese para continuar:</p>
   </div>
-  
 {{/if}}
 {{#if signin_error}}
-  {{>alertPartial value = signin_error}}
+  {{>alert value = signin_error value2 = "inicio de sesion."}}
 {{/if}}
 <div>
   <div class="bg-secondary mt-4 p-4 rounded border border-light">

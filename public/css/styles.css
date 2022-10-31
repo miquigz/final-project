@@ -18,7 +18,7 @@
 }
 
 .fr-wrapper{
-    background-color: #3d3333!important;
+    background-color: #110a0a!important;
 }
 
 .fr-svg>path{
@@ -94,4 +94,15 @@ body{
     transition: 0.3s;
     transition-property: fill;
     fill: #221f1f;
+}
+
+input[type="checkbox"]{
+    opacity: .3;
+}
+
+input[type="checkbox"]:checked {
+    box-shadow: 3px 0 -3px 0 rgba(0,0,0,0.2);
+    opacity: 1;
+    filter: invert(100%) hue-rotate(2255deg) brightness(1.2);
+    
 }

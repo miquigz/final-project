@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center my-2">
+<div class="d-flex justify-content-center my-2 shadow-lg">
     <ul class="pagination">
         <li {{#if (gte 0 paginacion.maximo)}}class="page-item disabled"{{/if}}
         {{#if (compare paginacion.desde '==' (multiply paginacion.valor 0))}} class="page-item active text-dark" {{else}} class="page-item" {{/if}}>

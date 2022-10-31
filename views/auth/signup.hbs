@@ -1,9 +1,9 @@
 
 {{#each errors}}
-  {{>alertSignup value = this.msg}}
+  {{>alert value = this.msg value2="registro."}}
 {{/each}}
 {{#if signup_userExist}}
-  {{>alertSignup value = this.signup_userExist}}
+  {{>alert value = this.signup_userExist value2="registro."}}
 {{/if}}
 
 <div class="bg-secondary mt-4 p-4 rounded border border-light">

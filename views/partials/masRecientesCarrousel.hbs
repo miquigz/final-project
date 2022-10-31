@@ -1,0 +1,81 @@
+<h2 class="text-center text-success h3 mt-3 font-weight-bold">Posts mas recientes:</h2>
+<hr class="bg-light">
+<div id="carouselExampleIndicators" class="carousel slide my-3 bg-sec-opacity rounded border border-success py-2 shadow-lg" style="height: 350px;" data-ride="carousel">
+    <ol class="carousel-indicators mt-5">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="d-flex justify-content-center">
+                <div class="col-sm-6 col-lg-3 col-md-6 card text-light bg-dark mb-3 mx-1 border border-dark" style="max-height: 300px">
+                <div class="card-header w-100 bg-success rounded text-dark text-center">- Post {{masRecientes.last.index}} -</div>
+                <div class="card-body" style="max-height:200px; overflow: hidden;">
+                    {{#if masRecientes.last.post.emoji}}<small>{{{masRecientes.last.post.emoji}}}</small>{{/if}}
+                    <h4 class="card-title">{{masRecientes.last.post.title}}</h4>
+                    <p class="card-text">{{{masRecientes.last.post.body}}}</p>
+                </div>
+                {{#if masRecientes.last.post.fecha}}
+                    <small>{{masRecientes.last.post.fecha}}</small>
+                {{/if}}
+                {{#if masRecientes.last.post.user}}
+                    <small class="text-muted">Creado por: <label class="text-success">{{masRecientes.last.post.user}}</label></small>
+                {{/if}}
+                <a href="/posts/{{masRecientes.last.post.slug}}" class="btn btn-light btn-sm my-2 text-weight-bold">Ver mas</a>
+            </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center">
+                <div class="col-sm-6 col-lg-3 col-md-6 card text-light bg-dark mb-3 mx-1 border border-dark">
+                <div class="card-header w-100 bg-success rounded text-dark text-center">- Post {{masRecientes.last2.index}} -</div>
+                <div class="card-body" style="max-height:200px; overflow: hidden;">
+                    {{#if masRecientes.last2.post.emoji}}<small>{{{masRecientes.last2.post.emoji}}}</small>{{/if}}
+                    <h4 class="card-title">{{masRecientes.last2.post.title}}</h4>
+                    <p class="card-text">{{{masRecientes.last2.post.body}}}</p>
+                </div>
+                {{#if masRecientes.last2.post.fecha}}
+                <small>{{masRecientes.last2.post.fecha}}</small>
+                {{/if}}
+                {{#if masRecientes.last2.post.user}}
+                    <small class="text-muted">Creado por: <label class="text-success">{{masRecientes.last2.post.user}}</label></small>
+                {{/if}}
+                <a href="/posts/{{masRecientes.last2.post.slug}}" class="btn btn-light btn-sm my-2 text-weight-bold">Ver mas</a>
+                </div>
+            </div>            
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center">
+                <div class="col-sm-6 col-lg-3 col-md-6 card text-light bg-dark mb-3 mx-1 border border-dark">
+                <div class="card-header w-100 bg-success rounded text-dark text-center">- Post {{masRecientes.last3.index}} -</div>
+                <div class="card-body" style="max-height:200px; overflow: hidden;">
+                    {{#if masRecientes.last3.post.emoji}}<small>{{{masRecientes.last3.post.emoji}}}</small>{{/if}}
+                    <h4 class="card-title">{{masRecientes.last3.post.title}}</h4>
+                    <p class="card-text">{{{masRecientes.last3.post.body}}}</p>
+                </div>
+                {{#if masRecientes.last2.post.fecha}}
+                    <small class="text-muted">{{masRecientes.last3.post.fecha}}</small>
+                {{/if}}
+                {{#if masRecientes.last3.post.user}}
+                    <small class="text-muted">Creado por: <label class="text-success">{{masRecientes.last3.post.user}}</label></small>
+                {{/if}}
+                <a href="/posts/{{masRecientes.last2.post.slug}}" class="btn btn-light btn-sm my-2 text-weight-bold">Ver mas</a>
+            </div>
+            </div>
+            
+
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<hr class="bg-light text-center">
