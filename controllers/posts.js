@@ -1,5 +1,6 @@
 const { request, response } = require("express");
 const Post = require("../models/posts");
+const { default: slugify } = require('slugify')
 let valor = 5; //Paginacion valor por defecto
 let paginacionBoolean = false;
 
@@ -97,31 +98,61 @@ const newPost = async (req, res = response) => {
   }
 }
 
+const tituloDuplicado = async(titulo) =>{
+  try {
+    auxBoolean = false;
+    // {title: {$regex: titulo, $options 'i'}}
+    //Buscamos el titulo, indistintamente si es con mayus o no /{{title}}/i
+    await Post.exists({ title: new RegExp(titulo, 'i')}).then( result =>{
+      if (result){
+        auxBoolean= true;
+      }else
+        auxBoolean = false;
+    }).catch(err=>{ console.log("Error en PROMISE Duplicado",err); return err; })
+
+    return auxBoolean;
+    
+  } catch (error) {
+    console.log("ERROR EN CB TituloDUplicado", error);
+  }
+
+}
+
 // CREATE
 const createPost = async (req = request, res = response) => {
     try {
         let errorTitle= false;
+        let errorDuplicado = false;
         let errorBody = false;
         let valorBody, valorTitle;
         valorBody = ''; valorTitle = '';
         let post = new Post();
-        if (req.body.title && req.body.body){
-          post.title = req.body.title;
-          post.body = req.body.body;
-          if (req.body.guardarUser)
-            post.user = req.user.name;
-          if (req.body.guardarFecha){
-            post.fecha = "Creado el: " + new Date().toLocaleString();
-          }
-          post = await post.save()
-          res.status(200).redirect(`/posts/${post.slug}`);
-        }else if (req.body.title == '' && req.body.body == ''){
+        //Errores mostrar:
+        if (req.body.title == '' && req.body.body == ''){
           res.status(400).render('posts/new', {
             errorTitle:true, errorBody:true, valorBody, valorTitle });
         }else if(req.body.title == ''){
-          res.status(400).render('posts/new', { errorTitle:true, errorBody, valorBody:req.body.body , valorTitle });
-        }else if (req.body.body == '')
-          res.status(400).render('posts/new', { errorTitle, errorBody:true, valorTitle:req.body.title, valorBody });
+          res.status(400).render('posts/new', {errorDuplicado, errorTitle:true, errorBody, valorBody:req.body.body , valorTitle });
+        }else if (req.body.body == ''){
+          res.status(400).render('posts/new', {errorDuplicado,  errorTitle, errorBody:true, valorTitle:req.body.title, valorBody });
+        }
+        if (await tituloDuplicado(req.body.title)){
+          res.status(400).render('posts/new', {errorDuplicado:true ,errorTitle, errorBody, valorTitle, valorBody: req.body.body});
+        }
+//Creacion del POST
+        if (req.body.title && req.body.body && !(await tituloDuplicado(req.body.title))){
+          post.title = req.body.title;
+          post.body = req.body.body;
+          //Casos opcionales guardar:
+            if (req.body.guardarUser)
+              post.user = req.user.name;
+            if (req.body.guardarFecha)
+              post.fecha = "Creado el: " + new Date().toLocaleString();
+            if (req.body.emoji)
+              post.emoji = req.body.emoji;
+          post = await post.save()
+          res.status(200).redirect(`/posts/${post.slug}`);
+        }
     } catch (error) {
         console.log('Error en CREATE Post', error);
     }
@@ -150,23 +181,27 @@ const showPostFormEdit = async (req, res = response) => {
 const editPost = async (req, res = response) => {
   try {
     let post = await Post.findById(req.params.id);
+
     if (post.user == null || post.user === req.user.name){
       post.title = req.body.title;
       post.body = req.body.body;
-      if (post.user)
+      //Si ya tiene postUser, y NO queremos guardar user:
+      if (post.user && !req.body.guardarUser)
         post.user = post.user;
-      if (req.body.guardarUser){
+      else if (req.body.guardarUser)
         post.user = req.body.user;
-      }else{
-        post.user = null;
-      }
+    
       if (req.body.guardarFecha)
         post.fecha = "Editado el: " + new Date().toLocaleString();
+      if (req.body.emoji)
+        post.emoji = req.body.emoji;
       post = await post.save();
       //res.redirect(`/posts/edit/${post._id}`);
       res.redirect(`/posts/${post.slug}`);
-    }else{
+    }
+    else{
       console.log('Incapaz de editar el Post, verifique su usario');
+      res.redirect('/home');
     }
       
   } catch (error) {

@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         quickInsertTags: [''],
         fontSize: ['8', '10', '12', '14', '18', '24', '30', '36', '42', '48'],
         theme: "dark",
-        language: 'es'
+        language: 'es',
+        charCounterMax: 150
     })
 
     // new FroalaEditor('div#froala-editor', {
@@ -16,6 +17,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     //     // iconsTemplate: 'font_awesome_5r'
     //     // iconsTemplate: 'font_awesome_5l'
     // })
+
+    new FroalaEditor('#emoji', {
+        toolbarButtons: ['emoticons'],
+        quickInsertTags: [''],
+        theme: "dark-emoji",
+        emoticonsUseImage: false,
+        charCounterMax: 1
+    })
     
 
     console.log(document.querySelector('title').textContent);
