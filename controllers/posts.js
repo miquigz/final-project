@@ -1,6 +1,5 @@
 const { request, response } = require("express");
 const Post = require("../models/posts");
-const { default: slugify } = require('slugify')
 let valor = 5; //Paginacion valor por defecto
 let paginacionBoolean = false;
 
@@ -148,6 +147,7 @@ const createPost = async (req = request, res = response) => {
               post.user = req.user.name;
             if (req.body.guardarFecha)
               post.fecha = "Creado el: " + new Date().toLocaleString();
+            console.log("EMOJI ES:", req.body.emoji);
             if (req.body.emoji)
               post.emoji = req.body.emoji;
           post = await post.save()

@@ -56,7 +56,7 @@
     {{else}}
       {{#each posts}}
           <tr>
-              <td class="border-success rounded bg-dark" width="30%"><p class="h4">{{this.title}}</p></td>
+              <td class="border-success rounded bg-dark" width="30%"> {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}<p class="h4">{{this.title}}</p></td>
               <td width="45%" class="border-bottom border-dark"><p>{{{this.body}}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-success">{{this.user}}</label></small>{{/if}} </td>
               <td class="d-flex flex-wrap border-success bg-dark rounded">
                   {{!-- <button id="botonDelete">borrarexample</button> --}}

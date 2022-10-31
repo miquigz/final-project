@@ -19,6 +19,7 @@
                 <div class="col-sm-6 col-lg-3 col-md-6 card text-light bg-dark mb-3 mx-1 border border-dark" style="max-height: 300px">
                 <div class="card-header w-100 bg-success rounded text-dark text-center">- Post {{masRecientes.last.index}} -</div>
                 <div class="card-body" style="max-height:200px; overflow: hidden;">
+                    {{#if masRecientes.last.post.emoji}}<small>{{{masRecientes.last.post.emoji}}}</small>{{/if}}
                     <h4 class="card-title">{{masRecientes.last.post.title}}</h4>
                     <p class="card-text">{{{masRecientes.last.post.body}}}</p>
                 </div>
@@ -37,6 +38,7 @@
                 <div class="col-sm-6 col-lg-3 col-md-6 card text-light bg-dark mb-3 mx-1 border border-dark">
                 <div class="card-header w-100 bg-success rounded text-dark text-center">- Post {{masRecientes.last2.index}} -</div>
                 <div class="card-body" style="max-height:200px; overflow: hidden;">
+                    {{#if masRecientes.last2.post.emoji}}<small>{{{masRecientes.last2.post.emoji}}}</small>{{/if}}
                     <h4 class="card-title">{{masRecientes.last2.post.title}}</h4>
                     <p class="card-text">{{{masRecientes.last2.post.body}}}</p>
                 </div>
@@ -55,6 +57,7 @@
                 <div class="col-sm-6 col-lg-3 col-md-6 card text-light bg-dark mb-3 mx-1 border border-dark">
                 <div class="card-header w-100 bg-success rounded text-dark text-center">- Post {{masRecientes.last3.index}} -</div>
                 <div class="card-body" style="max-height:200px; overflow: hidden;">
+                    {{#if masRecientes.last3.post.emoji}}<small>{{{masRecientes.last3.post.emoji}}}</small>{{/if}}
                     <h4 class="card-title">{{masRecientes.last3.post.title}}</h4>
                     <p class="card-text">{{{masRecientes.last3.post.body}}}</p>
                 </div>
@@ -83,10 +86,6 @@
 
 <hr class="bg-light text-center">
 
-
-
-
-
 {{#if homePagination}}
     <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
         <h3 class="text-center w-100">{{title}}</h3>
@@ -104,6 +103,7 @@
 
                 <div class="card-header w-100 bg-dark rounded text-center">- Post -</div>
                 <div class="card-body">
+                    {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}
                     <h4 class="card-title">{{this.title}}</h4>
                     <p class="card-text ">{{{this.body}}}</p>
                 </div>
@@ -133,6 +133,7 @@
 
         <div class="card-header w-100 bg-dark rounded text-white text-center">- Post - {{add @index 1}}</div>
         <div class="card-body">
+            {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}
             <h4 class="card-title">{{this.title}}</h4>
             <p class="card-text">{{{this.body}}}</p>
         </div>

@@ -18,7 +18,7 @@
     <form action="/posts" method="POST">
         <label for="emoji">Emoji del post: <small class="text-success">(Opcional)</small> </label>
         {{!-- <div id="emoji" class="w-25"> --}}
-        <textarea type="text" id="emoji" class="w-25">{{valorEmoji}}</textarea>
+        <textarea type="text" id="emoji" name="emoji" class="w-25">{{valorEmoji}}</textarea>
         <div {{#if errorTitle}} class="form-group has-danger" {{else}} class="form-group" {{/if}}>
             <label for="title">Título <small class="text-muted mx-1"><small class="text-danger font-weight-bold">*</small> Campo obligatorio.</small></label>
             <input type="text" 
