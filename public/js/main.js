@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     editor = new FroalaEditor('#textarea', {
         // Set custom buttons.
-        toolbarButtons: [['bold', 'italic', 'underline', 'strikeThrough'], ['fontFamily', 'fontSize', 'textColor', 'backgroundColor']]
+        toolbarButtons: [['bold', 'italic', 'underline', 'strikeThrough'], ['fontFamily'],['fontSize', 'textColor', 'backgroundColor'], ['clearFormatting']],
+        quickInsertTags: [''],
+        fontSize: ['8', '10', '12', '14', '18', '24', '30', '36', '42', '48'],
+        theme: "dark",
+        language: 'es'
     })
-
 
     // new FroalaEditor('div#froala-editor', {
     //     iconsTemplate: 'font_awesome_5'

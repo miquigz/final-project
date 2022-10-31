@@ -29,9 +29,7 @@ const helpers = require('handlebars-helpers')();
 
 app.engine('hbs', hbs.engine({
     helpers: {
-        helpers,
-        // inner: value => value.innerHTML
-        // lean: value => value.lean()
+        helpers
     },
     extname: '.hbs'
 }));
@@ -68,6 +66,7 @@ app.use((req, res, next)=>{
     res.locals.isAuthenticated_error = req.flash('isAuthenticated_error');
     res.locals.user = req.user || null; //si esto logged(existe req.user), guardo variable, sino null.
     res.locals.signin_error = req.flash('error');
+    //reqflash success?
     res.locals.signin_bien = req.flash('success');
     next();
 })

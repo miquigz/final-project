@@ -1,16 +1,9 @@
 
 {{#each errors}}
-<h1>{{this.msg}}</h1>
-{{!-- //TODO: Hacer partials de la alerta de c/u error --}}
+  {{>alertSignup value = this.msg}}
 {{/each}}
-
 {{#if signup_userExist}}
-{{!-- //TODO: Llevar a partials --}}
-<div class="alert alert-dismissible alert-light mt-3 text-dark border border-warning" data-dismiss="alert">
-  <button type="button" class="close btn-close rounded btn-secondary btn text-warning btn-sm" data-bs-dismiss="alert" aria-label="Close">X</button>
-  <h4 class="alert-heading mt-1 font-weight-bold">E-mail ya en uso!</h4>
-  <p class="mb-0">{{signup_userExist}}</p>
-</div>
+  {{>alertSignup value = this.signup_userExist}}
 {{/if}}
 
 <div class="bg-secondary mt-4 p-4 rounded border border-light">

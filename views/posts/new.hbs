@@ -1,14 +1,25 @@
+{{#if (and errorBody errorTitle)}}
+    {{>alertNewPost value='Por favor ingrese un titulo y texto para el post'}}
+{{else}}
+    {{#if errorTitle}}
+        {{>alertNewPost value='Por favor ingrese un titulo para el post'}}
+    {{/if}}
+    {{#if errorBody}}
+        {{>alertNewPost value='Por favor ingrese un texto para el post'}}
+    {{/if}}
+{{/if}}
+
 <div class="bg-sec-opacity py-3 rounded border border-light p-2 mt-2 rounded">
     <h2 class="m-4">Crear nuevo Post</h2>
 
     <form action="/posts" method="POST">
         <div class="form-group">
             <label for="title">Título</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Ingrese el título del post">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Ingrese el título del post" value="{{valorTitle}}">
         </div>
         
-        <label for="body">Example textarea</label>
-        <textarea class="form-control" id="body" name="body" rows="3"  placeholder="Ingrese su descripcion"></textarea>
+        <label for="body">Ingrese el cuerpo del post: </label>
+        <textarea class="form-control" id="textarea" name="body" rows="3"  placeholder="Ingrese su descripcion" aria-valuemax="400">{{valorBody}}</textarea>
         <div class="form-group form-check row mt-2">
             <div class="col">
                 <input type="checkbox" class="form-check-input" id="guardarFecha" name="guardarFecha">
