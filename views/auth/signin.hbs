@@ -2,8 +2,11 @@
   {{> successSignup}}
 {{/if}}
 {{#if isAuthenticated_error}}
-  <h1 class="text-danger font-weight-bold text-center my-4">{{isAuthenticated_error}}</h1>
-  <p class="text-warning font-weight-bold text-center my-4">Identifiquese para continuar:</p>
+  <div class="bg-dark border border-light rounded p-1 my-2">
+    <h1 class="text-danger font-weight-bold text-center my-4">{{isAuthenticated_error}}</h1>
+    <p class="text-warning font-weight-bold text-center my-4">Identifiquese para continuar:</p>
+  </div>
+  
 {{/if}}
 {{#if signin_error}}
   {{>alertPartial value = signin_error}}
