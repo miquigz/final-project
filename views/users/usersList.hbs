@@ -1,27 +1,27 @@
 <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
-    <h2 class="text-center text-success my-2 w-100">{{title}} - Total de Usuarios</h2>
-    <div class="d-flex justify-content-center align-items-center">
-        <a class="btn-success btn mx-4" href="/home/?skip=0&&limit=6">Paginacion Posts</a>
-    </div>
+    <h2 class="text-center text-success my-2 w-100">{{title}} : {{users.length}}</h2>
 </div>
 
 <hr class="bg-light text-center">
-<p>ordenar por alfabeto, o por orden de creacion</p>
+<div class="bg-sec-opacity">
+    <a href="/users/?alphabet=true" {{#if (eq ordenActual "alphabet")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por alfabeto</a>
+    <a href="/users/?dateOld=true" {{#if (eq ordenActual "dateOld")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por antiguedad</a>
+    <a href="/users/?dateRecent=true" {{#if (eq ordenActual "dateRecent")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por recientes</a>
+</div>
+
 <div class="row justify-content-center mx-auto p-4 border border-dark rounded mt-3 bg-sec-opacity shadow-box">
     {{#each users}}
-    <div class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success mb-3 mx-1 border border-dark" style="max-height: 300px;">
+        <div class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success mb-3 mx-1 border border-dark" style="max-height: 300px;">
 
-        <div class="card-header w-100 bg-dark rounded text-white text-center">- Usuario - {{add @index 1}}</div>
-        <div class="card-body">
-            <h4 class="card-title">{{this.name}}</h4>
-            <p class="card-text">Ultimo post:</p>
-            <a href="/posts/{{this.last.slug}}" class="btn btn-light my-2 font-weight-bold border border-dark rounded">Ver ultimo post</a>
+            <div class="card-header rounded text-center bg-secondary"><a href="" class="nav-link bg-link rounded text-dark px-2">{{this.name}}</a></div>
+            <div class="card-body">
+                <h4 class="card-title"></h4>
+                <p class="card-text">Fecha de creacion: {{this.createdAt}}</p>
+                <a href="/posts/{{this.last.slug}}" class="btn btn-light my-2 font-weight-bold border border-dark rounded">Ver ultimo post</a>
+            </div>
         </div>
-        {{!-- {{#if this.fecha}}
-        <small>{{this.fecha}}</small>
-        {{/if}} --}}
-        
-        {{!-- <div class="" style="max-width: 20rem;"></div>
-    </div> --}}
+    {{/each}}
 </div>
-{{/each}}
+<div class="d-flex justify-content-end mt-4">
+    <a class="nav-link bg-link rounded text-dark px-2 my-2" href="#top">Back to top</a>
+</div>

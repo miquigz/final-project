@@ -24,6 +24,7 @@ dbConnection()
 
 //----- HANDLEBARS & Helpers
 let hbs = require('express-handlebars');
+const { routerUsers } = require('./routes/users')
 
 const helpers = require('handlebars-helpers')();
 
@@ -79,6 +80,7 @@ app.use('/', routerAuth);
 app.use('/', routerDev); // Solo para desarrollo
 app.use('/', routerPosts);
 app.use('/', routerHome);
+app.use('/', routerUsers);
 
 
 
