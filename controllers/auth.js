@@ -51,9 +51,10 @@ const showAuthFormSignIn = (req, res = response) => {
 
 const signin = passport.authenticate('local', {
     successRedirect: '/home',
+    successFlash: true,
     failureRedirect: '/auth/signin', //Si falla redirigo de nuevo al signin
     failureFlash: true
-})
+}) 
 
 const logout = async(req, res = response, next) => {
     await req.logout((err)=>{
@@ -61,9 +62,6 @@ const logout = async(req, res = response, next) => {
         res.redirect('/auth/signin');
     })
 }
-
-
-
 
 
 

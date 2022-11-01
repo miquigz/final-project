@@ -177,13 +177,28 @@ const showPostFormEdit = async (req, res = response) => {
     }
 }
 
+const masDeUnTitulo = async()=>{
+  try {
+    await Post.find({ title: new RegExp(titulo, 'i')}).then( result =>{
+      if (result.length > 1){
+        auxBoolean= true;
+      }else
+        auxBoolean = false;
+    }).catch(err=>{ console.log("Error en PROMISE mas de un titulo",err); return err; })    
+
+  } catch (error) {
+    console.log("ERROR EN CALLBACK: masdeuntitulo", error);
+  }
+
+}
+
 const editPost = async (req, res = response) => {
   try {
     let post = await Post.findById(req.params.id);
 
     if (post.user == null || post.user === req.user.name){
 
-      if ((post.title != post.body.title) && !( await tituloDuplicado(req.body.title))){
+      if ((post.title != post.body.title) && !( await masDeUnTitulo(req.body.title))){
         post.title = req.body.title;
       }else{
         console.log("TITULOS DUPLICADOS") //TODO: llevar a alerta en front.

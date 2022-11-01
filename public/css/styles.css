@@ -8,12 +8,12 @@
 }
 
 .dark-theme{
-    background-color: #2c2626d2;
+    background-color: #2213097e;
     color:rgb(87, 141, 123);
 }
 
 .dark-emoji-theme{
-    background-color: #2c2626d2;
+    background-color: #2213097e;
     color:rgb(87, 141, 123);
 }
 
@@ -45,7 +45,7 @@
 
 /* background secondary with opacity */
 .bg-sec-opacity{
-    background-color: #2b1c1ccb;
+    background-color: #221309d8;
 }
 
 .opacity-75{
