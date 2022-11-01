@@ -21,7 +21,7 @@
         <div class="d-flex align-items-middle flex-wrap">
             <div class="mx-2">
                 <input class="" type="radio" name="themes" id="defect" value="defecto"
-                {{#if (eq mostrar.tema 'defecto')}}checked{{/if}}>
+                {{#if (or (isFalsey mostrar.tema)(eq mostrar.tema 'defecto'))}}checked{{/if}}>
                 <label class="user-select-none" for="defect">Defecto</label>
             </div>
             <div class="mx-2">

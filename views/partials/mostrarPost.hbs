@@ -13,7 +13,7 @@ class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success my-3 mx-1"{{/if}}
         <a href="/posts/{{post.slug}}"
         {{#if @root.mostrar.tema}}class="nav-link bg-link rounded text-dark px-2"
         {{else}} class=" btn button-dark rounded text-white px-2"
-        {{/if}}>{{#if (and post.emoji @root.mostrar.emoji)}}{{{post.emoji}}}{{else}}- Post -{{/if}}</a>
+        {{/if}}>{{#if index}}{{add index 1}}{{/if}}{{#if (and post.emoji @root.mostrar.emoji)}}{{{post.emoji}}}{{else}}- Post -{{/if}}</a>
     </div>
     <div 
     {{#if (eq @root.mostrar.tema 'theme1')}}class="card-body row text-center bg-dark"{{/if}}

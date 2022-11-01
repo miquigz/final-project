@@ -5,10 +5,29 @@
 <h1 id="#top">{{this.posts.[posts.lenght].title}}</h1>
 
 {{!-- {{posts.[(posts.lenght)].title}} --}}
+{{#if mostrarCarrousel}}
+    <div class="d-flex justify-content-end my-1">
+        <a href="/home/switchCarrousel" class="nav-link bg-link rounded text-dark px-2 my-1 btn-sm">Mostrar posts mas recientes</a>
+    </div>
+{{else}}
+    <div class="d-flex justify-content-end my-1">
+        <a href="/home/switchCarrousel" class="btn-light btn-sm">Ocultar posts mas recientes</a>
+    </div>
+    {{>masRecientesCarrousel masRecientes = this.masRecientes}}
+{{/if}}
 
-{{>masRecientesCarrousel masRecientes = this.masRecientes}}
 
-{{>configuracionPosts }}
+
+{{#if mostrarConfig}}
+    <div class="d-flex justify-content-end my-1">
+        <a href="/home/switchConfig" class="nav-link bg-link rounded text-dark px-2 my-1 btn-sm">Mostrar configuracion de Posts</a>
+    </div>
+{{else}}
+    <div class="d-flex justify-content-end my-1">
+        <a href="/home/switchConfig" class="btn-light btn-sm">Ocultar configuracion de Posts</a>
+    </div>
+    {{>configuracionPosts }}
+{{/if}}
 
 {{#if homePagination}}
     <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
@@ -46,29 +65,13 @@
 
 <div class="row justify-content-center mx-auto p-4 border border-dark rounded mt-3 bg-sec-opacity shadow-box">
     {{#each posts as |mostrar|}}
-        {{>mostrarPost post = this}}
+        {{>mostrarPost post = this index = @index}}
     {{/each}}
-    {{#each posts}}
-    <div class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success mb-3 mx-1 border border-dark" style="max-height: 300px;">
+</div>
 
-        <div class="card-header w-100 bg-dark rounded text-white text-center">- Post - {{add @index 1}}</div>
-        <div class="card-body">
-            {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}
-            <h4 class="card-title">{{this.title}}</h4>
-            <p class="card-text">{{{this.body}}}</p>
-        </div>
-        {{!-- {{#if this.fecha}}
-        <small>{{this.fecha}}</small>
-        {{/if}} --}}
-        <a href="/posts/{{this.slug}}" class="btn btn-light my-2 font-weight-bold border border-dark rounded">Ver mas</a>
-        {{!-- <div class="" style="max-width: 20rem;"></div>
-    </div> --}}
-    </div>
-    {{/each}}
+<div class="d-flex justify-content-end mt-4">
+    <p class=" btn btn-success"><a class="text-dark" href="#top"> Back to top</a></p>
 </div>
 {{/if}}
 
 
-<div class="d-flex justify-content-end mt-4">
-    <p class="nav-link"><a href="#top"> Back to top</a></p>
-</div>

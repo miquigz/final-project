@@ -67,6 +67,8 @@ app.use((req, res, next)=>{
     res.locals.user = req.user || null; //si esto logged(existe req.user), guardo variable, sino null.
     res.locals.signin_error = req.flash('error');
     res.locals.mostrar;
+    res.locals.mostrarConfig;
+    res.locals.mostrarCarrousel;
     //reqflash success?
     res.locals.signin_bien = req.flash('success');
     next();

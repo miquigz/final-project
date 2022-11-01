@@ -54,7 +54,6 @@ const showHomeAllPosts = async (req, res = response)=>{
 const actualizarCondiciones = async (req, res)=>{
     try {
         let enviarObject = {};
-        console.log(res.app.locals.mostrar);
         if (res.app.locals.mostrar){
             enviarObject = res.app.locals.mostrar;
         }
@@ -63,13 +62,9 @@ const actualizarCondiciones = async (req, res)=>{
             autor: req.body.mostrarAutores ? true : false,
             emoji: req.body.mostrarEmojis ? true : false
         };
-        console.log(objectAux);
-        console.log(res.app.locals.mostrar);
         Object.assign(enviarObject, objectAux);
         res.app.locals.mostrar = enviarObject;
-        console.log(objectAux);
-        console.log(res.app.locals.mostrar);
-        res.redirect('/home');
+        res.redirect(req.headers.referer);
     } catch (error) {
         console.log("ERROR EN: Actualizar condiciones", error);
     }
@@ -82,14 +77,42 @@ const actualizarTema = async (req, res)=>{
             objectAux = res.app.locals.mostrar;
         Object.assign(objectAux, {tema: req.body.themes});
         res.app.locals.mostrar = objectAux;
-        res.redirect('/home');
+        res.redirect(req.headers.referer);
     } catch (error) {
         console.log("ERROR EN ACTUALIZAR TEMA", error);
     }
 }
 
+const switchConfig = async(req, res)=>{
+    try {
+        // res.app.locals.mostrarConfig = res.app.mostrarConfig ? false : true
+        if (res.app.locals.mostrarConfig)
+            res.app.locals.mostrarConfig = false;
+        else
+            res.app.locals.mostrarConfig = true;
+        res.redirect(req.headers.referer);
+    } catch (error) {
+        console.log("ERROR EN mostrarConfig", error);
+    }
+}
+
+const switchCarrousel = async(req, res)=>{
+    try {
+        if (res.app.locals.mostrarCarrousel)
+            res.app.locals.mostrarCarrousel = false;
+        else
+            res.app.locals.mostrarCarrousel = true;
+        res.redirect(req.headers.referer);
+    } catch (error) {
+        console.log("ERROR EN mostrarConfig", error);
+    }
+}
+
+
 module.exports = {
     showHomeAllPosts,
     actualizarCondiciones,
-    actualizarTema
+    actualizarTema,
+    switchConfig,
+    switchCarrousel
 }
