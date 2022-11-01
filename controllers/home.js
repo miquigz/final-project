@@ -53,16 +53,21 @@ const showHomeAllPosts = async (req, res = response)=>{
 
 const actualizarCondiciones = async (req, res)=>{
     try {
-        const objAux = {
+        let enviarObject = {};
+        console.log(res.app.locals.mostrar);
+        if (res.app.locals.mostrar){
+            enviarObject = res.app.locals.mostrar;
+        }
+        let objectAux = {
             fecha: req.body.mostrarFechas ? true : false,
             autor: req.body.mostrarAutores ? true : false,
             emoji: req.body.mostrarEmojis ? true : false
         };
-        // Object.assign(objAux, {fecha: );
-        // Object.assign(objAux, {});
-        // Object.assign(objAux, {});
-        res.app.locals.mostrar = objAux;
-        console.log(objAux);
+        console.log(objectAux);
+        console.log(res.app.locals.mostrar);
+        Object.assign(enviarObject, objectAux);
+        res.app.locals.mostrar = enviarObject;
+        console.log(objectAux);
         console.log(res.app.locals.mostrar);
         res.redirect('/home');
     } catch (error) {
@@ -72,10 +77,14 @@ const actualizarCondiciones = async (req, res)=>{
 
 const actualizarTema = async (req, res)=>{
     try {
-        console.log(req.body);
+        let objectAux = {};
+        if (res.app.locals.mostrar)
+            objectAux = res.app.locals.mostrar;
+        Object.assign(objectAux, {tema: req.body.themes});
+        res.app.locals.mostrar = objectAux;
         res.redirect('/home');
     } catch (error) {
-        
+        console.log("ERROR EN ACTUALIZAR TEMA", error);
     }
 }
 

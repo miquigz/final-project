@@ -17,19 +17,27 @@
 </div>
 <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap my-2">
     <h4 class="text-center w-100">Temas de Posts</h4>
-    <form action="" >
+    <form action="/home/actualizarTema" method="POST">
         <div class="d-flex align-items-middle flex-wrap">
             <div class="mx-2">
-                    <input class="" type="radio" name="themes" id="theme1" value="theme1">
-                    <label class="user-select-none" for="theme1">Theme1</label>
+                <input class="" type="radio" name="themes" id="defect" value="defecto"
+                {{#if (eq mostrar.tema 'defecto')}}checked{{/if}}>
+                <label class="user-select-none" for="defect">Defecto</label>
+            </div>
+            <div class="mx-2">
+                <input class="" type="radio" name="themes" id="theme1" value="theme1"
+                {{#if (eq mostrar.tema 'theme1')}}checked{{/if}}>
+                <label class="user-select-none" for="theme1">Theme1</label>
+            </div>
+                <div class="mx-2">
+                    <input class="" type="radio" name="themes" id="theme2" value="theme2"
+                    {{#if (eq mostrar.tema 'theme2')}}checked{{/if}}>
+                    <label class="user-select-none" for="theme2" >Theme2</label>
                 </div>
                 <div class="mx-2">
-                    <input class="" type="radio" name="themes" id="theme2">
-                    <label class="user-select-none" for="theme2" value="theme2">Theme2</label>
-                </div>
-                <div class="mx-2">
-                    <input class="" type="radio" name="themes" id="theme3">
-                    <label class="user-select-none" for="theme3" value="theme3">Theme3</label>
+                    <input class="" type="radio" name="themes" id="theme3" value="theme3"
+                    {{#if (eq mostrar.tema 'theme3')}}checked{{/if}}>
+                    <label class="user-select-none" for="theme3">Theme3</label>
                 </div>
                 <div class="mx-2">
                     <input class="disabled" type="radio" disabled="" name="themes">

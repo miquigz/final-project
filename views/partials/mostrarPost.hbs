@@ -1,15 +1,31 @@
-<div class="col-sm-6 col-lg-3 col-md-6 card text-white bg-dark border-light border my-3 mx-1"
+<div 
+{{#if (eq @root.mostrar.tema 'theme1')}}class="col-sm-6 col-lg-3 col-md-6 card text-white bg-dark border-light border my-3 mx-1"{{/if}}
+{{#if (eq @root.mostrar.tema 'theme2')}}class="col-sm-6 col-lg-3 col-md-6 card text-white bg-secondary border-light border my-3 mx-1"{{/if}}
+{{#if (eq @root.mostrar.tema 'theme3')}}class="col-sm-6 col-lg-3 col-md-6 card text-white bg-primary border-light border my-3 mx-1"{{else}}
+class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success my-3 mx-1"{{/if}}
     style="max-height:500px; height:500px overflow: hidden;">
-    <div class="card-header rounded text-center bg-dark">
-        <a href="/posts/{{post.slug}}" class="nav-link bg-link rounded text-dark px-2">{{#if (and post.emoji @root.mostrar.emoji)}}{{{post.emoji}}}{{else}}- Post -{{/if}}</a>
+    <div 
+    {{#if (eq @root.mostrar.tema 'theme1')}}class="card-header rounded text-center bg-dark"{{/if}}
+    {{#if (eq @root.mostrar.tema 'theme2')}}class="card-header rounded text-center bg-secondary	"{{/if}}
+    {{#if (eq @root.mostrar.tema 'theme3')}}class="card-header rounded text-center bg-primary"{{else}}
+        class="card-header w-100 bg-dark rounded text-white text-center" {{!-- defect theme --}}
+    {{/if}}>
+        <a href="/posts/{{post.slug}}"
+        {{#if @root.mostrar.tema}}class="nav-link bg-link rounded text-dark px-2"
+        {{else}} class=" btn button-dark rounded text-white px-2"
+        {{/if}}>{{#if (and post.emoji @root.mostrar.emoji)}}{{{post.emoji}}}{{else}}- Post -{{/if}}</a>
     </div>
-    <div class="card-body row">
+    <div 
+    {{#if (eq @root.mostrar.tema 'theme1')}}class="card-body row text-center bg-dark"{{/if}}
+    {{#if (eq @root.mostrar.tema 'theme2')}}class="card-body row rounded text-dark bg-light"{{/if}}
+    {{#if (eq @root.mostrar.tema 'theme3')}}class="card-body row rounded text-center bg-primary"{{else}}
+        class="card-body row" {{!-- defect theme --}}
+    {{/if}}>
         <h5 class="card-title col-12 ">{{post.title}}</h5>
         <p class="card-text col-12 ">{{{post.body}}}</p>
         {{#if (and post.user @root.mostrar.autor)}}<small class="col-12 card-text"> {{post.user}}</small>{{/if}}
         {{#if (and post.fecha @root.mostrar.fecha)}}<small class="col-12 card-text"> {{post.fecha}}</small>{{/if}}
     </div>
-    
 </div>
     {{!-- {{@root.locals.mostrar.fecha}} --}}
     {{!-- {{@root.mostrar.fecha}} --}}
