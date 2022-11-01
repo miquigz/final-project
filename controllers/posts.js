@@ -21,7 +21,7 @@ const getPostsPaginacion = async (req, res = response)=>{
     hasta = req.query.limit;
     postsCortados.forEach(element => { element = Object.assign(element, {userActual: req.user.name}); });
     const paginacion = { desde, hasta, maximo: postsArray.length, valor }
-    res.render("posts/index", {
+    res.status(200).render("posts/index", {
       posts: postsCortados,
       paginacion,
       title: `Edicion / vista de Posts`
@@ -47,7 +47,7 @@ const modificarPaginacion = async(req, res = response)=>{
     let postsCortados = cortarPosts(postsArray, 0, valor);
     postsCortados.forEach(element => { element = Object.assign(element, {userActual: req.user.name}); });
     const paginacionTwo = { desde:0, hasta:valor, maximo: postsArray.length, valor }
-    res.render("posts/index", {
+    res.status(200).render("posts/index", {
       posts: postsCortados,
       paginacion: paginacionTwo,
       maximoExcedido
@@ -79,9 +79,11 @@ const deletePost = async (req = request, res = response) => {
         let postAborrar = await Post.findById(req.params.id);
         if (postAborrar.user == null || postAborrar.user === req.user.name)
           await Post.findByIdAndDelete(req.params.id)
-        else
+        else{
           console.log("No se puede borrar este elemento, verifique su usuario");
-        res.redirect(req.headers.referer);
+          res.status(400).redirect(req.headers.referer);
+        }
+        res.status(200).redirect(req.headers.referer);
         // console.log(req.headers.referer)
     } catch (error) {
         console.log('Error DELETE', error)
@@ -146,7 +148,6 @@ const createPost = async (req = request, res = response) => {
               post.user = req.user.name;
             if (req.body.guardarFecha)
               post.fecha = "Creado el: " + new Date().toLocaleString();
-            console.log("EMOJI ES:", req.body.emoji);
             if (req.body.emoji)
               post.emoji = req.body.emoji;
           post = await post.save()
@@ -170,14 +171,14 @@ const showPostFormEdit = async (req, res = response) => {
           })
         }else{
           req.flash('isAuthenticated_error', "Acceso no autorizado, POST de otro usuario");
-          res.redirect('/home')
+          res.status(200).redirect('/home')
         }
     } catch (error) {
         console.log('Show Edit Post', error)
     }
 }
 
-const masDeUnTitulo = async()=>{
+const masDeUnTitulo = async(titulo)=>{
   try {
     await Post.find({ title: new RegExp(titulo, 'i')}).then( result =>{
       if (result.length > 1){
@@ -197,34 +198,29 @@ const editPost = async (req, res = response) => {
     let post = await Post.findById(req.params.id);
 
     if (post.user == null || post.user === req.user.name){
-
       if ((post.title != post.body.title) && !( await masDeUnTitulo(req.body.title))){
         post.title = req.body.title;
       }else{
-        console.log("TITULOS DUPLICADOS") //TODO: llevar a alerta en front.
+        console.log("TITULOS DUPLICADOS") //ToDo: llevar a alerta en front.
         req.flash('isAuthenticated_error', "TITULOS DUPLICADOS, no se pudo editar");
-        res.redirect('/home')
+        res.status(400).redirect('/home')
         // res.redirect(`/posts/edit/${req.params.id}`);
       }
       post.body = req.body.body;
 
-      //Si ya tiene postUser, y NO queremos guardar user:
-      if (post.user && !req.body.guardarUser)
-        post.user = post.user;
-      else if (req.body.guardarUser)
-        post.user = req.body.user;
-    
       if (req.body.guardarFecha)
         post.fecha = "Editado el: " + new Date().toLocaleString();
+      else
+        post.fecha = post.fecha;
       if (req.body.emoji)
         post.emoji = req.body.emoji;
       post = await post.save();
       //res.redirect(`/posts/edit/${post._id}`);
-      res.redirect(`/posts/${post.slug}`);
+      res.status(200).redirect(`/posts/${post.slug}`);
     }
     else{
       console.log('Incapaz de editar el Post, verifique su usario');
-      res.redirect('/home');
+      res.status(400).redirect('/home');
     }
       
   } catch (error) {

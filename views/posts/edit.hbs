@@ -14,13 +14,6 @@
             <input type="checkbox" class="form-check-input" id="guardarFecha" name="guardarFecha" {{#if post.fecha}}checked{{/if}}>
             <label class="form-check-label" for="guardarFecha">Guardar fecha de edicion</label>
         </div>
-        <div class="form-group form-check flex-wrap">
-            <input type="checkbox" class="form-check-input" id="guardarUser" name="guardarUser" {{#if post.user}}checked{{/if}}>
-            <label class="form-check-label user-select-none" for="guardarUser">Guardar nombre de usuario</label>
-        </div>
-        <div class="d-flex">
-            <small id="userHelp" class="text-muted user-select-none"> <small class="text-danger font-weight-bold">*</small> Si no guardas tu nombre, el <label class="text-success user-select-none">post</label> podr'a ser <label class="text-warning"> editado/borrado</label> por cualquier usuario registrado.</small>
-        </div>
         <div class="d-flex justify-content-center">
             <button type="submit" id="btnCrearPost" class="btn btn-success mt-3">Submit</button>
             <a href="/posts/?skip=0&limit=5" type="reset" id="btnCancelCrear" class="btn btn-light mx-3 mt-3">Cancelar</a>
