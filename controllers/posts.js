@@ -1,10 +1,10 @@
 const { request, response } = require("express");
 const Post = require("../models/posts");
 let valor = 5; //Paginacion valor por defecto
+let postsArray;
 let paginacionBoolean = false;
-
+let mostrarPosts;
 // INDEX
-
 const cortarPosts = (posts, desde, hasta)=>{
   let postsCortados = posts.slice(desde, hasta);
 
@@ -13,8 +13,18 @@ const cortarPosts = (posts, desde, hasta)=>{
 
 const getPostsPaginacion = async (req, res = response)=>{
   try {
-    const postsArray = await Post.find({}).lean();
-    // console.log(typeof(req.query.skip));
+    if (req.query.myPosts){//BUSQUEDA POR USER(actual)
+      postsArray = await Post.find( { user: res.locals.user.name }).lean();     
+      mostrarPosts = 'myPosts';
+    }else if(req.query.editable){//Editables
+      postsArray = await Post.find({ $or: [ {user: res.locals.user.name} , {user:{$exists: false}} ] }).lean();
+      mostrarPosts = 'editable';
+    }else{ //Busqueda comun(total):
+      postsArray = await Post.find({}).lean();
+      mostrarPosts = '';
+    }
+    //TODO: hace callback
+    
     let postsCortados, desde, hasta;
     postsCortados = cortarPosts(postsArray, req.query.skip, req.query.limit);
     desde = req.query.skip;
@@ -24,7 +34,8 @@ const getPostsPaginacion = async (req, res = response)=>{
     res.status(200).render("posts/index", {
       posts: postsCortados,
       paginacion,
-      title: `Edicion / vista de Posts`
+      title: `Edicion / vista de Posts`,
+      mostrarPosts
     });
 
   } catch (error) {
@@ -34,7 +45,18 @@ const getPostsPaginacion = async (req, res = response)=>{
 
 const modificarPaginacion = async(req, res = response)=>{
   try {
-    const postsArray = await Post.find({}).lean();
+    if (req.query.myPosts){//BUSQUEDA POR USER(actual)
+      postsArray = await Post.find( { user: res.locals.user.name }).lean();     
+      mostrarPosts = 'myPosts';
+    }else if(req.query.editable){//Editables
+      postsArray = await Post.find({ $or: [ {user: res.locals.user.name} , { user: undefined} ] }).lean();
+      mostrarPosts = 'editable';
+      
+    }else{ //Busqueda comun(total):
+      postsArray = await Post.find({}).lean();
+      mostrarPosts = '';
+    }
+
     let maximoExcedido = false;
     paginacionBoolean = true;
     if (req.body.paginacionValor){
@@ -50,7 +72,8 @@ const modificarPaginacion = async(req, res = response)=>{
     res.status(200).render("posts/index", {
       posts: postsCortados,
       paginacion: paginacionTwo,
-      maximoExcedido
+      maximoExcedido,
+      mostrarPosts
     } )
   } catch (error) {
     console.log("Error en modificar paginacion.", error);
@@ -67,7 +90,6 @@ const showPost = async (req, res = response) => {
       title: `Informacion del Blog: ${post.title}`,
       post,
     })
-
   } catch (error) {
     console.log('Error SHOW' , error)
   }

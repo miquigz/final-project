@@ -32,11 +32,14 @@
 <body>
     <nav class="py-2 bg-sec-opacity navbar-nav d-flex flex-wrap flex-row justify-content-sm-between justify-content-md-center justify-content-lg-between align-items-center border-bottom border-light" id="#top">
         <h1 class="mx-2 titulo h2 text-sm-h4 opacity-1"> <a href="/home" class="nav-link">MyApp</a> </h1>
+        {{#if user}}<h4 class="text-success font-weight-bold mr-2"> {{usuario.name}} </h4>{{/if}}
         <ul class="d-flex flex-row align-middle navbar-nav mx-2 opacity-1">
             <li class="nav-item mx-2"><a class="nav-link bg-link rounded text-dark px-2" href="/home/?skip=0&&limit=6">Home</a></li>
             <li class="nav-item mx-2"><a class="nav-link bg-link rounded text-dark px-2" href="/users">Usuarios</a></li>
             <li class="nav-item mx-2"><a {{#if user}}class="nav-link bg-link rounded text-dark px-2"
             {{else}} class="nav-link btn btn-success disabled rounded text-dark px-2 disabled" {{/if}} href="/posts/?skip=0&limit=5">Posts</a></li>
+            <li class="nav-item mx-2"><a {{#if user}}class="nav-link bg-link rounded text-dark px-2" href="/user/{{usuario.slug}}"
+            {{else}} class="nav-link btn btn-success disabled rounded text-dark px-2 disabled" {{/if}}> Perfil</a></li>
             {{#if user}}
                 <li class="nav-item mx-2"><a class="nav-link bg-link rounded text-dark px-2" href="/auth/logout">Cerrar sesion</a></li>
             {{else}}

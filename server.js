@@ -55,23 +55,28 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
-// app.use((req, res, next)=>{
-//     console.log(req.user)
-//     next();
-// })
+app.use((req, res, next)=>{
+    if (req.user){
+        res.locals.usuario = {
+            name: req.user.name,
+            slug: req.user.slugUser
+        }
+    }else
+        res.locals.usuario = null;
+    next();
+})
 
 //Variables de entorno (Globales)
 app.use((req, res, next)=>{
     res.locals.signup_bien  = req.flash('signup_bien');
     res.locals.signup_userExist = req.flash('signup_userExist');
     res.locals.isAuthenticated_error = req.flash('isAuthenticated_error');
+    //User Variables
     res.locals.user = req.user || null; //si esto logged(existe req.user), guardo variable, sino null.
+    //Configuraciones ocultar/mostrar
     res.locals.mostrar;
     res.locals.mostrarConfig;
     res.locals.mostrarCarrousel;
-    //reqflash success?
-    res.locals.signin_error = req.flash('error');
-    res.locals.signin_bien = req.flash('success') || false;
     next();
 })
 

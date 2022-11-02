@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
+<div class="d-flex justify-content-center bg-sec-opacity my-2 py-3 rounded border border-light flex-wrap">
     <h2 class="text-center text-success my-2 w-100">{{title}} : {{users.length}}</h2>
 </div>
 
@@ -8,7 +8,6 @@
     <a href="/users/?dateOld=true" {{#if (eq ordenActual "dateOld")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por antiguedad</a>
     <a href="/users/?dateRecent=true" {{#if (eq ordenActual "dateRecent")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por recientes</a>
     {{#if (not user) }}<p class="text-success mt-2">*Para poder acceder a los perfiles de cada usuario debe iniciar sesion.</p> {{/if}}
-    
 </div>
 
 <div class="row justify-content-center mx-auto p-4 border border-dark rounded mt-3 bg-sec-opacity shadow-box">
