@@ -1,5 +1,4 @@
 const { response } = require("express");
-const Post = require("../models/posts");
 const Auth = require("../models/auth");
 
 const getAllUsers = async (req, res = response)=>{
@@ -18,7 +17,6 @@ const getAllUsers = async (req, res = response)=>{
         }
         else
             usersTotalArray = await Auth.find({}, { password:0, _id:0 }).lean();
-        
         
         usersTotalArray.forEach( (ele) =>{
             ele.createdAt = ele.createdAt.toLocaleDateString();

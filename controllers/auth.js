@@ -6,8 +6,9 @@ const showAuthFormSignUp  = (req, res = response) => {
     res.render('auth/signup');
 }
 const signUp = async (req, res = response) => {
-    const errors = [];
-    const { name, email, password, confirmPassword } = req.body;
+    try {
+        const errors = [];
+    const { name, email, password, confirmPassword, slugUser } = req.body;
 
     if ( password !== confirmPassword){
         errors.push({ msg: 'Password do not match'});
@@ -32,8 +33,8 @@ const signUp = async (req, res = response) => {
         req.flash('signup_userExist', "El e-mail ingresado ya esta actualmente registrado.")
         return res.redirect('/auth/signup');
     }
-
-    const newUser = new Auth({name, email, password});
+    console.log("SLUG ES:", req.body)
+    const newUser = new Auth({name, email, password, slugUser});
     //Encriptamos el password q escribe el usuario para registrarse(signUp)
     newUser.password = await newUser.passwordEncrypt(password);
     await newUser.save()
@@ -43,6 +44,9 @@ const signUp = async (req, res = response) => {
     // await newUser.update()  otras opciones
     // await newUser.insertOne
     res.redirect('/auth/signin'); //finalmente registramos el user
+    } catch (error) {
+        console.log("error en signup",error)
+    }
 }
 
 const showAuthFormSignIn = (req, res = response) => {
@@ -62,8 +66,6 @@ const logout = async(req, res = response, next) => {
         res.redirect('/auth/signin');
     })
 }
-
-
 
 module.exports = {
     showAuthFormSignUp,

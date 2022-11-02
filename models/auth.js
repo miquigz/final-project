@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { default: slugify } = require('slugify')
 
 const AuthSchema = new mongoose.Schema(
     {
@@ -15,6 +16,11 @@ const AuthSchema = new mongoose.Schema(
         password: {
             type: String,
             required:true
+        },
+        slugUser:{
+            type: String,
+            required: true,
+            unique: true
         }
     },
     {
@@ -34,4 +40,13 @@ AuthSchema.methods.checkPassword = async function( password ) {
     return await bcrypt.compare(password, this.password);//ambas pass encriptadas.
 }//Retorna TRUE/FALSE
 
-module.exports = mongoose.model('Auth', AuthSchema);
+AuthSchema.pre('validate', function(next) {
+    //Generamos un slug que nos permita tener varios usuarios con el mismo nombre:
+    if(this.name) {
+        this.slugUser = slugify((this.name + ' ' + Date().slice(8, -37)) , {lower: true, strict: true})
+    }
+    console.log(this.slugUser)
+    next()
+})
+
+module.exports = mongoose.model('Auth', AuthSchema, );
