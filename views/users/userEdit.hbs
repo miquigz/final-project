@@ -1,0 +1,25 @@
+{{!--  --}}
+<div class="bg-secondary mt-4 p-4 rounded border border-light">
+  <h3 class="text-center text-success font-weight-bold">Editar Usuario</h3>
+  <form action="/user/edit/{{user.slugUser}}?_method=PUT" method="POST">
+      {{!-- NOmbre --}}
+    <div class="form-group">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABaElEQVRIic2UvUoDQRSFvzubiFVaEX9eIK1aCLqT2gfYYGeTUkGSt0ha0VKw0RewMxPESuzUWoiFbyCYZK6FIHE3TjaJYA5MMffMuWfOZRiYJ8QuubOuejuJpjDJYYFt0IkuJelC5aa6p0bPgJU05+ylAFiXjHDRV0VqHXt5PVzNJFDjT0EyzQFsu2pVGIxOIasCZ8B60ABkdVTzL0rbmcg/sZYumPD52TFHBqJN1C9/LVp5ZXmfqXPxVWNoX49dsimwO06YL4HykC6Jcp9Hms/AyEamJmzlkeYbkWocu6TlTbEJUPAfDYWdvzMABI4j3zsG0OwH8CvyjOhR4TAyvtwrvJd6hfdSZHxZkCPgaZx4TAK5QN8OOhXXTxHPwLNt2xOVpXOB/akSRH2pu2zzb7iK63tTrId6BA1UZDHEAxR7fiHEB0fko8GLdUnQwDMI8v/xF+nrDP26Yw0UqU1p0kVNbaprzTU+AVWFaogsHiu0AAAAAElFTkSuQmCC">
+      <label for="name">Nombre</label>
+      <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" 
+      placeholder="Ingrese su nombre"
+      value="{{user.name}}">
+    </div>
+    {{!-- DESC--}}
+    <div class="form-group">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAA60lEQVQ4jc2RvU5CQRCFv7lAgZUdzwDhDUzgoiU1QmELjaHlQbDS2pig72AW4hNoQU9NTUgEhoJ/2HvvbkJxT3l25puzM5B2ic18GDVKqwX5fZHmpt/3HxME9QZWTbMr0D/2FN5E9d+En90kaGDxyvbR8lwbtl5R+6/igJFStJ0E9QK6QB2BkgXmx9DQPL7YoFknHFrXzaFuD6bkQtO4M3z9eAOBgkDv3FQJAE6A3jtMUmRChRnwHvH8JHDjBdw2dLzixQFTk/DqR7kAivLn2iwivxeerbAybBYzy5V1RzstM8FsVB2MXYenR2uXcUI7pIyLpwAAAABJRU5ErkJggg==">
+        <label for="password">Descripcion</label>
+        <textarea class="form-control" name="desc" id="desc" placeholder="Ingrese su descripcion">{{user.desc}}</textarea>
+    </div>
+    <div class="mt-2">
+        <button type="submit" class="btn btn-success">Editar</button>
+        <button type="reset" class="btn btn-light">Reset</button>
+        <a href="/user/{{user.slugUser}}" class="btn btn-dark">Cancelar</a>
+    </div>
+</form>
+</div>

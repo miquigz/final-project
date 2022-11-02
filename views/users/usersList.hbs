@@ -3,21 +3,27 @@
 </div>
 
 <hr class="bg-light text-center">
-<div class="bg-sec-opacity">
+<div class="bg-sec-opacity my-2 mx-1 p-2 py-4 rounded border border-light flex-wrap">
     <a href="/users/?alphabet=true" {{#if (eq ordenActual "alphabet")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por alfabeto</a>
     <a href="/users/?dateOld=true" {{#if (eq ordenActual "dateOld")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por antiguedad</a>
     <a href="/users/?dateRecent=true" {{#if (eq ordenActual "dateRecent")}}class="btn btn-outline-success"{{else}}class="btn btn-success"{{/if}}>Ordenar por recientes</a>
+    {{#if (not user) }}<p class="text-success mt-2">*Para poder acceder a los perfiles de cada usuario debe iniciar sesion.</p> {{/if}}
+    
 </div>
 
 <div class="row justify-content-center mx-auto p-4 border border-dark rounded mt-3 bg-sec-opacity shadow-box">
-    {{#each users}}
-        <div class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success mb-3 mx-1 border border-dark" style="max-height: 300px;">
-
-            <div class="card-header rounded text-center bg-secondary"><a href="" class="nav-link bg-link rounded text-dark px-2">{{this.name}}</a></div>
-            <div class="card-body">
-                <h4 class="card-title"></h4>
-                <p class="card-text">Fecha de creacion: {{this.createdAt}}</p>
-                <a href="/posts/{{this.last.slug}}" class="btn btn-light my-2 font-weight-bold border border-dark rounded">Ver ultimo post</a>
+    {{!-- Cada each tiene su propio contexto, ..., pasamos var global --}}
+    {{#each users as |user|}}
+        <div class="col-sm-6 col-lg-3 col-md-6 card text-dark bg-success mb-3 mx-1 border border-dark" style="max-height: 300px;">            
+            <div class="card-header rounded text-center bg-secondary"><a href="/user/{{this.slugUser}}"
+            {{#if @root.user}} class="nav-link bg-link rounded text-dark px-2"{{else}}class="nav-link btn btn-success disabled rounded text-dark px-2 disabled" {{/if}}>{{this.name}}</a></div>
+            <div class="card-body d-flex flex-wrap justify-content-center">
+                {{#if this.desc}}<p class="card-text">{{this.desc}}</p>{{/if}}
+                <p class="card-text text-muted">Fecha de creacion: {{this.createdAt}}</p>
+                <div>
+                    <a href="/user/{{this.slugUser}}"{{#if @root.user}}class="btn btn-sm btn-light my-2 font-weight-bold border border-dark rounded"{{else}}class="btn btn-sm btn-light my-2 font-weight-bold border border-dark rounded disabled"{{/if}}>Ver perfil</a>
+                </div>
+                
             </div>
         </div>
     {{/each}}

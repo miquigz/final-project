@@ -17,6 +17,11 @@ const AuthSchema = new mongoose.Schema(
             type: String,
             required:true
         },
+        desc: {
+            type: String,
+            required: false,
+            unique: false
+        },
         slugUser:{
             type: String,
             required: true,
@@ -43,7 +48,7 @@ AuthSchema.methods.checkPassword = async function( password ) {
 AuthSchema.pre('validate', function(next) {
     //Generamos un slug que nos permita tener varios usuarios con el mismo nombre:
     if(this.name) {
-        this.slugUser = slugify((this.name + ' ' + Date().slice(8, -37)) , {lower: true, strict: true})
+        this.slugUser = slugify((this.name + ' ' + Date().slice(8, -37) + " " + (Math.random(1) * 0.1).toString().slice(6, -10)) , {lower: true, strict: true})
     }
     console.log(this.slugUser)
     next()
