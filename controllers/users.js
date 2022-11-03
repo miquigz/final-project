@@ -135,7 +135,6 @@ const putSpecificUserEdit = async (req, res = response)=>{
 
 const getSearchUsers = async (req, res)=>{
     try {
-        console.log(req.query.userName);
         if (ordenActual){
             res.redirect(`/users/?${ordenActual}=true&userName=${req.query.userName}`);
         }else

@@ -8,7 +8,6 @@ let mostrarPosts;
 // INDEX
 const cortarPosts = (posts, desde, hasta)=>{
   let postsCortados = posts.slice(desde, hasta);
-
   return postsCortados
 }
 
@@ -82,7 +81,6 @@ const modificarPaginacion = async(req, res = response)=>{
 }
 
 // SHOW
-
 const showPost = async (req, res = response) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
@@ -139,20 +137,17 @@ const tituloDuplicado = async(titulo) =>{
   } catch (error) {
     console.log("ERROR EN CB TituloDUplicado", error);
   }
-
 }
 
 const actualizarTotal = async (userActual)=>{
     try {
       const userUpdate = await Auth.findOne({name: userActual}).lean();
-      console.log(userUpdate);
-      await Auth.findOneAndUpdate({name:userActual}, {totalPosts: userUpdate.totalPosts + 1});
+      await Auth.findOneAndUpdate({name:userActual}, {totalPosts: (userUpdate.totalPosts || 0) + 1});
     }
     catch (error) {
         console.log(`Error en actualizarTotal `, error)
     }
 }
-
 // CREATE
 const createPost = async (req = request, res = response) => {
     try {
@@ -192,11 +187,9 @@ const createPost = async (req = request, res = response) => {
         console.log('Error en CREATE Post', error);
     }
 }
-
 // Show Post Form Edit
 
 const showPostFormEdit = async (req, res = response) => {
-
     try {
         const post = await Post.findById(req.params.id).lean();
         if (post.user == null || post.user === req.user.name){
@@ -257,7 +250,6 @@ const editPost = async (req, res = response) => {
       console.log('Incapaz de editar el Post, verifique su usario');
       res.status(400).redirect('/home');
     }
-      
   } catch (error) {
     console.log('Edit ERORR', error)
   }
