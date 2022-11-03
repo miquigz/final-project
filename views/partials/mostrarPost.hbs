@@ -3,11 +3,11 @@
 {{#if (eq @root.mostrar.tema 'theme2')}}class="col-sm-6 col-lg-3 col-md-6 card text-white bg-secondary border-light border my-3 mx-1"{{/if}}
 {{#if (eq @root.mostrar.tema 'theme3')}}class="col-sm-6 col-lg-3 col-md-6 card text-white bg-warning disabled btn border-light border my-3 mx-1"{{else}}
     class="col-sm-6 col-lg-4 col-md-6 card text-light bg-vintage my-3 mx-4 p-4 border-secondary"{{/if}}
-    style="max-height:700px; overflow: hidden;">
+    style="max-height:700px; overflow: hidden; word-break: break-word;">
     <div class="div-card card-img-top w-100 my-2">
         <img src="{{post.img}}" class="image rounded-3" alt="postCard">
-        <div class="overlay rounded-3 text-light">
-            <div class="text-overlay"><small>{{post.title}}</small> </div>
+        <div class="overlay rounded-3 text-light" >
+            <div class="text-overlay" style="max-width: 15rem; word-break: break-word;"><small>{{post.title}}</small> </div>
         </div>
     </div>
 
@@ -17,7 +17,7 @@
     {{#if (eq @root.mostrar.tema 'theme3')}}class="card-header rounded text-center bg-warning disabled btn"{{else}}
         class="card-header w-100 bg-dark rounded text-white text-center" {{!-- defect theme --}}
     {{/if}}>
-        <a href="/posts/{{post.slug}}" class="btn button-dark rounded text-white px-2">
+        <a href="/posts/{{post.slug}}" class="btn-sm button-dark rounded text-white px-2">
         {{#if index}}{{add index 1}}{{/if}}{{#if (and post.emoji @root.mostrar.emoji)}}{{{post.emoji}}}{{else}} - Post -{{/if}}</a>
     </div>
     <div 
@@ -28,7 +28,7 @@
     {{/if}}>
         <h5 class="card-title col-12 "></h5>
         <p class="card-text col-12 ">{{{post.body}}}</p>
-        {{#if (and post.user @root.mostrar.autor)}}<small class="col-12 card-text"> {{post.user}}</small>{{/if}}
+        {{#if (and post.user @root.mostrar.autor)}}<small class="col-12 card-text text-warning"> {{post.user}}</small>{{/if}}
         {{#if (and post.fecha @root.mostrar.fecha)}}<small class="col-12 card-text"> {{post.fecha}}</small>{{/if}}
     </div>
 </div>

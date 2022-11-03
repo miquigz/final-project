@@ -13,7 +13,7 @@
     {{>alert value = signin_error value2 = "inicio de sesion."}}
   {{/if}}
   <div class="bg-sec-opacity mt-4 p-4 rounded border border-light">
-    <h3 class="text-center text-success font-weight-bold">Iniciar Sesión</h3>
+    <h3 class="text-center text-warning font-weight-bold">Iniciar Sesión</h3>
     <form action="/auth/signin" method="POST">
       {{!-- Email --}}
       <div class="form-group">
@@ -34,7 +34,7 @@
         <input type="password" name="password" {{#if signin_error}}class="is-invalid form-control" {{/if}}
           class="form-control" id="password" placeholder="Ingrese su Contraseña">
       </div>
-      <button type="submit" class="btn btn-success">Iniciar sesión</button>
+      <button type="submit" class="btn btn-warning">Iniciar sesión</button>
       <a href="/home" class="btn btn-dark">Cancelar</a>
     </form>
   </div>

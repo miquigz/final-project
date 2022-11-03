@@ -6,68 +6,66 @@
     <p class="text-muted mt-2">Valor establecido en 20 (maximo actual).</p>
   </div>
 {{/if}}
+<div class="container">
+  <hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
+  <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light align-items-center flex-wrap">
+      <label class="h2 mr-4">|</label>
+      <a href="/posts/new" class="btn btn-warning btn">Crear Post</a>
+      {{!-- <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-warning font-weight-bold"> {{paginacion.maximo}}</label></p> --}}
+        {{>totalPosts paginacion = this.paginacion}}
+        <label class="h2">|</label>
+        <div class="d-flex justify-content-center align-items-center mx-4">
+            <small class="text-light font-weight-bold">Mostrando Actualmente: <label
+              class="h4 mx-2 bg-dark p-2 rounded">{{paginacion.valor}}</label></small>
+        </div>
+        <label class="h2">|</label>
+  </div>
 
-<hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
-<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light align-items-center flex-wrap">
-    <label class="h2 mr-4">|</label>
-    <a href="/posts/new" class="btn btn-success btn">Crear Post</a>
-    {{!-- <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-success font-weight-bold"> {{paginacion.maximo}}</label></p> --}}
-      {{>totalPosts paginacion = this.paginacion}}
-      <label class="h2">|</label>
-      <div class="d-flex justify-content-center align-items-center mx-4">
-          <small class="text-light font-weight-bold">Mostrando Actualmente: <label
-            class="h4 mx-2 bg-dark p-2 rounded">{{paginacion.valor}}</label></small>
-      </div>
-      <label class="h2">|</label>
+  <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-warning mt-2">
+    <form action="/posts/cambiarPaginacion" class="row flex-wrap" method="POST">
+        <label for="paginacionValor" class="col-form-label col-form-label-sm align-items-center mx-2 font-weight-lighter text-center">Elige la cantidad de elementos a mostrar:  </label>
+        <input list="paginacionValores" class="form-control-sm w-25 bg-dark text-center text-warning" name="paginacionValor" autocomplete="off" id="paginacionValor">
+        <datalist id="paginacionValores">
+          <option value="5" {{#if true}}{{/if}}>
+          <option value="7" class="disabled">
+          <option value="10">
+          <option value="15">
+          <option value="20">
+        </datalist>
+        <div class="col">
+          <input type="submit" class="btn btn-light btn-sm">
+        </div>
+      </form>
+  </div>
+    <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-warning mt-2">
+    <a {{#if (compare mostrarPosts "==" 'myPosts')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
+    href="/posts/?skip=0&limit={{paginacion.valor}}&myPosts=true">Mostrar mis Posts</a>
+    <a {{#if (compare mostrarPosts "==" 'editable')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
+    href="/posts/?skip=0&limit={{paginacion.valor}}&editable=true">Mostrar Posts editables</a>
+    <a {{#if (compare mostrarPosts "==" '')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
+    href="/posts/?skip=0&limit={{paginacion.valor}}">Mostrar todos los posts</a>
+  </div>
+  <hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
 </div>
-
-<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-success mt-2">
-  <form action="/posts/cambiarPaginacion" class="row flex-wrap" method="POST">
-      <label for="paginacionValor" class="col-form-label col-form-label-sm align-items-center mx-2 font-weight-lighter text-center">Elige la cantidad de elementos a mostrar:  </label>
-      <input list="paginacionValores" class="form-control-sm w-25 bg-dark text-center text-success" name="paginacionValor" autocomplete="off" id="paginacionValor">
-      <datalist id="paginacionValores">
-        <option value="5" {{#if true}}{{/if}}>
-        <option value="7" class="disabled">
-        <option value="10">
-        <option value="15">
-        <option value="20">
-      </datalist>
-      <div class="col">
-        <input type="submit" class="btn btn-light btn-sm">
-      </div>
-    </form>
-</div>
-
-<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-success mt-2">
-  <a {{#if (compare mostrarPosts "==" 'myPosts')}} class="btn-sm btn-success active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
-  href="/posts/?skip=0&limit={{paginacion.valor}}&myPosts=true">Mostrar mis Posts</a>
-  <a {{#if (compare mostrarPosts "==" 'editable')}} class="btn-sm btn-success active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
-  href="/posts/?skip=0&limit={{paginacion.valor}}&editable=true">Mostrar Posts editables</a>
-  <a {{#if (compare mostrarPosts "==" '')}} class="btn-sm btn-success active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
-  href="/posts/?skip=0&limit={{paginacion.valor}}">Mostrar todos los posts</a>
-</div>
-
-<hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
-
-<table class="table border border-success rounded border-bottom-0 shadow-box">
+<table class="table border border-warning rounded border-bottom-0 shadow-box">
   <thead>
-    <tr class="bg-dark rounded">
-      <th scope="col h5"><p class="h4 text-bold text-center bg-dark">Titulo</p></th>
-      <th scope="col h5"><p class="h4 text-bold text-center bg-dark">Post</p></th>
-      <th scope="col h5"><p class="h4 text-bold text-center bg-dark">Acciones</p></th>
+    <tr class="bg-dark rounded bg-vintage">
+      <th scope="col h5"><p class="h4 text-bold text-center">Titulo</p></th>
+      <th scope="col h5"><p class="h4 text-bold text-center">Post</p></th>
+      <th scope="col h5"><p class="h4 text-bold text-center">Acciones</p></th>
     </tr>
   </thead>
   <tbody class="bg-secondary">
     {{#isEmpty posts}}
-      <td class="text-success font-weight-bold h4">No hay posts para mostrar :/</td>
-      <td class="text-success h4">Intente creando uno!</td>
-      <td class="text-success"></td>
+      <td class="text-warning font-weight-bold h4">No hay posts para mostrar :/</td>
+      <td class="text-warning h4">Intente creando uno!</td>
+      <td class="text-warning"></td>
     {{else}}
       {{#each posts}}
           <tr>
-              <td class="border-success rounded bg-dark" width="30%"> {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}<p class="h4">{{this.title}}</p></td>
-              <td width="45%" class="border-bottom border-dark"><p>{{{this.body}}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-success">{{this.user}}</label></small>{{/if}} </td>
-              <td class="d-flex flex-wrap border-success bg-dark rounded">
+              <td class="border-warning rounded bg-dark" width="30%"> {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}<p class="h4">{{this.title}}</p></td>
+              <td width="45%" class="border-bottom border-dark"><p>{{{this.body}}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-warning">{{this.user}}</label></small>{{/if}} </td>
+              <td class="d-flex flex-wrap border-warning bg-vintage rounded">
                   {{!-- <button id="botonDelete">borrarexample</button> --}}
 
                   <a href="/posts/{{this.slug}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-light btn-sm"{{else}} class="btn btn-light btn-sm disabled"{{/or}}>Ver</a>
@@ -92,7 +90,8 @@
     {{/each}}
 {{/isEmpty}}
   </tbody>
-  <div class="d-flex w-100 justify-content-center my-1 bg-sec-opacity py-2 rounded border border-light">
+  <div class="container">
+    <div class="d-flex w-100 justify-content-center my-1 bg-sec-opacity py-2 rounded border border-light">
     {{!-- first --}}
     <a href="/posts/?skip=0&limit={{paginacion.valor}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
     {{#if (lte paginacion.desde 0)}}class="btn btn-light disabled mx-2"{{else}}class="btn btn-light mx-2"{{/if}}>
@@ -111,9 +110,8 @@
     <a href="/posts/?skip={{minus paginacion.maximo paginacion.valor}}&limit={{paginacion.maximo}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
     {{#if (gte (add paginacion.desde paginacion.valor) paginacion.maximo)}}class="btn btn-sm btn-light disabled mx-2"{{else}}class="btn btn-sm btn-light mx-2"{{/if}}> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>  
   </div>
-          
-        
-  <hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
+</div>
+<hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
 </table>
 <hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
 

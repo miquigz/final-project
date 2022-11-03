@@ -1,8 +1,8 @@
-<h2 class="h1 my-5 text-center text-success font-weight-bold ">Informacion del Usuario</h2>
+<h2 class="h1 my-5 text-center text-light font-weight-bold ">Informacion del Usuario</h2>
 <div class="mt-2 bg-sec-opacity py-3 rounded border border-light pt-5 pb-1 mx-5 rounded">
     {{#if editar}}<div class="d-flex justify-content-end"><a href="/user/edit/{{user.slugUser}}"
             class="btn btn-light mx-2">Editar Perfil</a></div>{{/if}}
-    <h3 class="text-center text-success font-weight-bold">
+    <h3 class="text-center text-warning font-weight-bold">
         {{ user.name }}
     </h3>
     {{#if user.desc}}
@@ -12,7 +12,7 @@
     {{/if}}
     {{#if user.totalPosts}}
     <div class="mx-1 my-4">
-        <p class="text-success">Total de posts creados:<label class="font-weight-bold h4 p-2 mx-2 text-white bg-dark rounded">{{user.totalPosts}}</label></p>
+        <p class="text-warning">Total de posts creados:<label class="font-weight-bold h4 p-2 mx-2 text-danger bg-dark rounded">{{user.totalPosts}}</label></p>
     </div>
     {{else}}
     <div class="mx-2 my-4">
@@ -20,7 +20,7 @@
     </div>
     {{/if}}
     <div class="my-3">
-        <p class="text-muted mx-2">Fecha de creacion: {{user.createdAt}}</p>
-        <p class="text-muted mx-2">Ultima vez editado: : {{user.updatedAt}}</p>
+        <p class="text-muted mx-2">Fecha de creacion: <label class="text-warning">{{user.createdAt}}</label></p>
+        <p class="text-muted mx-2">Ultima vez editado: : <label class="text-warning">{{user.updatedAt}}</label> </p>
     </div>
 </div>

@@ -1,6 +1,6 @@
 {{!--  --}}
-<div class="bg-secondary mt-4 p-4 rounded border border-light">
-  <h3 class="text-center text-success font-weight-bold">Editar Usuario</h3>
+<div class="bg-secondary mt-4 p-4 rounded border border-light container">
+  <h3 class="text-center text-warning font-weight-bold">Editar Usuario</h3>
   <form action="/user/edit/{{user.slugUser}}?_method=PUT" method="POST">
       {{!-- NOmbre --}}
     <div class="form-group">
@@ -17,7 +17,7 @@
         <textarea class="form-control" name="desc" id="desc" placeholder="Ingrese su descripcion">{{user.desc}}</textarea>
     </div>
     <div class="mt-2">
-        <button type="submit" class="btn btn-success">Editar</button>
+        <button type="submit" class="btn btn-warning">Editar</button>
         <button type="reset" class="btn btn-light">Reset</button>
         <a href="/user/{{user.slugUser}}" class="btn btn-dark">Cancelar</a>
     </div>

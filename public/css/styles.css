@@ -9,12 +9,12 @@
 
 .dark-theme{
     background-color: #2213097e;
-    color:rgb(87, 141, 123);
+    color:rgb(161, 129, 40);
 }
 
 .dark-emoji-theme{
     background-color: #2213097e;
-    color:rgb(87, 141, 123);
+    color:rgb(179, 153, 67);
 }
 
 .fr-wrapper{
@@ -22,8 +22,8 @@
 }
 
 .fr-svg>path{
-    color:aquamarine;
-    fill: rgb(127, 255, 212)!important;
+    color:rgb(196, 137, 70);
+    fill: rgb(212, 162, 68)!important;
 }
 
 .fr-link{
@@ -170,4 +170,24 @@ input[type="checkbox"]:checked, input[type="radio"]:checked {
 
 .rounded-3{
     border-radius: 3%;
+}
+
+
+.page-link{
+    color: #000;
+    background-color: #cc8512;
+}
+
+.page-link:hover{
+    background-color: #694814;
+}
+
+.page-item.active .page-link{
+    color: #fff;
+    background-color: rgb(231, 166, 90);
+}
+
+.page-item.disabled .page-link{
+    background-color: #412c0a;
+    color: #7e7272;
 }

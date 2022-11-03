@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <div class="col-sm-6 col-lg-4 col-md-6 card text-light bg-vintage my-3 mx-4 p-4 border-secondary" style="max-height: 500px">
+    <div class="col-sm-6 col-lg-4 col-md-6 card text-light bg-vintage my-3 mx-4 p-4 border-secondary" style="max-height: 600px">
         <div class="div-card card-img-top w-100 my-2">
             <img src="{{post.img}}" class="image rounded-3" alt="postCard">
             <div class="overlay rounded-3 text-light">
@@ -7,8 +7,8 @@
             </div>
         </div>
     <div class="card-header w-100 bg-dark rounded text-white text-center">
-        <a href="/posslug}}" class="btn button-dark rounded text-white px-2"> - Post {{index}} -</a></div>
-    <div class="card-body" style="max-height:200px; overflow: hidden;">
+        <a href="/posts/{{post.slug}}" class="btn button-dark rounded text-white px-2"> - Post {{index}} -</a></div>
+    <div class="card-body" style="max-height:400px; overflow: hidden;">
         {{#if post.emoji}}<small>{{{post.emoji}}}</small>{{/if}}
         <h4 class="card-title">{{post.title}}</h4>
         <p class="card-text">{{{post.body}}}</p>
@@ -17,7 +17,7 @@
         <small>{{post.fecha}}</small>
     {{/if}}
     {{#if post.user}}
-        <small class="text-muted">Creado por: <label class="text-light">{{post.user}}</label></small>
+        <small class="text-muted">Creado por: <label class="text-warning">{{post.user}}</label></small>
     {{/if}}
 </div>
 </div>

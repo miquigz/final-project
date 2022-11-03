@@ -1,4 +1,3 @@
-
 {{#each errors}}
   {{>alert value = this.msg value2="registro."}}
 {{/each}}
@@ -7,7 +6,7 @@
 {{/if}}
 
 <div class="bg-sec-opacity mt-4 p-4 rounded border border-light container">
-  <h3 class="text-center text-success font-weight-bold">Registrarse</h3>
+  <h3 class="text-center text-warning font-weight-bold">Registrarse</h3>
   <form action="/auth/signup" method="POST">
       {{!-- NOmbre --}}
     <div class="form-group">
@@ -41,7 +40,7 @@
     </div>
     
     <div class="mt-2">
-      <button type="submit" class="btn btn-success">SignUp</button>
+      <button type="submit" class="btn btn-warning">SignUp</button>
       <button type="reset" class="btn btn-light">Reset</button>
       <a href="/home" class="btn btn-dark">Cancelar</a>
     </div>

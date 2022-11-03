@@ -1,4 +1,4 @@
-<h2 class="text-center text-light h3 font-weight-bold">Posts mas recientes:</h2>
+<h2 class="text-center text-white h3 font-weight-bold">Posts mas recientes:</h2>
 <div id="carouselExampleIndicators" class="carousel slide my-3 bg-sec-opacity rounded border border-dark py-2 shadow-lg" style="height: 650px;" data-ride="carousel">
     <ol class="carousel-indicators mt-5">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -8,13 +8,13 @@
     
     <div class="carousel-inner">
         <div class="carousel-item active">
-            {{>postsRecientes post = masRecientes.last.post}}
+            {{>postsRecientes post = masRecientes.last.post index = masRecientes.last.index}}
         </div>
         <div class="carousel-item">
-            {{>postsRecientes post = masRecientes.last2.post}}
+            {{>postsRecientes post = masRecientes.last2.post index = masRecientes.last2.index}}
         </div>
         <div class="carousel-item">
-            {{>postsRecientes post = masRecientes.last3.post}}
+            {{>postsRecientes post = masRecientes.last3.post index = masRecientes.last3.index}}
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

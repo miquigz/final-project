@@ -6,33 +6,40 @@
 <div class="container">
     <div class="bg-sec-opacity my-2 mx-1 p-2 py-4 rounded border border-light flex-wrap justify-content-center">
         <div>
-            <a href="/users/?alphabet=true{{#if searchByUser}}&userName={{searchByUser}}{{/if}}" {{#if (eq ordenActual "alphabet")}}class="btn btn btn-outline-warning"{{else}}class="btn btn-light"{{/if}}>Ordenar por alfabeto</a>
-        <a href="/users/?dateOld=true{{#if searchByUser}}&userName={{searchByUser}}{{/if}}" {{#if (eq ordenActual "dateOld")}}class="btn btn btn-outline-warning"{{else}}class="btn btn-light"{{/if}}>Ordenar por antiguedad</a>
-        <a href="/users/?dateRecent=true{{#if searchByUser}}&userName={{searchByUser}}{{/if}}" {{#if (eq ordenActual "dateRecent")}}class="btn btn-outline-warning"{{else}}class="btn btn-light"{{/if}}>Ordenar por recientes</a>
+            <a href="/users/?alphabet=true{{#if searchByUser}}&userName={{searchByUser}}{{/if}}" {{#if (eq ordenActual "alphabet")}}class="btn btn-warning mx-2"{{else}}class="btn btn-outline-warning mx-1"{{/if}}>Ordenar por alfabeto</a>
+        <a href="/users/?dateOld=true{{#if searchByUser}}&userName={{searchByUser}}{{/if}}" {{#if (eq ordenActual "dateOld")}}class="btn btn-warning mx-2"{{else}}class="btn btn-outline-warning mx-1"{{/if}}>Ordenar por antiguedad</a>
+        <a href="/users/?dateRecent=true{{#if searchByUser}}&userName={{searchByUser}}{{/if}}" {{#if (eq ordenActual "dateRecent")}}class="btn btn-warning mx-2"{{else}}class="btn btn-outline-warning mx-1"{{/if}}>Ordenar por recientes</a>
         </div>
         
-        {{#if (not user) }}<p class="text-warning mt-2">*Para poder acceder a los perfiles de cada usuario debe iniciar sesion.</p> {{/if}}
+        {{#if (not user) }}<p class="text-warning mt-2">*Para poder acceder a los perfiles de cada usuario debe <span class="text-danger">iniciar sesion</span>.</p> {{/if}}
     </div>
 </div>
 
 {{!-- //TODO: Buscar usuarios por nombre --}}
-<div class="bg-sec-opacity my-2 mx-1 p-2 py-4 rounded border border-light flex-wrap">
-    <form action="/search/user/" method="GET" class="d-flex justify-content-center">
-    <div class="mx-2">
-        <h4 class="text-white text-center font-weight-bold">Buscar usuarios por nombre</h4>
+<div class="container">
+    <div class="bg-sec-opacity my-2 mx-1 p-2 py-4 rounded border border-light flex-wrap">
+        <form action="/search/user/" method="GET" class="d-flex justify-content-center">
+            <div class="mx-2">
+                <h4 class="text-white text-center font-weight-bold">Buscar usuarios por nombre</h4>
+            </div>
+            <input {{#if user}} class="form-control w-25 me-sm-2" {{else}} class="form-control w-25 me-sm-2 disabled bg-light text-warning"{{/if}} type="text" id="userName" name="userName" placeholder="Buscar Usuario/s">
+            <button {{#if user}} class="nav-link btn btn-warning rounded px-2 my-2 mx-2 my-sm-0" {{else}} class="disabled btn mx-2 my-2 my-sm-0 btn-warning" {{/if}}type="submit">Buscar</button>
+        </form>
     </div>
-    <input {{#if user}} class="form-control w-25 me-sm-2" {{else}} class="form-control w-25 me-sm-2 disabled bg-light text-warning"{{/if}} type="text" id="userName" name="userName" placeholder="Buscar Usuario/s">
-    <button {{#if user}} class="btn btn-light my-2 mx-2 my-sm-0" {{else}} class="disabled btn mx-2 my-2 my-sm-0 btn-light" {{/if}}type="submit">Buscar</button>
-</form>
 </div>
+
+<hr class="bg-light text-center">
 {{#if searchByUser}}
-<div class="row justify-content-center d-flex mx-auto p-2 border border-light rounded my-4 bg-sec-opacity shadow-box flex-wrap">
-    <h4 class="text-light my-4 w-100 text-center">Buscando usuarios por nombre: <span class="text-light font-weight-bold">{{searchByUser}}</span> </h4>
-    <div>
-        <a class="btn-light btn-sm border-light mx-2 nav-link" href="/users/{{#if ordenActual}}?{{ordenActual}}=true{{/if}}">Volver a mostrar total de usuarios</a>
+
+<div class="container">
+    <div class="justify-content-center mx-auto p-2 border border-light rounded my-4 bg-sec-opacity shadow-box ">
+        <h4 class="text-light my-4 w-100 text-center">Buscando usuarios por nombre: <span class="text-warning font-weight-bold">{{searchByUser}}</span> </h4>
+        <div class="justify-content-center d-flex">
+            <a class="nav-link btn btn-outline-warning rounded px-2 my-2 mx-2 my-sm-0 text-center w-25 " href="/users/{{#if ordenActual}}?{{ordenActual}}=true{{/if}}">Volver a mostrar total de usuarios</a>
+        </div>
     </div>
-    
 </div>
+
 {{/if}}
 <div class="row justify-content-center mx-auto p-4 border border-dark rounded mt-3 bg-sec-opacity shadow-box">
     {{!-- Cada each tiene su propio contexto, ..., pasamos var global --}}
@@ -43,7 +50,7 @@
     {{#each users as |user|}}
         <div class="col-sm-6 col-lg-4 col-md-6 card text-light bg-vintage my-3 mx-4 p-4 border-secondary" style="max-height: 300px;">
             <div class="card-header w-100 bg-dark rounded text-white text-center"><a href="/user/{{this.slugUser}}"
-            {{#if @root.user}} class="btn button-dark rounded text-white px-2"{{else}}class="nav-link btn btn-info disabled rounded text-light px-2 disabled" {{/if}}>{{this.name}}</a></div>
+            {{#if @root.user}} class="btn button-dark rounded text-warning px-2"{{else}}class="nav-link btn btn-outline-warning disabled rounded text-light px-2 disabled" {{/if}}>{{this.name}}</a></div>
             <div class="card-body d-flex flex-wrap justify-content-center" >
                 <div style="white-space:nowrap; overflow:hidden;" class="mb-2">
                     {{#if this.desc}} 
@@ -56,12 +63,12 @@
                 <p class="card-text text-muted">Fecha de creacion: {{this.createdAt}}</p>
             </div>
             <div class="text-center">
-                <a href="/user/{{this.slugUser}}"{{#if @root.user}}class="btn btn-sm btn-dark my-2 border border-light rounded"{{else}}class="btn btn-sm btn-dark my-2 border border-light rounded disabled"{{/if}}>« Ver perfil »</a>
+                <a href="/user/{{this.slugUser}}"{{#if @root.user}}class="nav-link btn btn-outline-warning rounded px-2"{{else}}class="btn btn-sm btn btn-outline-warning disabled my-2 border border-light rounded disabled"{{/if}}>« Ver perfil »</a>
             </div>
         </div>
     {{/each}}
 </div>
 <div class="d-flex justify-content-end mt-4">
-    <a class="nav-link bg-link rounded text-dark px-2 my-2" href="#top">Back to top</a>
+    <a class="nav-link btn btn-warning rounded rounded text-dark px-2 m-4 shadow" href="#top">Back to top</a>
 </div>
 {{/isEmpty}}

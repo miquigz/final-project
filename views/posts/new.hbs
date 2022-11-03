@@ -12,11 +12,11 @@
     {{>alert value='El titulo del post ya existe, ingrese otro.' value2="creacion de post."}}
 {{/if}}
 
-<div class="bg-sec-opacity py-3 rounded border border-light p-2 mt-2 rounded">
+<div class="bg-sec-opacity py-3 rounded border border-light p-2 mt-2 rounded container">
     <h2 class="m-4">Crear nuevo Post</h2>
     
     <form action="/posts" method="POST">
-        <label for="emoji">Emoji del post: <small class="text-success">(Opcional)</small> </label>
+        <label for="emoji">Emoji del post: <small class="text-warning">(Opcional)</small> </label>
         {{!-- <div id="emoji" class="w-25"> --}}
         <textarea type="text" id="emoji" name="emoji" class="w-25">{{valorEmoji}}</textarea>
         <div {{#if errorTitle}} class="form-group has-danger" {{else}} class="form-group" {{/if}}>
@@ -38,16 +38,16 @@
         <div class="form-group form-check row mt-2">
             <div class="col">
                 <input type="checkbox" class="form-check-input" id="guardarFecha" name="guardarFecha">
-                <label class="form-check-label user-select-none" for="guardarFecha">Guardar fecha de creacion. <small class="text-success">(Opcional)</small></label>
+                <label class="form-check-label user-select-none" for="guardarFecha">Guardar fecha de creacion. <small class="text-warning">(Opcional)</small></label>
             </div>
             <div class="col">
                 <input type="checkbox" class="form-check-input" id="guardarUser" name="guardarUser">
-                <label class="form-check-label user-select-none" for="guardarUser">Guardar nombre de usuario. <small class="text-success">(Opcional)</small></label>
+                <label class="form-check-label user-select-none" for="guardarUser">Guardar nombre de usuario. <small class="text-warning">(Opcional)</small></label>
             </div>
-                <small id="userHelp" class="text-muted user-select-none"> <small class="text-danger font-weight-bold">*</small> Si no guardas tu nombre, el <label class="text-success user-select-none">post</label> podr'a ser <label class="text-warning"> editado/borrado</label> por cualquier usuario registrado.</small>
+                <small id="userHelp" class="text-muted user-select-none"> <small class="text-danger font-weight-bold">*</small> Si no guardas tu nombre, el <label class="text-warning user-select-none">post</label> podr'a ser <label class="text-warning"> editado/borrado</label> por cualquier usuario registrado.</small>
         </div>            
 
-        <button type="submit" id="btnCrearPost" class="btn btn-success mt-3">Submit</button>
+        <button type="submit" id="btnCrearPost" class="btn btn-warning mt-3">Submit</button>
         <a href="/posts/?skip=0&limit=5" type="reset" id="btnCancelCrear" class="btn btn-light mx-3 mt-3">Cancelar</a>
     </form>
 </div>
