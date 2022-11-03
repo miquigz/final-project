@@ -1,4 +1,5 @@
 const { request, response } = require("express");
+const Auth = require("../models/auth");
 const Post = require("../models/posts");
 let valor = 5; //Paginacion valor por defecto
 let postsArray;
@@ -141,6 +142,17 @@ const tituloDuplicado = async(titulo) =>{
 
 }
 
+const actualizarTotal = async (userActual)=>{
+    try {
+      const userUpdate = await Auth.findOne({name: userActual}).lean();
+      console.log(userUpdate);
+      await Auth.findOneAndUpdate({name:userActual}, {totalPosts: userUpdate.totalPosts + 1});
+    }
+    catch (error) {
+        console.log(`Error en actualizarTotal `, error)
+    }
+}
+
 // CREATE
 const createPost = async (req = request, res = response) => {
     try {
@@ -166,13 +178,14 @@ const createPost = async (req = request, res = response) => {
           post.title = req.body.title;
           post.body = req.body.body;
           //Casos opcionales guardar:
-            if (req.body.guardarUser)
+            if (req.body.guardarUser){
               post.user = req.user.name;
-            if (req.body.guardarFecha)
+              await actualizarTotal(req.user.name);
+            }if (req.body.guardarFecha)
               post.fecha = "Creado el: " + new Date().toLocaleString();
             if (req.body.emoji)
               post.emoji = req.body.emoji;
-          post = await post.save()
+          post = await post.save();
           res.status(200).redirect(`/posts/${post.slug}`);
         }
     } catch (error) {

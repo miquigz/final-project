@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { default: slugify } = require('slugify')
+const { default: slugify } = require('slugify');
 
 const AuthSchema = new mongoose.Schema(
     {
@@ -26,6 +26,11 @@ const AuthSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true
+        },
+        totalPosts:{
+            type: Number,
+            required: false,
+            unique: false
         }
     },
     {
