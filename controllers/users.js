@@ -1,30 +1,57 @@
 const { response } = require("express");
 const Auth = require("../models/auth");
+let ordenActual = '';
+let usersTotalArray;
+
+const sortUsers = async (query, searchByUser = false)=>{
+    try {
+        let auxTotal = [];
+        if (query.alphabet){
+            if(searchByUser)
+                auxTotal = await Auth.find({name: searchByUser}, { password:0, _id:0 }).sort({name:1}).lean();
+            else
+                auxTotal = await Auth.find({}, { password:0, _id:0 }).sort({name:1}).lean();
+            ordenActual = 'alphabet';
+        }else if (query.dateOld){
+            if(searchByUser)
+                auxTotal = await Auth.find({name: searchByUser}, { password:0, _id:0 }).sort({createdAt: 1}).lean();
+            else
+                auxTotal = await Auth.find({}, { password:0, _id:0 }).sort({createdAt: 1}).lean();
+            ordenActual = 'dateOld';
+        }else if (query.dateRecent){
+            if(searchByUser)
+                auxTotal = await Auth.find({name: searchByUser}, { password:0, _id:0 }).sort({createdAt: -1}).lean();
+            else
+                auxTotal = await Auth.find({}, { password:0, _id:0 }).sort({createdAt: -1}).lean();
+            ordenActual = 'dateRecent';
+        }
+        else{
+            if(searchByUser)
+            auxTotal = await Auth.find({name:searchByUser}, { password:0, _id:0 }).lean();
+            else
+                auxTotal = await Auth.find({}, { password:0, _id:0 }).lean();
+        }
+        return auxTotal;
+    } catch (error) {
+        console.log("error en CallBack: sortUsers", error);
+    }
+}
 
 const getAllUsers = async (req, res = response)=>{
     try {
-        let ordenActual = '';
-        let usersTotalArray;
-        if (req.query.alphabet){
-            usersTotalArray = await Auth.find({}, { password:0, _id:0 }).sort({name:1}).lean();
-            ordenActual = 'alphabet';
-        }else if (req.query.dateOld){
-            usersTotalArray = await Auth.find({}, { password:0, _id:0 }).sort({createdAt: 1}).lean();
-            ordenActual = 'dateOld'
-        }else if (req.query.dateRecent){
-            usersTotalArray = await Auth.find({}, { password:0, _id:0 }).sort({createdAt: -1}).lean();
-            ordenActual = 'dateRecent'
-        }
-        else
-            usersTotalArray = await Auth.find({}, { password:0, _id:0 }).lean();
+        usersTotalArray = await sortUsers(req.query, req.query.userName);
         
-        usersTotalArray.forEach( (ele) =>{
-            ele.createdAt = ele.createdAt.toLocaleDateString();
-        })
+        if(usersTotalArray.length > 0){
+            usersTotalArray.forEach( (ele) =>{
+                ele.createdAt = ele.createdAt.toLocaleDateString();
+            })
+        }
         res.render('users/usersList', {
             users: usersTotalArray,
             title: 'Total Usuarios',
-            ordenActual
+            searchByUser: req.query.userName || null,
+            ordenActual,
+            searchByUser:req.query.userName
         });
     } catch (error) {
         console.log("ERROR EN getAllUsers", error)
@@ -34,7 +61,7 @@ const getAllUsers = async (req, res = response)=>{
 const getSpecificUser = async(req, res = response)=>{
     try {
         let slugBuscar = req.params.slug;
-        Auth.find({ slugUser:slugBuscar} , { password:0, _id:0} ).lean().then( async (result)=>{
+        await Auth.find({ slugUser:slugBuscar} , { password:0, _id:0} ).lean().then( async (result)=>{
             result = result.slice()[0];//quitamos array q nos devuelve
             result.createdAt = result.createdAt.toLocaleDateString();
             result.updatedAt = result.updatedAt.toLocaleString();
@@ -106,10 +133,23 @@ const putSpecificUserEdit = async (req, res = response)=>{
     }
 }
 
+const getSearchUsers = async (req, res)=>{
+    try {
+        console.log(req.query.userName);
+        if (ordenActual){
+            res.redirect(`/users/?${ordenActual}=true&userName=${req.query.userName}`);
+        }else
+            res.redirect(`/users/?userName=${req.query.userName}`);
+    } catch (error) {
+        console.log(`Error en getSearchUsers `, error)
+    }
+}
+
 
 module.exports = {
     getAllUsers,
     getSpecificUser,
+    getSearchUsers,
     putSpecificUserEdit,
-    getEditSpecificUser
+    getEditSpecificUser,
 }
