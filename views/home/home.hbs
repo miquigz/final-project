@@ -9,45 +9,48 @@
 
 {{!-- {{posts.[(posts.lenght)].title}} --}}
 {{#if mostrarCarrousel}}
-    <div class="d-flex justify-content-end my-1">
-        <a href="/home/switchCarrousel" class="nav-link bg-link rounded text-dark px-2 my-1 btn-sm">Mostrar posts mas recientes</a>
+    <div class="d-flex justify-content-end my-1 container">
+        <a href="/home/switchCarrousel" class="nav-link bg-link rounded text-white px-2 my-1 btn-sm">Mostrar posts mas recientes</a>
     </div>
 {{else}}
-    <div class="d-flex justify-content-end my-1">
-        <a href="/home/switchCarrousel" class="btn-light btn-sm">Ocultar posts mas recientes</a>
+    <div class="d-flex justify-content-end my-1  container">
+        <a href="/home/switchCarrousel" class="btn-light btn-sm nav-link">Ocultar posts mas recientes</a>
     </div>
-    {{>masRecientesCarrousel masRecientes = this.masRecientes}}
+    <div class="container">
+        {{>masRecientesCarrousel masRecientes = this.masRecientes}}
+    </div>
 {{/if}}
 
 
 
 {{#if mostrarConfig}}
-    <div class="d-flex justify-content-end my-1">
-        <a href="/home/switchConfig" class="nav-link bg-link rounded text-dark px-2 my-1 btn-sm">Mostrar configuracion de Posts</a>
+    <div class="d-flex justify-content-end my-1 container">
+        <a href="/home/switchConfig" class="nav-link bg-link rounded text-white px-2 my-1 btn-sm">Mostrar configuracion de Posts</a>
     </div>
 {{else}}
-    <div class="d-flex justify-content-end my-1">
-        <a href="/home/switchConfig" class="btn-light btn-sm">Ocultar configuracion de Posts</a>
+    <div class="d-flex justify-content-end my-1 container">
+        <a href="/home/switchConfig" class="btn-light btn-sm nav-link">Ocultar configuracion de Posts</a>
     </div>
-    {{>configuracionPosts }}
+    <div class="container user-select-none">
+        {{>configuracionPosts }}
+    </div>
 {{/if}}
 
 {{#if homePagination}}
-    <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
+    <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap container">
         <h3 class="text-center w-100">{{title}}</h3>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="btn-light btn mx-4" href="/home">Ver Todos los posts:</a>
+            <a class="nav-link btn btn-outline-warning rounded mx-4" href="/home">Ver Todos los posts:</a>
             {{>totalPosts paginacion = this.paginacion}}
         </div>
     </div>
-    <hr class="bg-light shadow">
     {{>paginationHomeNav paginacion = this.paginacion}}
 
     {{!-- <h4>
         {{@root.mostrar.autor}}
     </h4> --}}
 
-    <div class="row justify-content-center mx-auto p-4 border-success rounded bg-sec-opacity shadow-box" >
+    <div class="row justify-content-center mx-auto p-4 border-light rounded bg-sec-opacity shadow-box container">
         {{#each posts as |mostrar|}}
             {{>mostrarPost post = this}}
         {{/each}}
@@ -57,10 +60,10 @@
     {{>paginationHomeNav paginacion = this.paginacion}}
 
 {{else}}
-<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap">
-    <h2 class="text-center text-success my-2 w-100">{{title}} - Total de Posts</h2>
+<div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light flex-wrap container">
+    <h2 class="text-center text-white my-2 w-100">{{title}} - Total de Posts</h2>
     <div class="d-flex justify-content-center align-items-center">
-        <a class="btn-success btn mx-4" href="/home/?skip=0&&limit=6">Paginacion Posts</a>
+        <a class="nav-link btn btn-outline-warning rounded mx-4 mt-2" href="/home/?skip=0&&limit=6">Paginacion Posts</a>
     </div>
 </div>
 

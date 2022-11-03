@@ -77,6 +77,7 @@ app.use((req, res, next)=>{
     res.locals.mostrar;
     res.locals.mostrarConfig;
     res.locals.mostrarCarrousel;
+    res.locals.signin_error = req.flash('error');
     next();
 })
 

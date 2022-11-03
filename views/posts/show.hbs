@@ -1,5 +1,9 @@
 <h2 class="h1 mb-5 text-center text-success font-weight-bold">Informacion del Post</h2>
 <div class="mt-2 bg-sec-opacity py-3 rounded border border-light pt-5 pb-1 mx-5 rounded">
+    <div class="w-100 h-50 justify-content-center d-flex">
+        <img src="{{post.img}}" class="image w-50 h-25 rounded-3" alt="postCard">
+    </div>
+    
     <h3 class="text-center text-success font-weight-bold">
         {{#if post.emoji}}
             {{{post.emoji}}}

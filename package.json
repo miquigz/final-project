@@ -9,10 +9,9 @@
     "debug": "set DEBUG=express:* & nodemon server.js"
   },
   "keywords": [],
-  "author": "MP",
+  "author": "Miqueas Gimenez",
   "license": "ISC",
   "dependencies": {
-    "@faker-js/faker": "^7.6.0",
     "bcrypt": "^5.1.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
@@ -28,6 +27,7 @@
     "slugify": "^1.6.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "@faker-js/faker": "^7.6.0"
   }
 }

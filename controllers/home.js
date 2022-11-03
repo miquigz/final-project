@@ -4,7 +4,7 @@ const Post = require("../models/posts");
 const showHomeAllPosts = async (req, res = response)=>{
     try {
         let postsArray = await Post.find({}).lean(); // Me deja un obj puro de JS
-        const title = "Inicio - Posts InfoBlog";
+        const title = "Inicio - Posts";
         let homePagination = false;
         const masRecientes = {
             last: {
