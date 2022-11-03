@@ -51,16 +51,18 @@
         <div class="col-sm-6 col-lg-4 col-md-6 card text-light bg-vintage my-3 mx-4 p-4 border-secondary" style="max-height: 300px;">
             <div class="card-header w-100 bg-dark rounded text-white text-center"><a href="/user/{{this.slugUser}}"
             {{#if @root.user}} class="btn button-dark rounded text-warning px-2"{{else}}class="nav-link btn btn-outline-warning disabled rounded text-light px-2 disabled" {{/if}}>{{this.name}}</a></div>
-            <div class="card-body d-flex flex-wrap justify-content-center" >
+            <div class="card-body d-flex flex-column flex-wrap" >
                 <div style="white-space:nowrap; overflow:hidden;" class="mb-2">
-                    {{#if this.desc}} 
-                        <span>{{this.desc}}</span>
-                    {{else}}
-                        <span>Usuario sin descripcion.</span>
-                    {{/if}}
                 </div>
-                <p class="card-text font-weight-bold" >{{#if this.totalPosts}}Total de posts creados: {{this.totalPosts}}{{else}} Sin posts creados.{{/if}}</p>
-                <p class="card-text text-muted">Fecha de creacion: {{this.createdAt}}</p>
+                <div>
+                    {{#if this.desc}} 
+                        <p class="card-text">{{this.desc}}</p>
+                    {{else}}
+                        <p class="card-text">Usuario sin descripcion.</p>
+                    {{/if}}
+                    <p class="card-text font-weight-bold">{{#if this.totalPosts}}Total de posts creados: <span class="text-warning">{{this.totalPosts}}</span> {{else}} Sin posts creados.{{/if}}</p>
+                    <p class="card-text text-muted">Fecha de creacion: {{this.createdAt}}</p>    
+                </div>
             </div>
             <div class="text-center">
                 <a href="/user/{{this.slugUser}}"{{#if @root.user}}class="nav-link btn btn-outline-warning rounded px-2"{{else}}class="btn btn-sm btn btn-outline-warning disabled my-2 border border-light rounded disabled"{{/if}}>« Ver perfil »</a>

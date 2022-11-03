@@ -1,6 +1,6 @@
 # Final Project
 ## Bootcamp NodeJS - Telecom #Digitalers (educacionIT)
-Hola! Este es el proyecto integrador que hice para el bootcamp de NodeJS es un CRUD hecho en node con express y con el patron de diseño de software MVC(Modelo-Vista-Controlador).
+Hola! Este es el proyecto integrador que hice para el bootcamp de NodeJS es un CRUD hecho en node con el framework express.js y usando el patron de diseño de software MVC(Modelo-Vista-Controlador).
 A fin de poner en practica lo aprendido durante el bootcamp, este proyecto es FullStack Back-End, si bien tiene estilos y CSS, no esta tan enfocado al área front.
 
 # Sobre el proyecto
@@ -12,7 +12,7 @@ Requisitos para correr el proyecto de forma local: Contar con MongoDB, mongo she
 `Ejecutar en terminal:`
 > **mongodb --dbpath"/ruta-de-la-base-de-datos"**
 > > **npm run dev**
-> > > **Abrir localhost:8090/home**
+> > > **Abrir localhost:PORT-Especificado/home**
 ### También esta disponible en linea :
 ``link project``
 
