@@ -182,7 +182,6 @@ const createPost = async (req = request, res = response) => {
               post.emoji = req.body.emoji;
           //img del post
           post.img = `/img/postCards/${Math.round(Math.random() * (12 - 1) + 1)}-min.png`; 
-          console.log(post);
           post = await post.save();
           res.status(200).redirect(`/posts/${post.slug}`);
         }

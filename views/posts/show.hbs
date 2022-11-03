@@ -1,26 +1,27 @@
-<h2 class="h1 mt-2 mb-3 text-center text-warning font-weight-bold">Informacion del Post</h2>
-<div class="mt-2 bg-sec-opacity py-3 rounded border border-light pt-2 pb-1 mx-5 rounded">
-    <div class="w-100 h-25 justify-content-center d-flex ">
-        <img src="{{post.img}}" class="img-fluid img-thumbnail mb-3" alt="postCard">
-    </div>
-    
-    <h3 class="text-center text-warning font-weight-bold">
-        {{#if post.emoji}}
-            {{{post.emoji}}}
+<div style="min-height: 736px;" class="container">
+    <h2 class="h1 mt-2 mb-3 text-center text-warning font-weight-bold">Informacion del Post</h2>
+    <div class="mt-2 bg-sec-opacity py-3 rounded border border-light pt-2 pb-1 mx-5 rounded">
+        <div class="w-100 h-25 justify-content-center d-flex ">
+            <img src="{{post.img}}" class="img-fluid img-thumbnail mb-3" alt="postCard">
+        </div>
+        
+        <h3 class="text-center text-warning font-weight-bold">
+            {{#if post.emoji}}
+                {{{post.emoji}}}
+            {{/if}}
+            {{ post.title }}
+        </h3>
+        <div class="d-flex justify-content-center">
+            {{{post.body}}}
+        </div>
+        <div>
+
+        </div>
+        {{#if post.fecha}}
+            <p class="text-muted text-warning mx-2">{{post.fecha}}</p>
         {{/if}}
-        {{ post.title }}
-    </h3>
-    <div class="d-flex justify-content-center">
-        {{{post.body}}}
+        {{#if post.user}}
+            <p class="text-muted mx-2">Creado por: <label class="text-warning">{{post.user}}</label></p> 
+        {{/if}}
     </div>
-    <div>
-
-    </div>
-    {{#if post.fecha}}
-        <p class="text-muted text-warning mx-2">{{post.fecha}}</p>
-    {{/if}}
-    {{#if post.user}}
-        <p class="text-muted mx-2">Creado por: <label class="text-warning">{{post.user}}</label></p> 
-    {{/if}}
 </div>
-

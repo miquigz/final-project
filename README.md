@@ -1,7 +1,7 @@
 # Final Project
 ## Bootcamp NodeJS - Telecom #Digitalers (educacionIT)
 Hola! Este es el proyecto integrador que hice para el bootcamp de NodeJS es un CRUD hecho en node con express y con el patron de diseño de software MVC(Modelo-Vista-Controlador).
-A fin de poner en practica lo aprendido durante el bootcamp, este proyecto es FullStack Back-End, si bien tiene estilos, y CSS, no esta tan enfocado al área front.
+A fin de poner en practica lo aprendido durante el bootcamp, este proyecto es FullStack Back-End, si bien tiene estilos y CSS, no esta tan enfocado al área front.
 
 # Sobre el proyecto
 El proyecto consiste en la publicación de posts, cuenta con sistema de registro y autenticación de usuarios, la capacidad de editar posts, filtrar posts, filtrar usuarios, y entre otras funcionalidades como pueden ser cambiar temas, editar perfil, etc.
@@ -30,7 +30,7 @@ Requisitos para correr el proyecto de forma local: Contar con MongoDB, mongo she
 ##### Utilidades/Template language
 >**express-handlebars**: Esta librería nos permitirá trabajar con la capa del front mediante un sistema de plantillas, generando HTML a partir de objetos con datos en formato JSON. Facilita el manejo de datos provenientes del back, y su posible manejo para la vista.
 
->**handlebars-helpers:** A fin de darle una mayor utilidad(generando mayor dinamismo/logica en el front gracias a esta dependencia) a hbs y poder desarrollar logica en el template, esta dependencia incorpora 188 helpers para handlebars.
+>**handlebars-helpers:** A fin de darle una mayor utilidad a hbs(generando mas dinamismo en el front gracias a esta dependencia)  y poder desarrollar logica en el template, esta dependencia incorpora 188 helpers para handlebars.
 
 ##### Otras
 >**dotenv**: A fin de poder configurar y acceder a variables de entorno, dotenv nos permite realizar esto mismo de una forma eficiente.
