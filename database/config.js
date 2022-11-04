@@ -4,7 +4,7 @@ const dbConnection = async () => {
 
     try {
         
-        await mongoose.connect(process.env.DB_LOCAL_URI, {
+        await mongoose.connect(process.env.DB_REMOTA_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
