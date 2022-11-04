@@ -5,22 +5,22 @@
   <form action="/user/edit/{{user.slugUser}}?_method=PUT" method="POST">
       {{!-- NOmbre --}}
     <div class="form-group">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABaElEQVRIic2UvUoDQRSFvzubiFVaEX9eIK1aCLqT2gfYYGeTUkGSt0ha0VKw0RewMxPESuzUWoiFbyCYZK6FIHE3TjaJYA5MMffMuWfOZRiYJ8QuubOuejuJpjDJYYFt0IkuJelC5aa6p0bPgJU05+ylAFiXjHDRV0VqHXt5PVzNJFDjT0EyzQFsu2pVGIxOIasCZ8B60ABkdVTzL0rbmcg/sZYumPD52TFHBqJN1C9/LVp5ZXmfqXPxVWNoX49dsimwO06YL4HykC6Jcp9Hms/AyEamJmzlkeYbkWocu6TlTbEJUPAfDYWdvzMABI4j3zsG0OwH8CvyjOhR4TAyvtwrvJd6hfdSZHxZkCPgaZx4TAK5QN8OOhXXTxHPwLNt2xOVpXOB/akSRH2pu2zzb7iK63tTrId6BA1UZDHEAxR7fiHEB0fko8GLdUnQwDMI8v/xF+nrDP26Yw0UqU1p0kVNbaprzTU+AVWFaogsHiu0AAAAAElFTkSuQmCC">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABOklEQVRIie2UvU4CQRSFvztLoiUSGjV0NlbQ2Fr5Ex/Ax6AwNkQaCiwNBZU+gjyAMZFG7WzoDIkdxJiIQOhM3Lk2kLibXWeTsZNT3jP3fDOTuQNLOSRZFmm9UNJAWoocAIjSFaUmzVHfG6D1QskGpgcUYtbEhLYs5+PBb/3GCQiklRAOsKaBuXD1uwHza0n2OPQGOPm+AFG66Sa3fwGoAZME58OIPfUHNEd9E9qyQAeYATOEa2PCijTGQ1f/Uk6lTrIeE3xtF3cNsi+qOypsAqW5PRBkqGKfrMpd7nl0Lx3CTACtbq3Y/LSKcAJsZNzoK0rLTPNtab98pgL0rLhuc9wA5YzBcfWMkSNpvL8tCpFnqgFXHuEAFQ318mchChD2PMIXGZG/Kz5oq76AeEb0BPDom67w4Jvxz/QNfsRcDnb1UnYAAAAASUVORK5CYII=">
       <label for="name">Nombre</label>
-      <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" 
+      <input type="text" class="form-control text-warning bg-dark border border-light" id="name" name="name" aria-describedby="emailHelp" 
       placeholder="Ingrese su nombre"
       value="{{user.name}}">
     </div>
     {{!-- DESC--}}
     <div class="form-group">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAA60lEQVQ4jc2RvU5CQRCFv7lAgZUdzwDhDUzgoiU1QmELjaHlQbDS2pig72AW4hNoQU9NTUgEhoJ/2HvvbkJxT3l25puzM5B2ic18GDVKqwX5fZHmpt/3HxME9QZWTbMr0D/2FN5E9d+En90kaGDxyvbR8lwbtl5R+6/igJFStJ0E9QK6QB2BkgXmx9DQPL7YoFknHFrXzaFuD6bkQtO4M3z9eAOBgkDv3FQJAE6A3jtMUmRChRnwHvH8JHDjBdw2dLzixQFTk/DqR7kAivLn2iwivxeerbAybBYzy5V1RzstM8FsVB2MXYenR2uXcUI7pIyLpwAAAABJRU5ErkJggg==">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50" style="fill:#FD7E14;"><path d="M 14 7 C 12.343 7 11 8.343 11 10 L 11 40 C 11 41.657 12.343 43 14 43 L 36 43 C 37.657 43 39 41.657 39 40 L 39 22 L 27 22 C 25.343 22 24 20.657 24 19 L 24 7 L 14 7 z M 25 7.2929688 L 25 19 C 25 20.105 25.895 21 27 21 L 38.707031 21 L 25 7.2929688 z M 17.5 28 L 32.5 28 C 32.776 28 33 28.224 33 28.5 C 33 28.776 32.776 29 32.5 29 L 17.5 29 C 17.224 29 17 28.776 17 28.5 C 17 28.224 17.224 28 17.5 28 z M 17.5 34 L 32.5 34 C 32.776 34 33 34.224 33 34.5 C 33 34.776 32.776 35 32.5 35 L 17.5 35 C 17.224 35 17 34.776 17 34.5 C 17 34.224 17.224 34 17.5 34 z"></path></svg>
         <label for="password">Descripcion</label>
-        <textarea class="form-control" name="desc" id="desc" placeholder="Ingrese su descripcion">{{user.desc}}</textarea>
+        <textarea class="form-control text-warning bg-dark border border-light" name="desc" id="desc" placeholder="Ingrese su descripcion">{{user.desc}}</textarea>
     </div>
     <div class="mt-2">
-        <button type="submit" class="btn btn-warning">Editar</button>
-        <button type="reset" class="btn btn-light">Reset</button>
-        <a href="/user/{{user.slugUser}}" class="btn btn-dark">Cancelar</a>
+        <button type="submit" class="btn btn-outline-warning">Editar</button>
+        <button type="reset" class="btn btn-outline-light">Reset</button>
+        <a href="/user/{{user.slugUser}}" class="btn btn-dark border-light border">Cancelar</a>
     </div>
   </form>
   </div>

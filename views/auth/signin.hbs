@@ -23,19 +23,21 @@
           <path d="m22 6-10 7L2 6"></path>
         </svg>
         <label for="email">Direccion de Email</label>
-        <input type="email" {{#if signin_error}}class="is-invalid form-control" {{/if}} class="form-control" id="email"
+        <input type="email" {{#if signin_error}}class="is-invalid form-control text-warning bg-dark" {{/if}} class="form-control text-warning bg-dark border border-light" id="email"
           name="email" aria-describedby="emailHelp" placeholder="Ingrese su Email">
       </div>
       {{!-- Password --}}
       <div class="form-group">
-        <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAACWElEQVQ4jaWTsWsTYRiHf+/3XZL2hFYLCUI3N+ng0klb7xIoGttCQS6NVkFQExAnoSAZFJS6KN1bF6VSL70iUrSD0NyFlrq4Cv4HFlOoODRp2vtehxgMadJL9TceD889L9wR/iy5moxU9N4sE6cA6gIAMMpgzkdjat4ZcKroYAIAEmtWf1nv8RQ4ArU35hn2oGfYg+DKOBHrpZL0EmtWfydCSq4mI2W9x2OoB0XT+Wy61mkA8OLOVh1KFNPnFeNFNOqbQaWiovdmGXhXk6VuQIhlCLFsFien6lDBsDfBvFLalncDT2biFPHey1ov3daqahRqbwyMO43ggSbnwEgHCgHq8uLvfwIAAe5+SM4SRWYZVGgEN4YXd0Do7kD4d66ZfyKJ80Swi6b99BDNLA49a5oGRtl0J07WKwtG/lMr8NKm1VepohxYyOAlonAmCKxUKUvAmXghPXqkUN/9Nc8QE/FC6kI7yHStIYDGwqHwOSU4d5SUgNqHraR0wLxyoMm5jeHFHaB+JmUJYtwX2tX1i2++D61fPyV9/4NQ9MxN2B9bCgHA+mqFSz9EBoQUiHQw7zPQB2ArFlUjzoBTTa4mI7t6z2JIyul9319oJaXmNzTOWrJkKSZfgfibZ+RnaudfuwxSjzUppw589ZoIz13DXulIWJdux+QCg8+CyGfGjFCoKsG5kJQ3m0sDhY2LF9MZAHANe75d6bGFzJwD0fbhUvWWiW8dS9i+lB8RYCuoE4G/Ursxc84spr8wcTcpzDD4HkFc+afC1qWT90F4qP2PsKE0A2ZdEUZ+A7P1JLg7Y/ATAAAAAElFTkSuQmCC">
+        <img src="https://img.icons8.com/ios/20/FD7E14/key-security.png"/>
         <label for="password">Contraseña</label>
-        <input type="password" name="password" {{#if signin_error}}class="is-invalid form-control" {{/if}}
-          class="form-control" id="password" placeholder="Ingrese su Contraseña">
+        <input type="password" name="password" {{#if signin_error}}class="is-invalid form-control text-warning bg-dark" {{/if}}
+          class="form-control text-warning bg-dark border border-light" id="password" placeholder="Ingrese su Contraseña">
       </div>
-      <button type="submit" class="btn btn-warning">Iniciar sesión</button>
-      <a href="/home" class="btn btn-dark">Cancelar</a>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-outline-warning">Iniciar sesión</button>
+        <a href="/home" class="btn btn-dark border-light border">Cancelar</a>
+      </div>
+      
     </form>
   </div>
 </div>
