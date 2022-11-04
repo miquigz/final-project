@@ -108,11 +108,20 @@ const switchCarrousel = async(req, res)=>{
     }
 }
 
+const redirectHome = async (req, res)=>{
+    try {
+        res.redirect('/home')
+    } catch (error) {
+        console.log(`Error en redirectHome `, error)
+    }
+}
+
 
 module.exports = {
     showHomeAllPosts,
     actualizarCondiciones,
     actualizarTema,
     switchConfig,
-    switchCarrousel
+    switchCarrousel,
+    redirectHome
 }
