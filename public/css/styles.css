@@ -193,9 +193,14 @@ input[type="checkbox"]:checked, input[type="radio"]:checked {
 }
 
 p[data-f-id="pbf"]{
-    display: none;
+    display: none!important;
 }
 
 a[ href="https://www.froala.com/wysiwyg-editor?pb=1"]{
-    display: none;
+    display: none!important;
+}
+
+/* style="z-index:9999;width:100%;position:relative" */
+div[style="z-index:9999;width:100%;position:relative"]{
+    display:none!important;
 }
