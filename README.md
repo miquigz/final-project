@@ -14,7 +14,7 @@ Requisitos para correr el proyecto de forma local: Contar con MongoDB, mongo she
 > > **npm run dev**
 > > > **Abrir localhost:PORT-Especificado/home**
 ### También esta disponible en linea :
-``link project``
+``link project: https://finalproject.up.railway.app/home``
 
 ## Librerías utilizadas y su por que:
 ##### Autenticación y Seguridad:

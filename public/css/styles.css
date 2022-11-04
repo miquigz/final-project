@@ -191,3 +191,11 @@ input[type="checkbox"]:checked, input[type="radio"]:checked {
     background-color: #412c0a;
     color: #7e7272;
 }
+
+p[data-f-id="pbf"]{
+    display: none;
+}
+
+a[ href="https://www.froala.com/wysiwyg-editor?pb=1"]{
+    display: none;
+}
