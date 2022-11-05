@@ -83,10 +83,14 @@ app.use((req, res, next)=>{
 
 // Routes
 app.use('/', routerAuth);
-app.use('/', routerDev); // Solo para desarrollo
+// app.use('/', routerDev); // Solo para desarrollo
 app.use('/', routerPosts);
 app.use('/', routerHome);
 app.use('/', routerUsers);
+app.use((req, res) => {
+    res.status(404).render('error/error', {title: 'Error 404', errorTitle: 'Error 404, ruta desconocida.', errDesc: 'Intente nuevamente...'})
+})
+
 
 
 
