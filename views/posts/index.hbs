@@ -1,117 +1,120 @@
-{{#if maximoExcedido}}
-  <div class="alert alert-dismissible alert-dark mt-3 text-danger border border-warning" data-dismiss="alert">
-    <button type="button" class="close btn-close rounded btn-secondary btn text-warning btn-sm" data-bs-dismiss="alert" aria-label="Close">X</button>
-    <h4 class="alert-heading mt-1 text-danger font-weight-bold">Maximo Excedido!</h4>
-    <p class="mb-0">Maximo de elementos a mostrar excedido.</p>
-    <p class="text-muted mt-2">Valor establecido en 20 (maximo actual).</p>
-  </div>
-{{/if}}
-<div class="container">
-  <hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
-  <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light align-items-center flex-wrap">
-      <label class="h2 mr-4">|</label>
-      <a href="/posts/new" class="btn btn-warning btn">Crear Post</a>
-      {{!-- <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-warning font-weight-bold"> {{paginacion.maximo}}</label></p> --}}
-        {{>totalPosts paginacion = this.paginacion}}
-        <label class="h2">|</label>
-        <div class="d-flex justify-content-center align-items-center mx-4">
-            <small class="text-light font-weight-bold">Mostrando Actualmente: <label
-              class="h4 mx-2 bg-dark p-2 rounded">{{paginacion.valor}}</label></small>
-        </div>
-        <label class="h2">|</label>
-  </div>
-
-  <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-warning mt-2">
-    <form action="/posts/cambiarPaginacion" class="row flex-wrap" method="POST">
-        <label for="paginacionValor" class="col-form-label col-form-label-sm align-items-center mx-2 font-weight-lighter text-center">Elige la cantidad de elementos a mostrar:  </label>
-        <input list="paginacionValores" class="form-control-sm w-25 bg-dark text-center text-warning" name="paginacionValor" autocomplete="off" id="paginacionValor">
-        <datalist id="paginacionValores">
-          <option value="5" {{#if true}}{{/if}}>
-          <option value="7" class="disabled">
-          <option value="10">
-          <option value="15">
-          <option value="20">
-        </datalist>
-        <div class="col">
-          <input type="submit" class="btn btn-light btn-sm">
-        </div>
-      </form>
-  </div>
-    <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-warning mt-2">
-    <a {{#if (compare mostrarPosts "==" 'myPosts')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
-    href="/posts/?skip=0&limit={{paginacion.valor}}&myPosts=true">Mostrar mis Posts</a>
-    <a {{#if (compare mostrarPosts "==" 'editable')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
-    href="/posts/?skip=0&limit={{paginacion.valor}}&editable=true">Mostrar Posts editables</a>
-    <a {{#if (compare mostrarPosts "==" '')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
-    href="/posts/?skip=0&limit={{paginacion.valor}}">Mostrar todos los posts</a>
-  </div>
-  <hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
-</div>
-<table class="table border border-warning rounded border-bottom-0 shadow-box">
-  <thead>
-    <tr class="bg-dark rounded bg-vintage">
-      <th scope="col h5"><p class="h4 text-bold text-center">Titulo</p></th>
-      <th scope="col h5"><p class="h4 text-bold text-center">Post</p></th>
-      <th scope="col h5"><p class="h4 text-bold text-center">Acciones</p></th>
-    </tr>
-  </thead>
-  <tbody class="bg-secondary">
-    {{#isEmpty posts}}
-      <td class="text-warning font-weight-bold h4">No hay posts para mostrar :/</td>
-      <td class="text-warning h4">Intente creando uno!</td>
-      <td class="text-warning"></td>
-    {{else}}
-      {{#each posts}}
-          <tr>
-              <td class="border-warning rounded bg-dark" width="30%"> {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}<p class="h4">{{this.title}}</p></td>
-              <td width="45%" class="border-bottom border-dark"><p>{{{this.body}}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-warning">{{this.user}}</label></small>{{/if}} </td>
-              <td class="d-flex flex-wrap border-warning bg-vintage rounded">
-                  {{!-- <button id="botonDelete">borrarexample</button> --}}
-
-                  <a href="/posts/{{this.slug}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-light btn-sm"{{else}} class="btn btn-light btn-sm disabled"{{/or}}>Ver</a>
-                  <a href="/posts/edit/{{this._id}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-primary btn-sm mx-1"{{else}} class="btn btn-primary btn-sm mx-1 disabled"{{/or}}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                      </svg>
-                      Editar
-                  </a>
-                  <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
-                    <button {{#or (eq this.user this.userActual) (not this.user)}} class="btn btn-danger btn-effect btn-sm botonDelete"{{else}} class="btn btn-danger botonDelete btn-sm disabled" disabled="true"{{/or}}>
-                      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                        width="16" height="20"
-                        viewBox="0 0 20 20"
-                        ><path d="M 10 2 L 9 3 L 5 3 C 4.448 3 4 3.448 4 4 C 4 4.552 4.448 5 5 5 L 7 5 L 17 5 L 19 5 C 19.552 5 20 4.552 20 4 C 20 3.448 19.552 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.105 5.895 22 7 22 L 17 22 C 18.105 22 19 21.105 19 20 L 19 7 L 5 7 z"></path></svg>
-                      Eliminar
-                    </button>
-                  </form>
-              </td>
-          </tr>
-    {{/each}}
-{{/isEmpty}}
-  </tbody>
+<div style="min-height: 736px;">
+  {{#if maximoExcedido}}
+    <div class="alert alert-dismissible alert-dark mt-3 text-danger border border-warning" data-dismiss="alert">
+      <button type="button" class="close btn-close rounded btn-secondary btn text-warning btn-sm" data-bs-dismiss="alert" aria-label="Close">X</button>
+      <h4 class="alert-heading mt-1 text-danger font-weight-bold">Maximo Excedido!</h4>
+      <p class="mb-0">Maximo de elementos a mostrar excedido.</p>
+      <p class="text-muted mt-2">Valor establecido en 20 (maximo actual).</p>
+    </div>
+  {{/if}}
   <div class="container">
-    <div class="d-flex w-100 justify-content-center my-1 bg-sec-opacity py-2 rounded border border-light">
-    {{!-- first --}}
-    <a href="/posts/?skip=0&limit={{paginacion.valor}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
-    {{#if (lte paginacion.desde 0)}}class="btn btn-light disabled mx-2"{{else}}class="btn btn-light mx-2"{{/if}}>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg=="><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg==">
-    </a>
-    {{!-- back --}}
-    <a href="/posts/?skip={{minus paginacion.desde paginacion.valor}}&limit={{minus paginacion.hasta paginacion.valor}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}" 
-    {{#if (lt (minus paginacion.desde paginacion.valor) 0)}}class="btn btn-light disabled"{{else}}class="btn btn-light"{{/if}}><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg==">Atras</a>
+    <hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
+    <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-light align-items-center flex-wrap">
+        <label class="h2 mr-4">|</label>
+        <a href="/posts/new" class="btn btn-warning btn">Crear Post</a>
+        {{!-- <p class="mx-5 h3 bg-secondary px-2 rounded">Total de Posts: <label class="text-warning font-weight-bold"> {{paginacion.maximo}}</label></p> --}}
+          {{>totalPosts paginacion = this.paginacion}}
+          <label class="h2">|</label>
+          <div class="d-flex justify-content-center align-items-center mx-4">
+              <small class="text-light font-weight-bold">Mostrando Actualmente: <label
+                class="h4 mx-2 bg-dark p-2 rounded">{{paginacion.valor}}</label></small>
+          </div>
+          <label class="h2">|</label>
+    </div>
 
-    <p class="h4 mx-5">{{add paginacion.desde 1}} - {{paginacion.hasta}}</p>
-
-    {{!-- next --}}
-    <a href="/posts/?skip={{add paginacion.desde paginacion.valor}}&limit={{add paginacion.hasta paginacion.valor}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
-    {{#if (gte (add paginacion.desde paginacion.valor) paginacion.maximo)}}class="btn btn-light disabled"{{else}}class="btn btn-light"{{/if}}>Siguiente <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>
-    {{!-- last --}}
-    <a href="/posts/?skip={{minus paginacion.maximo paginacion.valor}}&limit={{paginacion.maximo}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
-    {{#if (gte (add paginacion.desde paginacion.valor) paginacion.maximo)}}class="btn btn-sm btn-light disabled mx-2"{{else}}class="btn btn-sm btn-light mx-2"{{/if}}> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>  
+    <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-warning mt-2">
+      <form action="/posts/cambiarPaginacion" class="row flex-wrap" method="POST">
+          <label for="paginacionValor" class="col-form-label col-form-label-sm align-items-center mx-2 font-weight-lighter text-center">Elige la cantidad de elementos a mostrar:  </label>
+          <input list="paginacionValores" type="number" class="form-control-sm w-25 bg-dark text-center text-warning" name="paginacionValor" style="overflow-y: hidden;" autocomplete="off" id="paginacionValor">
+          <datalist id="paginacionValores">
+            <option value="5" {{#if true}}{{/if}}>
+            <option value="7" class="disabled">
+            <option value="10">
+            <option value="15">
+            <option value="20">
+          </datalist>
+          <div class="col">
+            <input type="submit" class="btn btn-light btn-sm">
+          </div>
+        </form>
+    </div>
+      <div class="d-flex justify-content-center bg-sec-opacity py-3 rounded border border-warning mt-2">
+      <a {{#if (compare mostrarPosts "==" 'myPosts')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
+      href="/posts/?skip=0&limit={{paginacion.valor}}&myPosts=true">Mostrar mis Posts</a>
+      <a {{#if (compare mostrarPosts "==" 'editable')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
+      href="/posts/?skip=0&limit={{paginacion.valor}}&editable=true">Mostrar Posts editables</a>
+      <a {{#if (compare mostrarPosts "==" '')}} class="btn-sm btn-warning active mx-2"{{else}}class="btn btn-light btn-sm mx-2"{{/if}}
+      href="/posts/?skip=0&limit={{paginacion.valor}}">Mostrar todos los posts</a>
+    </div>
+    <hr class="rounded bg-light mt-4 font-weight-bold shadow-box">
   </div>
-</div>
-<hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
-</table>
-<hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
+  <table class="table border border-warning rounded border-bottom-0 shadow-box">
+    <thead>
+      <tr class="bg-dark rounded bg-vintage">
+        <th scope="col h5"><p class="h4 text-bold text-center">Titulo</p></th>
+        <th scope="col h5"><p class="h4 text-bold text-center">Post</p></th>
+        <th scope="col h5"><p class="h4 text-bold text-center">Acciones</p></th>
+      </tr>
+    </thead>
+    <tbody class="bg-secondary">
+      {{#isEmpty posts}}
+        <td class="text-warning font-weight-bold h4">No hay posts para mostrar :/</td>
+        <td class="text-warning h4">Intente creando uno!</td>
+        <td class="text-warning"></td>
+      {{else}}
+        {{#each posts}}
+            <tr>
+                <td class="border-warning rounded bg-dark" width="30%"> {{#if this.emoji}}<small>{{{this.emoji}}}</small>{{/if}}<p class="h4">{{this.title}}</p></td>
+                <td width="45%" class="border-bottom border-dark"><p>{{{this.body}}}</p>{{#if this.fecha}} <small class="text-muted">{{this.fecha}} </small>{{/if}}  {{#if this.user}} <small class="text-muted">- Creado por: <label class="text-warning">{{this.user}}</label></small>{{/if}} </td>
+                <td class="d-flex flex-wrap border-warning bg-vintage rounded">
+                    {{!-- <button id="botonDelete">borrarexample</button> --}}
 
+                    <a href="/posts/{{this.slug}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-light btn-sm"{{else}} class="btn btn-light btn-sm disabled"{{/or}}>Ver</a>
+                    <a href="/posts/edit/{{this._id}}" {{#or (eq this.user this.userActual) (not this.user)}}class="btn btn-primary btn-sm mx-1"{{else}} class="btn btn-primary btn-sm mx-1 disabled"{{/or}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        Editar
+                    </a>
+                    <form action="/posts/{{this._id}}?_method=DELETE" method="POST">
+                      <button {{#or (eq this.user this.userActual) (not this.user)}} class="btn btn-danger btn-effect btn-sm botonDelete"{{else}} class="btn btn-danger botonDelete btn-sm disabled" disabled="true"{{/or}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                          width="16" height="20"
+                          viewBox="0 0 20 20"
+                          ><path d="M 10 2 L 9 3 L 5 3 C 4.448 3 4 3.448 4 4 C 4 4.552 4.448 5 5 5 L 7 5 L 17 5 L 19 5 C 19.552 5 20 4.552 20 4 C 20 3.448 19.552 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.105 5.895 22 7 22 L 17 22 C 18.105 22 19 21.105 19 20 L 19 7 L 5 7 z"></path></svg>
+                        Eliminar
+                      </button>
+                    </form>
+                </td>
+            </tr>
+      {{/each}}
+  {{/isEmpty}}
+    </tbody>
+    <div class="container">
+      <div class="d-flex w-100 justify-content-center my-1 bg-sec-opacity py-2 rounded border border-light">
+      {{!-- first --}}
+      <a href="/posts/?skip=0&limit={{paginacion.valor}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
+      {{#if (lte paginacion.desde 0)}}class="btn btn-light disabled mx-2"{{else}}class="btn btn-light mx-2"{{/if}}>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg=="><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg==">
+      </a>
+      {{!-- back --}}
+      <a href="/posts/?skip={{minus paginacion.desde paginacion.valor}}&limit={{minus paginacion.hasta paginacion.valor}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}" 
+      {{#if (lt (minus paginacion.desde paginacion.valor) 0)}}class="btn btn-light disabled"{{else}}class="btn btn-light"{{/if}}><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVRIie3WQQpBURTGcb2SkZlSRgYWYGJo9EamTNiDZxOeRRixhbcAMlHIGhRlJDMpkb/JledEUs6R8i3g/Dq3e889icQ/vxAgDUy5ZWiBekDEfeYWcEegW6CgjdaAcww9Ar42WgR2otumNpoFVgLtaaNJYCTQMZDShrsCXQJZbbQl0D1Q0kZ9d2uvOQN1bTQPbES3bVXUwTOBRoD3idqvivAJ5O08OerQCi8DB3G5GlZ4YP6cYrgcIGsgZwF/Z2Q6PAMsBN5Xhx3+6FsMrPAq94vACahY4aHoWn/1cfB3lj2Hp4FJDB6YwP+8kwvBLQQ4VrWo1wAAAABJRU5ErkJggg==">Atras</a>
+
+      <p class="h4 mx-5">{{add paginacion.desde 1}} - {{paginacion.hasta}}</p>
+
+      {{!-- next --}}
+      <a href="/posts/?skip={{add paginacion.desde paginacion.valor}}&limit={{add paginacion.hasta paginacion.valor}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
+      {{#if (gte (add paginacion.desde paginacion.valor) paginacion.maximo)}}class="btn btn-light disabled"{{else}}class="btn btn-light"{{/if}}>Siguiente <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>
+      {{!-- last --}}
+      <a href="/posts/?skip={{minus paginacion.maximo paginacion.valor}}&limit={{paginacion.maximo}}{{#if mostrarPosts}}&{{mostrarPosts}}=true{{/if}}"
+      {{#if (gte (add paginacion.desde paginacion.valor) paginacion.maximo)}}class="btn btn-sm btn-light disabled mx-2"{{else}}class="btn btn-sm btn-light mx-2"{{/if}}> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA70lEQVRIie3WMUoDURCA4RAQKzshYGXhASy0tEplGxu9g/ESxkNY6RU8gGIjJOAZBAUrsZOAKPksfMH1GbBxJhb5++XjLW9np9Va9J/Cla9GWMmCb33vAu0MeB1PFT4Ihwu+g9cGPMFBFt6vTj3GdhZ+WuGPWMuAl3Bd4TdYzsBXcVfh5+FwwTfxUuH9LLxXbve0d+xm4YPq1M/YyIDbPidZs9Fvz8WPvahwkv6qsVddrjd0o9FZn9NhNNrBQ4WeRaPzGZl+/iTu0YlGjyp0jK1otFtu7bQJ9qPRWavPcSha4Lkte5cNdChrvV30F30A7hgDN1exTwwAAAAASUVORK5CYII="></a>  
+    </div>
+  </div>
+  <hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
+  </table>
+  <hr class="bg-light mb-4 rounded font-weight-bold shadow-box">
+
+
+</div>

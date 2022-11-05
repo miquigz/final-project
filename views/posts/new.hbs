@@ -11,11 +11,14 @@
 {{#if errorDuplicado}}
     {{>alert value='El titulo del post ya existe, ingrese otro.' value2="creacion de post."}}
 {{/if}}
-
+<div style="min-height: 736px;">
 <div class="bg-sec-opacity py-3 rounded border border-light p-2 mt-2 rounded container">
     <h2 class="m-4">Crear nuevo Post</h2>
     
-    <form action="/posts" method="POST">
+    <form action="/posts" method="POST" enctype="multipart/form-data">
+        <label for="imageInput">Imagen del post: <small class="text-warning">(Opcional)</small> </label>
+        <input type="file" id="imageInput" name="postImage" />
+        <small class="text-muted user-select-none"> <small class="text-danger font-weight-bold">*</small> Si no subes ninguna se generara una aleatoria(1-12) de una imagen de un , el <label class="text-warning user-select-none">postcard</label>.</small>
         <label for="emoji">Emoji del post: <small class="text-warning">(Opcional)</small> </label>
         {{!-- <div id="emoji" class="w-25"> --}}
         <textarea type="text" id="emoji" name="emoji" class="w-25">{{valorEmoji}}</textarea>
@@ -50,4 +53,5 @@
         <button type="submit" id="btnCrearPost" class="btn btn-warning mt-3">Submit</button>
         <a href="/posts/?skip=0&limit=5" type="reset" id="btnCancelCrear" class="btn btn-light mx-3 mt-3">Cancelar</a>
     </form>
+</div>
 </div>

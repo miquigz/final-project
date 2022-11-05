@@ -1,6 +1,5 @@
 const express = require('express')
 const routerPosts = express.Router()
-
 const { newPost, createPost, showPost, deletePost, showPostFormEdit, editPost, getPostsPaginacion, modificarPaginacion } = require('../controllers/posts')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 

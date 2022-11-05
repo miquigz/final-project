@@ -1,6 +1,9 @@
 const { request, response } = require("express");
 const Auth = require("../models/auth");
 const Post = require("../models/posts");
+const sharp = require('sharp')
+const path = require('path');
+
 let valor = 5; //Paginacion valor por defecto
 let postsArray;
 let paginacionBoolean = false;
@@ -24,7 +27,6 @@ const getPostsPaginacion = async (req, res = response)=>{
       mostrarPosts = '';
     }
     //TODO: hace callback
-    
     let postsCortados, desde, hasta;
     postsCortados = cortarPosts(postsArray, req.query.skip, req.query.limit);
     desde = req.query.skip;
@@ -86,8 +88,8 @@ const showPost = async (req, res = response) => {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
     if (post === null) res.redirect("/");
     res.render("posts/show", {
-      title: `Informacion del Blog: ${post.title}`,
-      post,
+      title: `Informacion: ${post.title}`,
+      post
     })
   } catch (error) {
     console.log('Error SHOW' , error)
@@ -125,6 +127,7 @@ const newPost = async (req, res = response) => {
 const tituloDuplicado = async(titulo) =>{
   try {
     auxBoolean = false;
+    console.log("title buscar:", titulo);
     // {title: {$regex: titulo, $options 'i'}}
     //Buscamos el titulo, indistintamente si es con mayus o no /{{title}}/i
     await Post.exists({ title: new RegExp(titulo, 'i')}).then( result =>{
@@ -161,6 +164,7 @@ const createPost = async (req = request, res = response) => {
         let errorBody = false;
         let valorBody, valorTitle;
         valorBody = ''; valorTitle = '';
+        
         let post = new Post();
         //Errores mostrar:
         if (req.body.title == '' && req.body.body == null){
@@ -186,7 +190,23 @@ const createPost = async (req = request, res = response) => {
             if (req.body.emoji)
               post.emoji = req.body.emoji;
           //img del post
-          post.img = `/img/postCards/${Math.round(Math.random() * (12 - 1) + 1)}-min.png`; 
+            if (req.file){
+              await sharp(req.file.path)
+              .resize(500, 500)
+              .webp({ quality: 90 })
+              // .tint({ r: 255, g: 240, b: 16 })
+              .modulate({
+                brightness: 0.7,
+                saturation: 0.7,
+                hue: 90,
+              })
+              .toFile(`public/img/sharp/edit-${req.file.filename.slice(0, -10)}.webp`);
+              //TODO: Borrar las uploads luego de hacer el sharp, intentar ponerle tono sepia a las img.
+              //TODO: Validar tipo de IMGs, maxSize, generar alertas de errores en front.
+              post.img = `/img/sharp/edit-${req.file.filename.slice(0, -10)}.webp`;
+            }else{
+              post.img = `/img/postCards/${Math.round(Math.random() * (12 - 1) + 1)}-min.png`; 
+            }
           post = await post.save();
           res.status(200).redirect(`/posts/${post.slug}`);
         }

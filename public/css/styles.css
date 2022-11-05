@@ -211,3 +211,13 @@ div[style="z-index: 9999; width: 100%; position: relative;"]{
 a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     display: none!important;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
