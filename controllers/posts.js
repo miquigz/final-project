@@ -98,9 +98,11 @@ const showPost = async (req, res = response) => {
 const deletePost = async (req = request, res = response) => {
     try {
         let postAborrar = await Post.findById(req.params.id);
-        if (postAborrar.user == null || postAborrar.user === req.user.name)
+        if (postAborrar.user == null || postAborrar.user === req.user.name){
           await Post.findByIdAndDelete(req.params.id)
-        else{
+          if (postAborrar.user === req.user.name)
+            await actualizarTotal(req.user.name, false); //RESTAMOS TOTAL POSTS
+        }else{
           console.log("No se puede borrar este elemento, verifique su usuario");
           res.status(400).redirect(req.headers.referer);
         }
@@ -139,10 +141,13 @@ const tituloDuplicado = async(titulo) =>{
   }
 }
 
-const actualizarTotal = async (userActual)=>{
+const actualizarTotal = async (userActual, suma = true)=>{
     try {
       const userUpdate = await Auth.findOne({name: userActual}).lean();
-      await Auth.findOneAndUpdate({name:userActual}, {totalPosts: (userUpdate.totalPosts || 0) + 1});
+      if (suma) 
+        await Auth.findOneAndUpdate({name:userActual}, {totalPosts: (userUpdate.totalPosts || 0) + 1});
+      else 
+        await Auth.findOneAndUpdate({name:userActual}, {totalPosts: userUpdate.totalPosts - 1});
     }
     catch (error) {
         console.log(`Error en actualizarTotal `, error)
