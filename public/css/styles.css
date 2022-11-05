@@ -42,7 +42,7 @@
 .bg-sec-opacity{
     /* background: linear-gradient(to bottom, rgba(58, 34, 4, 0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(190, 123, 46, 0.4) 0%, rgba(0,0,0,0.40) 120%) #553a29d5;
     background-blend-mode: multiply,multiply; */
-    background-image: linear-gradient(rgba(42, 39, 33, 0.15) 0%, rgba(22, 21, 17, 0.15) 100%), radial-gradient(at center top, rgba(117, 98, 70, 0.4) 0%, rgba(22, 21, 17, 0.4) 120%);
+    background-image: linear-gradient(rgba(42, 39, 33, 0.15) 0%, rgba(22, 21, 17, 0.15) 100%), radial-gradient(at center top, rgba(117, 98, 70, 0.4) 0%, rgba(22, 21, 17, 0.89) 120%);
     background-color: rgba(68, 58, 45, 0.83);
 }
 
