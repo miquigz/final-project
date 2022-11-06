@@ -9,8 +9,7 @@
     <div class="card-header w-100 bg-dark rounded text-white text-center">
         <a href="/posts/{{post.slug}}" class="btn button-dark rounded text-white px-2"> - Post {{index}} -</a></div>
     <div class="card-body" style="max-height:400px; overflow: hidden;">
-        {{#if post.emoji}}<small>{{{post.emoji}}}</small>{{/if}}
-        <h4 class="card-title">{{post.title}}</h4>
+        <h5 class="card-title">{{post.title}} {{#if post.emoji}}{{{post.emoji}}}{{/if}}</h5>
         <p class="card-text">{{{post.body}}}</p>
     </div>
     {{#if post.fecha}}

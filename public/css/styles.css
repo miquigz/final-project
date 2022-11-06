@@ -214,10 +214,47 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.liked{
+    fill:#FD7E14;
+    transition: .6s;
+    transition-property: fill;
+}
+.unliked{
+    fill:#92887f;
+    transition: .6s;
+    transition-property: fill;
+}
+
+.unliked:hover{
+    fill:#FD7E14;
+    transition: .6s;
+    transition-property: fill;
+}
+
+.liked:hover{
+    fill:#92887f;
+    transition: .6s;
+    transition-property: fill;
+}
+
+.animacion-btn-liked:hover{
+    transition: .4s;
+    border-color: #92887f;
+    background-color: #92887f2d;
+    transition-property: border;
+}
+
+.animacion-btn-unliked:hover{
+    transition: .4s;
+    border-color: #FD7E14;
+    background-color: rgba(216, 133, 60, 0.425);
+    transition-property: border;
 }

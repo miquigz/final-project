@@ -1,0 +1,16 @@
+
+<div class="col-sm-6 col-lg-2 col-md-4 card mx-1 card text-light bg-vintage my-3 border-secondary" style="max-height: 600px">
+    <a href="/posts/{{p.slug}}" class="div-card card-img-top w-100 my-2">
+        <img src="{{p.img}}" class="image rounded-3" alt="postCard">
+        <div class="overlay rounded-3 text-light">
+            <div class="text-overlay user-select-none"><small>{{p.title}}</small> </div>
+        </div>
+    </a>
+    <div class="card-header w-100 bg-dark rounded text-white text-center">
+        <a href="/posts/{{p.slug}}" class="btn button-dark rounded text-white px-2">{{#if p.user}}<small class="text-muted">Creado por: <label class="text-warning">{{p.user}}</label></small>{{/if}}</a>
+    </div>
+    <div class="card-body" style="max-height:400px; overflow: hidden;">
+        <p class="card-text">{{{p.body}}}</p>
+    </div>
+
+</div>

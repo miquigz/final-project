@@ -34,6 +34,11 @@ const postSchema = new mongoose.Schema(
             type: String,
             unique: false,
             required: false
+        },
+        likes:{
+            type: Number,
+            unique:false,
+            required:false
         }
     },
     {

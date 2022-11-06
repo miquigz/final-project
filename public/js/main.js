@@ -33,11 +33,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     const swalDeleteConfirm = Swal.mixin({
         customClass: {
-            confirmButton: 'btn btn-success mx-3',
-            cancelButton: 'btn btn-danger mx-3'
+            confirmButton: 'btn btn-outline-warning mx-3 font-weight-bold',
+            cancelButton: 'btn btn-outline-danger mx-3',
+            popup:'border border-light shadow-box'
         },
         buttonsStyling: false,
-        background: "#444444",
+        background: "linear-gradient(to right, #271f1f 0%, black 100%)",
         color: "#FEFEFE"
     })
     try {

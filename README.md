@@ -4,7 +4,7 @@ Hola! Este es el proyecto integrador que hice para el bootcamp de NodeJS es un C
 A fin de poner en practica lo aprendido durante el bootcamp, este proyecto es FullStack Back-End, si bien tiene estilos y CSS, no esta tan enfocado al área front.
 
 # Sobre el proyecto
-El proyecto consiste en la publicación de posts, cuenta con sistema de registro y autenticación de usuarios, la capacidad de editar posts, filtrar posts, filtrar usuarios, y entre otras funcionalidades como pueden ser cambiar temas, editar perfil, etc.
+El proyecto consiste en la publicación de posts, cuenta con sistema de registro y autenticación de usuarios, la capacidad de editar posts, filtrar posts, filtrar usuarios, sistema de likes, y entre otras funcionalidades como pueden ser cambiar temas, editar perfil, etc.
 
 ## Ejecutar el proyecto
 Requisitos para correr el proyecto de forma local: Contar con MongoDB, mongo shell, NodeJS (LTS) instalados.

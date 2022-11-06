@@ -84,10 +84,11 @@ app.use((req, res, next)=>{
     res.locals.isAuthenticated_error = req.flash('isAuthenticated_error');
     //User Variables
     res.locals.user = req.user || null; //si esto logged(existe req.user), guardo variable, sino null.
-    //Configuraciones ocultar/mostrar
-    res.locals.mostrar;
+    //Configuraciones ocultar/mostrar 
+    res.locals.mostrar;//TODO: (Pasarlas a querystrings)
     res.locals.mostrarConfig;
     res.locals.mostrarCarrousel;
+    //
     res.locals.signin_error = req.flash('error');
     next();
 })

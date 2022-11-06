@@ -1,5 +1,5 @@
-<div class="container" style="min-height: 705px;">
-    <h2 class="h1 my-5 text-center text-light font-weight-bold ">Informacion del Usuario</h2>
+<div class="container" style="min-height: 485px;">
+    <h2 class="h1 my-2 text-center text-light font-weight-bold ">Informacion del Usuario</h2>
     <div class="mt-2 bg-sec-opacity py-3 rounded border border-light pt-5 pb-1 mx-5 rounded">
         {{#if editar}}<div class="d-flex justify-content-end"><a href="/user/edit/{{user.slugUser}}"
                 class="btn btn-light mx-2">Editar Perfil</a></div>{{/if}}
@@ -25,4 +25,39 @@
             <p class="text-muted mx-2">Ultima vez editado: : <label class="text-warning">{{user.updatedAt}}</label> </p>
         </div>
     </div>
+</div>
+
+{{!-- //TODO: Mejorar estilos, responsive etc. --}}
+<div class="justify-content-center bg-sec-opacity mb-2 py-1 rounded border border-warning flex-wrap container">
+    <h2 class="text-center text-white my-2 w-100">Actividad:</h2>
+    <div class="d-flex justify-content-center align-items-center">
+    </div>
+</div>
+
+<div class="row justify-content-center border-light rounded bg-sec-opacity py-2 shadow-box mx-auto" style="max-width: 95%;">
+    <div class="w-100">
+        <h2 class="text-center text-warning rounded mx-4 mt-2">Posts de {{user.name}}:</h2>
+    </div>
+    {{#isEmpty misPosts}}
+        <h5 class="text-center text-light font-weight-bold">No cuenta con ningun post</h5>
+    {{else}}
+        {{#forEach misPosts}}
+            {{>userPartials p = this}}
+        {{/forEach}}
+    {{/isEmpty}}
+</div>
+
+
+<div class="row justify-content-center border-light rounded my-3 bg-sec-opacity shadow-box mx-auto" style="max-width: 95%;">
+    <div class="w-100">
+        <h2 class="text-center text-warning ">Posts Likeados:</h2>
+    </div>
+    
+    {{#isEmpty postLikeados}}
+        <h5 class="text-center text-light font-weight-bold">Sin posts a los que dio like.</h5>
+    {{else}}
+        {{#forEach postLikeados}}
+            {{>userPartials p = this}}
+        {{/forEach}}
+    {{/isEmpty}}
 </div>

@@ -1,5 +1,6 @@
 const { response } = require("express");
 const Auth = require("../models/auth");
+const Posts = require("../models/posts");
 let ordenActual = '';
 let usersTotalArray;
 
@@ -65,10 +66,17 @@ const getSpecificUser = async(req, res = response)=>{
             result = result.slice()[0];//quitamos array q nos devuelve
             result.createdAt = result.createdAt.toLocaleDateString();
             result.updatedAt = result.updatedAt.toLocaleString();
+            let postLikeados = [];
+            let misPosts = await Posts.find({user:result.name}).lean();
+            if (result.totalLikesPosts){
+                postLikeados = await Posts.find({slug: result.totalLikesPosts}).lean();
+            }
             res.status(200).render('users/user', {
                 user: result,
                 title: `${result.name}`,
-                editar: res.locals.user.slugUser === result.slugUser
+                editar: res.locals.user.slugUser === result.slugUser,
+                postLikeados,
+                misPosts
             });
         }).catch( (err)=>{
             console.log("error en busqueda de user", err);

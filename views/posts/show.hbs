@@ -23,5 +23,18 @@
         {{#if post.user}}
             <p class="text-muted mx-2">Creado por: <label class="text-warning">{{post.user}}</label></p> 
         {{/if}}
+        {{#if post.likes}}
+            
+            <div class="d-flex">
+                <p class="text-muted mx-2">Total de Likes del post: </label></p> 
+                <svg class="{{#if diLike}}liked user-select-none{{else}}unliked user-select-none{{/if}}" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15" viewBox="0 0 50 50"><path d="M 25 47.300781 L 24.359375 46.769531 C 23.144531 45.753906 21.5 44.652344 19.59375 43.378906 C 12.167969 38.40625 2 31.601563 2 20 C 2 12.832031 7.832031 7 15 7 C 18.894531 7 22.542969 8.734375 25 11.699219 C 27.457031 8.734375 31.105469 7 35 7 C 42.167969 7 48 12.832031 48 20 C 48 31.601563 37.832031 38.40625 30.40625 43.378906 C 28.5 44.652344 26.855469 45.753906 25.640625 46.769531 Z"></path><p class="mx-2 {{#if diLike}}text-warning{{else}}text-light{{/if}}">{{post.likes}}</p>
+            </div>
+        {{else}}
+            <p class="text-muted mx-2">Post sin <label class="text-warning">likes</label>.</p> 
+        {{/if}}
+        <a href="/posts/like/{{post.slug}}" {{#if (eq post.user userAct)}}class="btn btn-outline-warning disabled mx-2 user-select-none"{{else}}
+        {{#if diLike}}class="mx-2 btn btn-outline-warning animacion-btn-liked user-select-none"{{else}}class="mx-2 btn btn-outline-light animacion-btn-unliked user-select-none"{{/if}}{{/if}}>
+        <svg class="{{#if diLike}}liked user-select-none w-100{{else}}unliked user-select-none w-100{{/if}}" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50"><path d="M 25 47.300781 L 24.359375 46.769531 C 23.144531 45.753906 21.5 44.652344 19.59375 43.378906 C 12.167969 38.40625 2 31.601563 2 20 C 2 12.832031 7.832031 7 15 7 C 18.894531 7 22.542969 8.734375 25 11.699219 C 27.457031 8.734375 31.105469 7 35 7 C 42.167969 7 48 12.832031 48 20 C 48 31.601563 37.832031 38.40625 30.40625 43.378906 C 28.5 44.652344 26.855469 45.753906 25.640625 46.769531 Z"></path></a>
+        {{#if (eq post.user userAct)}}<div><small class="text-muted m-2">* No puedes darte like a ti mismo/a. </small></div>{{/if}}
     </div>
-</div>
+</div> 

@@ -1,6 +1,6 @@
 const express = require('express')
 const routerPosts = express.Router()
-const { newPost, createPost, showPost, deletePost, showPostFormEdit, editPost, getPostsPaginacion, modificarPaginacion } = require('../controllers/posts')
+const { newPost, createPost, showPost, deletePost, showPostFormEdit, editPost, getPostsPaginacion, modificarPaginacion, modificarLikes } = require('../controllers/posts')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
 // Rutas de Index
@@ -10,7 +10,8 @@ routerPosts.get('/posts/', isAuthenticated,getPostsPaginacion)
 routerPosts.get('/posts/new', isAuthenticated, newPost)
 //TODO: Hacer SLUG en vez de ID
 routerPosts.get('/posts/edit/:id', isAuthenticated, showPostFormEdit)
-routerPosts.get('/posts/:slug', showPost) //Lo utiliza tambien la vista home. 
+routerPosts.get('/posts/:slug', isAuthenticated, showPost) //Lo utiliza tambien la vista home. 
+routerPosts.get('/posts/like/:id', isAuthenticated, modificarLikes);
 
 routerPosts.post('/posts',isAuthenticated ,createPost)
 routerPosts.post('/posts/cambiarPaginacion', modificarPaginacion);

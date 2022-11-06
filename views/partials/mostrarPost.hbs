@@ -4,12 +4,12 @@
 {{#if (eq @root.mostrar.tema 'theme3')}}class="col-sm-6 col-lg-3 col-md-6 card text-white bg-warning disabled btn border-light border my-3 mx-1"{{else}}
     class="col-sm-6 col-lg-4 col-md-6 card text-light bg-vintage my-3 mx-4 p-4 border-secondary"{{/if}}
     style="max-height:700px; overflow: hidden; word-break: break-word;">
-    <div class="div-card card-img-top w-100 my-2">
+    <a href="/posts/{{post.slug}}" class="div-card card-img-top w-100 my-2">
         <img src="{{post.img}}" class="image rounded-3" alt="postCard">
         <div class="overlay rounded-3 text-light" >
             <div class="text-overlay user-select-none" style="max-width: 15rem; word-break: break-word;"><small>{{post.title}}</small> </div>
         </div>
-    </div>
+    </a>
 
     <div 
     {{#if (eq @root.mostrar.tema 'theme1')}}class="card-header rounded text-center bg-dark"{{/if}}
@@ -30,7 +30,20 @@
         <p class="card-text col-12 ">{{{post.body}}}</p>
         {{#if (and post.user @root.mostrar.autor)}}<small class="col-12 card-text text-warning"> {{post.user}}</small>{{/if}}
         {{#if (and post.fecha @root.mostrar.fecha)}}<small class="col-12 card-text"> {{post.fecha}}</small>{{/if}}
+        {{#if post.likes}}
+        <div class="d-flex">
+            <svg class="{{#if post.liked}}liked user-select-none{{else}}unliked user-select-none{{/if}}" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15" viewBox="0 0 50 50"><path d="M 25 47.300781 L 24.359375 46.769531 C 23.144531 45.753906 21.5 44.652344 19.59375 43.378906 C 12.167969 38.40625 2 31.601563 2 20 C 2 12.832031 7.832031 7 15 7 C 18.894531 7 22.542969 8.734375 25 11.699219 C 27.457031 8.734375 31.105469 7 35 7 C 42.167969 7 48 12.832031 48 20 C 48 31.601563 37.832031 38.40625 30.40625 43.378906 C 28.5 44.652344 26.855469 45.753906 25.640625 46.769531 Z"></path></a><p class="mx-2 {{#if post.liked}}text-warning{{else}}text-light{{/if}} text-center">{{post.likes}}</p> 
+        </div>
+        {{/if}}
     </div>
+    {{#if post.userAct}}
+    <a href="/posts/like/{{post.slug}}" {{#if (eq post.user post.userAct)}}class="btn btn-outline-warning disabled mx-2 user-select-none"{{else}}
+        {{#if post.liked}}class="mx-2 btn btn-outline-warning animacion-btn-liked user-select-none"{{else}}class="mx-2 btn btn-outline-light animacion-btn-unliked user-select-none"{{/if}}{{/if}}>
+        <svg class="{{#if post.liked}}liked user-select-none w-100{{else}}unliked user-select-none w-100{{/if}}" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50"><path d="M 25 47.300781 L 24.359375 46.769531 C 23.144531 45.753906 21.5 44.652344 19.59375 43.378906 C 12.167969 38.40625 2 31.601563 2 20 C 2 12.832031 7.832031 7 15 7 C 18.894531 7 22.542969 8.734375 25 11.699219 C 27.457031 8.734375 31.105469 7 35 7 C 42.167969 7 48 12.832031 48 20 C 48 31.601563 37.832031 38.40625 30.40625 43.378906 C 28.5 44.652344 26.855469 45.753906 25.640625 46.769531 Z"></path></a>
+        {{#if (eq post.user post.userAct)}}<div><small class="text-muted m-2">* No puedes darte like a ti mismo/a. </small></div>{{/if}}
+    {{else}}
+    <a href="/posts/like/{{post.slug}}" class="btn btn-outline-warning disabled mx-2 user-select-none">
+    <svg class="unliked user-select-none w-100" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50"><path d="M 25 47.300781 L 24.359375 46.769531 C 23.144531 45.753906 21.5 44.652344 19.59375 43.378906 C 12.167969 38.40625 2 31.601563 2 20 C 2 12.832031 7.832031 7 15 7 C 18.894531 7 22.542969 8.734375 25 11.699219 C 27.457031 8.734375 31.105469 7 35 7 C 42.167969 7 48 12.832031 48 20 C 48 31.601563 37.832031 38.40625 30.40625 43.378906 C 28.5 44.652344 26.855469 45.753906 25.640625 46.769531 Z"></path></a>
+    <div><small class="text-muted m-2">* Es necesario iniciar sesion para dar like. </small></div>
+    {{/if}}
 </div>
-    {{!-- {{@root.locals.mostrar.fecha}} --}}
-    {{!-- {{@root.mostrar.fecha}} --}}

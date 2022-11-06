@@ -20,7 +20,11 @@ const showHomeAllPosts = async (req, res = response)=>{
                 index:postsArray.length - 3
             }
         }
+        let likesDelUser = {totalUserLikes: []};
+        if (req.user)
+            likesDelUser = {totalUserLikes: req.user.totalLikesPosts};
 
+        
         if (req.query.skip != null && req.query.limit != null){
             let posts = postsArray.slice(req.query.skip, req.query.limit);
             const paginacion = {
@@ -28,7 +32,20 @@ const showHomeAllPosts = async (req, res = response)=>{
                 desde: req.query.skip,
                 maximo: postsArray.length
             };
+            if (req.user){//TODO: Refactor CB
+                posts.forEach(ele => {
+                    console.log("Condicion:" , ele.slug)
+                    ele.slug
+                    for (i = 0; i < req.user.totalLikesPosts.length; i++) {
+                        if (ele.slug == req.user.totalLikesPosts[i])
+                            Object.assign(ele, {liked:true})
+                    }
+                    Object.assign(ele, {userAct: req.user.name})
+                    console.log("Condicion:" , ele.liked);
+                });
+            }
             homePagination = true;
+            console.log(posts);
             res.status(200).render("home/home", {
                 title,
                 posts,
@@ -37,12 +54,23 @@ const showHomeAllPosts = async (req, res = response)=>{
                 homePagination
             });
         }else{
-            homePagination = false;
+            if (req.user){
+                postsArray.forEach(ele => {
+                    console.log("Condicion:" , ele.slug)
+                    ele.slug
+                    for (i = 0; i < req.user.totalLikesPosts.length; i++) {
+                        if (ele.slug == req.user.totalLikesPosts[i])
+                            Object.assign(ele, {liked:true})
+                    }
+                    Object.assign(ele, {userAct: req.user.name})
+                    console.log("Condicion:" , ele.liked);
+                });
+            }
             res.status(200).render("home/home", {
                 title,
                 posts: postsArray,
                 masRecientes,
-                homePagination
+                homePagination,
             });
         }
 

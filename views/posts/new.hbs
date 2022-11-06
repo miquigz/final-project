@@ -17,9 +17,12 @@
     
     <form action="/posts" method="POST" enctype="multipart/form-data">
         <label for="imageInput">Imagen del post: <small class="text-warning">(Opcional)</small> </label>
-        <input type="file" id="imageInput" name="postImage" />
-        <small class="text-muted user-select-none"> <small class="text-danger font-weight-bold">*</small> Si no subes ninguna se generara una aleatoria(1-12) de una imagen de un , el <label class="text-warning user-select-none">postcard</label>.</small>
-        <label for="emoji">Emoji del post: <small class="text-warning">(Opcional)</small> </label>
+        <div>    
+            <input class="form-input form-control-file" type="file" id="imageInput" name="postImage" />
+        </div>
+        <div class="mb-2"><small class="text-muted user-select-none mb-2"> <small class="text-danger font-weight-bold">*</small> Si no subes ninguna se generara una aleatoria(1-12) imagen <label class="text-warning user-select-none"> postcard</label>.</small></div>
+        
+        <label for="emoji">Emoji del post: <small class="text-warning mt-4">(Opcional)</small> </label>
         {{!-- <div id="emoji" class="w-25"> --}}
         <textarea type="text" id="emoji" name="emoji" class="w-25">{{valorEmoji}}</textarea>
         <div {{#if errorTitle}} class="form-group has-danger" {{else}} class="form-group" {{/if}}>

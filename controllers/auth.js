@@ -33,7 +33,6 @@ const signUp = async (req, res = response) => {
         req.flash('signup_userExist', "El e-mail ingresado ya esta actualmente registrado.")
         return res.redirect('/auth/signup');
     }
-    console.log("SLUG ES:", req.body)
     const newUser = new Auth({name, email, password, slugUser});
     //Encriptamos el password q escribe el usuario para registrarse(signUp)
     newUser.password = await newUser.passwordEncrypt(password);

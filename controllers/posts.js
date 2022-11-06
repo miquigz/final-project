@@ -1,8 +1,8 @@
 const { request, response } = require("express");
 const Auth = require("../models/auth");
 const Post = require("../models/posts");
-const sharp = require('sharp')
-const path = require('path');
+const sharp = require('sharp');
+const { findOne, findOneAndUpdate } = require("../models/auth");
 
 let valor = 5; //Paginacion valor por defecto
 let postsArray;
@@ -88,8 +88,10 @@ const showPost = async (req, res = response) => {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
     if (post === null) res.redirect("/");
     res.render("posts/show", {
-      title: `Informacion: ${post.title}`,
-      post
+      title: `Informacion: ${post.title || ''}`,
+      post,
+      diLike: req.user.totalLikesPosts.includes(req.params.slug),
+      userAct: req.user.name
     })
   } catch (error) {
     console.log('Error SHOW' , error)
@@ -282,6 +284,71 @@ const editPost = async (req, res = response) => {
   }
 }
 
+const yaTieneLike = async (user, postSlugAct)=>{
+  try {
+    console.log("Total likes user:", user.totalLikesPosts);
+    if (user.totalLikesPosts != undefined){//Si tengo posts likeados entro en consulta, sino retorno false.
+      let aux = user.totalLikesPosts.includes(postSlugAct);
+      console.log("entre en condicion-yatieneLIke, likes de este post?:", aux);
+      if(aux){
+        return true
+      }
+    }
+    return false;
+  } catch (error) {
+    console.log(`Error en yaTieneLike `, error)
+  }
+}
+
+const actualizarLikes = async (user, postSlugAct, auxLikes ,sumar = false)=>{
+  try {
+    const auxUser = await Auth.findOne({name: user.name});
+    if (sumar){
+      await Post.findOneAndUpdate({slug: postSlugAct}, {likes: auxLikes});
+      // auxUser.totalLikesPosts.push(postSlugAct).update();
+      await auxUser.totalLikesPosts.push(postSlugAct)
+      await auxUser.save();
+      console.log(`SUME EN USER` , auxUser.totalLikesPosts);
+    }else{
+      await Post.findOneAndUpdate({slug: postSlugAct}, {likes: auxLikes});
+      await auxUser.totalLikesPosts.remove(postSlugAct);
+      await auxUser.save();
+      // await auxUser.update();
+      console.log(`RESTA EN USER`);
+    }
+  } catch (error) {
+    console.log('Error en actualizarUserLikes', error);
+  }
+}
+
+const modificarLikes = async (req, res)=>{
+  try {
+    console.log(req.params);
+    if (req.params){
+      let postActual = await Post.findOne({slug: req.params.id}).lean();
+      console.log(`POSTACTUAL:${postActual.title}-SUSLIKES:${postActual.likes}`);
+      if (req.user.name !==  postActual.user){
+        // console.log("YaTieneLike devuelve:", await yaTieneLike(req.user, postActual.slug));
+        let auxLikes = postActual.likes || 0; //Aux actualizar
+        if (await yaTieneLike(req.user, postActual.slug)){ //Si ya le di like entonces se lo quito.
+          auxLikes = auxLikes - 1;
+          await actualizarLikes(req.user, req.params.id, auxLikes);
+        }else{
+          auxLikes = auxLikes + 1; //TODO: hacer auxLikes++
+          await actualizarLikes(req.user, req.params.id, auxLikes, true);
+        }
+        // res.redirect(`/posts/${postActual.slug}`);
+        res.redirect(req.headers.referer);
+      }else{
+        console.log("no puedes darte like a ti mismo");
+      }
+    }
+      res.status(404).render('error/error', {errorTitle: 'POST NO ENCONTRADO PARA DAR LIKE', errDesc: 'intente nuevamente'});    
+  } catch (error) {
+    console.log(`Error en modificarLikes `, error)
+  }
+}
+
 module.exports = {
   showPost,
   deletePost,
@@ -290,5 +357,6 @@ module.exports = {
   showPostFormEdit,
   editPost,
   getPostsPaginacion,
-  modificarPaginacion
+  modificarPaginacion,
+  modificarLikes
 };
