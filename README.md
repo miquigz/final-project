@@ -40,3 +40,10 @@ Requisitos para correr el proyecto de forma local: Contar con MongoDB, mongo she
 >**connect-flash**: Nos permitirá generar variables de entorno que permanezcan en la aplicación(persistan). Con esto mismo podemos enviar información entre distintas pantallas.
 
 >**method-override:**: Con el fin de poder seguir las reglas de las rutas REST, a la hora de editar y borrar utilizamos metodos PUT y DELETE, estos metodos no estan implementados en HTML(navegador), por lo cual utilizamos esta libreria para poder sobrescribir metodos y forzar peticiones PUT/DELETE.
+
+### Vista Previa del Proyecto:
+![Project preview 1](https://i.postimg.cc/4dqCd4y4/preview1.png)
+![Project preview 2](https://i.postimg.cc/j5G9T83L/preview2.png)
+![Project preview 3](https://i.postimg.cc/HsGD1LFB/preview3.png)
+![Project preview 4](https://i.postimg.cc/RZRjtLhD/preview6.png)
+![enter image description here](https://i.postimg.cc/QtBPRLb2/preview4.png)
