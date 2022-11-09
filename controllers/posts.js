@@ -2,15 +2,16 @@ const { request, response } = require("express");
 const Auth = require("../models/auth");
 const Post = require("../models/posts");
 const sharp = require('sharp');
-const { findOne, findOneAndUpdate } = require("../models/auth");
 
 let valor = 5; //Paginacion valor por defecto
 let postsArray;
 let paginacionBoolean = false;
 let mostrarPosts;
 // INDEX
-const cortarPosts = (posts, desde, hasta)=>{
+const cortarPosts = (posts, desde, hasta, userName)=>{
   let postsCortados = posts.slice(desde, hasta);
+  if (userName)
+    postsCortados.forEach(element => { element = Object.assign(element, {userActual: userName}); });  
   return postsCortados
 }
 
@@ -26,12 +27,9 @@ const getPostsPaginacion = async (req, res = response)=>{
       postsArray = await Post.find({}).lean();
       mostrarPosts = '';
     }
-    //TODO: hace callback
     let postsCortados, desde, hasta;
-    postsCortados = cortarPosts(postsArray, req.query.skip, req.query.limit);
-    desde = req.query.skip;
-    hasta = req.query.limit;
-    postsCortados.forEach(element => { element = Object.assign(element, {userActual: req.user.name}); });
+    desde = req.query.skip;  hasta = req.query.limit;
+    postsCortados = cortarPosts(postsArray, desde, hasta, req.user.name);
     const paginacion = { desde, hasta, maximo: postsArray.length, valor }
     res.status(200).render("posts/index", {
       posts: postsCortados,
@@ -53,7 +51,6 @@ const modificarPaginacion = async(req, res = response)=>{
     }else if(req.query.editable){//Editables
       postsArray = await Post.find({ $or: [ {user: res.locals.user.name} , { user: undefined} ] }).lean();
       mostrarPosts = 'editable';
-      
     }else{ //Busqueda comun(total):
       postsArray = await Post.find({}).lean();
       mostrarPosts = '';
@@ -68,8 +65,8 @@ const modificarPaginacion = async(req, res = response)=>{
       }else
         valor = req.body.paginacionValor;
     }
-    let postsCortados = cortarPosts(postsArray, 0, valor);
-    postsCortados.forEach(element => { element = Object.assign(element, {userActual: req.user.name}); });
+    let postsCortados = cortarPosts(postsArray, 0, valor, req.user.name);
+    // postsCortados.forEach(element => { element = Object.assign(element, {userActual: req.user.name}); });
     const paginacionTwo = { desde:0, hasta:valor, maximo: postsArray.length, valor }
     res.status(200).render("posts/index", {
       posts: postsCortados,
@@ -108,7 +105,7 @@ const deletePost = async (req = request, res = response) => {
             await actualizarTotal(req.user.name, false); //RESTAMOS TOTAL POSTS
         }else{
           console.log("No se puede borrar este elemento, verifique su usuario");
-          res.status(400).redirect(req.headers.referer);
+          res.status(401).redirect(req.headers.referer);
         }
         res.status(200).redirect(req.headers.referer);
         // console.log(req.headers.referer)
@@ -130,17 +127,14 @@ const tituloDuplicado = async(titulo) =>{
   try {
     auxBoolean = false;
     console.log("title buscar:", titulo);
-    // {title: {$regex: titulo, $options 'i'}}
+    // {title: {$regex: titulo, $options: 'i'}}
     //Buscamos el titulo, indistintamente si es con mayus o no /{{title}}/i
-    await Post.exists({ title: new RegExp(titulo, 'i')}).then( result =>{
-      if (result){
-        auxBoolean= true;
-      }else
-        auxBoolean = false;
+    // ({ title: new RegExp(titulo, 'i')})
+    await Post.exists({title: {$regex: titulo, $options: 'i'}}).then( result =>{
+      auxBoolean = result;
     }).catch(err=>{ console.log("Error en PROMISE Duplicado",err); return err; })
 
     return auxBoolean;
-    
   } catch (error) {
     console.log("ERROR EN CB TituloDUplicado", error);
   }
@@ -149,9 +143,9 @@ const tituloDuplicado = async(titulo) =>{
 const actualizarTotal = async (userActual, suma = true)=>{
     try {
       const userUpdate = await Auth.findOne({name: userActual}).lean();
-      if (suma) 
+      if (suma)
         await Auth.findOneAndUpdate({name:userActual}, {totalPosts: (userUpdate.totalPosts || 0) + 1});
-      else 
+      else
         await Auth.findOneAndUpdate({name:userActual}, {totalPosts: userUpdate.totalPosts - 1});
     }
     catch (error) {
@@ -304,12 +298,13 @@ const actualizarLikes = async (user, postSlugAct, auxLikes ,sumar = false)=>{
   try {
     const auxUser = await Auth.findOne({name: user.name});
     if (sumar){
+      auxLikes = auxLikes + 1;
       await Post.findOneAndUpdate({slug: postSlugAct}, {likes: auxLikes});
-      // auxUser.totalLikesPosts.push(postSlugAct).update();
       await auxUser.totalLikesPosts.push(postSlugAct)
       await auxUser.save();
       console.log(`SUME EN USER` , auxUser.totalLikesPosts);
     }else{
+      auxLikes = auxLikes - 1;
       await Post.findOneAndUpdate({slug: postSlugAct}, {likes: auxLikes});
       await auxUser.totalLikesPosts.remove(postSlugAct);
       await auxUser.save();
@@ -328,22 +323,19 @@ const modificarLikes = async (req, res)=>{
       let postActual = await Post.findOne({slug: req.params.id}).lean();
       console.log(`POSTACTUAL:${postActual.title}-SUSLIKES:${postActual.likes}`);
       if (req.user.name !==  postActual.user){
-        // console.log("YaTieneLike devuelve:", await yaTieneLike(req.user, postActual.slug));
         let auxLikes = postActual.likes || 0; //Aux actualizar
-        if (await yaTieneLike(req.user, postActual.slug)){ //Si ya le di like entonces se lo quito.
-          auxLikes = auxLikes - 1;
+        // await actualizarLikes(req.user. req.params.id, auxLikes, !(await yaTieneLike(req.user, postActual.slug)));
+        if (await yaTieneLike(req.user, postActual.slug)){
           await actualizarLikes(req.user, req.params.id, auxLikes);
         }else{
-          auxLikes = auxLikes + 1; //TODO: hacer auxLikes++
           await actualizarLikes(req.user, req.params.id, auxLikes, true);
         }
-        // res.redirect(`/posts/${postActual.slug}`);
         res.redirect(req.headers.referer);
       }else{
         console.log("no puedes darte like a ti mismo");
       }
     }
-      res.status(404).render('error/error', {errorTitle: 'POST NO ENCONTRADO PARA DAR LIKE', errDesc: 'intente nuevamente'});    
+      res.status(404).render('error/error', {errorTitle: 'Error al intentar dar LIKE', errDesc: 'intente nuevamente'});    
   } catch (error) {
     console.log(`Error en modificarLikes `, error)
   }

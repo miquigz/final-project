@@ -1,6 +1,23 @@
 const { response } = require("express");
 const Post = require("../models/posts");
 
+const insertarTotalLikePosts = async (posts, userAct)=>{
+    try {
+        posts.forEach(ele => {
+            console.log("Condicion:" , ele.slug)
+            for (i = 0; i < userAct.totalLikesPosts.length; i++) {
+                if (ele.slug == userAct.totalLikesPosts[i])
+                    Object.assign(ele, {liked:true})
+            }
+            Object.assign(ele, {userAct: userAct.name})
+            console.log("Condicion:" , ele.liked);
+        });
+        return posts;
+    } catch (error) {
+        console.log(`Error en insertarTotalLikePosts `, error)
+    }
+}
+
 const showHomeAllPosts = async (req, res = response)=>{
     try {
         let postsArray = await Post.find({}).lean(); // Me deja un obj puro de JS
@@ -32,20 +49,11 @@ const showHomeAllPosts = async (req, res = response)=>{
                 desde: req.query.skip,
                 maximo: postsArray.length
             };
-            if (req.user){//TODO: Refactor CB
-                posts.forEach(ele => {
-                    console.log("Condicion:" , ele.slug)
-                    ele.slug
-                    for (i = 0; i < req.user.totalLikesPosts.length; i++) {
-                        if (ele.slug == req.user.totalLikesPosts[i])
-                            Object.assign(ele, {liked:true})
-                    }
-                    Object.assign(ele, {userAct: req.user.name})
-                    console.log("Condicion:" , ele.liked);
-                });
+            
+            if (req.user){
+                posts = await insertarTotalLikePosts(posts, req.user);
             }
             homePagination = true;
-            console.log(posts);
             res.status(200).render("home/home", {
                 title,
                 posts,
@@ -55,16 +63,7 @@ const showHomeAllPosts = async (req, res = response)=>{
             });
         }else{
             if (req.user){
-                postsArray.forEach(ele => {
-                    console.log("Condicion:" , ele.slug)
-                    ele.slug
-                    for (i = 0; i < req.user.totalLikesPosts.length; i++) {
-                        if (ele.slug == req.user.totalLikesPosts[i])
-                            Object.assign(ele, {liked:true})
-                    }
-                    Object.assign(ele, {userAct: req.user.name})
-                    console.log("Condicion:" , ele.liked);
-                });
+                postsArray = await insertarTotalLikePosts(postsArray, req.user);
             }
             res.status(200).render("home/home", {
                 title,
@@ -114,6 +113,7 @@ const actualizarTema = async (req, res)=>{
 const switchConfig = async(req, res)=>{
     try {
         // res.app.locals.mostrarConfig = res.app.mostrarConfig ? false : true
+        // res.app.locals.mostrarConfig = res.app.locals.mostrarConfig == false ? true : false;
         if (res.app.locals.mostrarConfig)
             res.app.locals.mostrarConfig = false;
         else
@@ -125,7 +125,7 @@ const switchConfig = async(req, res)=>{
 }
 
 const switchCarrousel = async(req, res)=>{
-    try {
+    try {//TODO: Pasar a QueryStrings 
         if (res.app.locals.mostrarCarrousel)
             res.app.locals.mostrarCarrousel = false;
         else
@@ -143,7 +143,6 @@ const redirectHome = async (req, res)=>{
         console.log(`Error en redirectHome `, error)
     }
 }
-
 
 module.exports = {
     showHomeAllPosts,

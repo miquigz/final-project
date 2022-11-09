@@ -1,7 +1,8 @@
 // const app = require('express')()
 const express = require('express')
-const methodOverride = require('method-override')
 const session = require('express-session')
+
+const methodOverride = require('method-override')
 const path = require('path');
 const sharp = require('sharp')
 const MongoStore = require('connect-mongo')
@@ -11,13 +12,11 @@ const flash = require('connect-flash');
 require('dotenv').config()
 require('./config/passport')
 
-
 const { dbConnection } = require('./database/config')
 const { routerAuth } = require('./routes/auth')
 // const { routerDev } = require('./routes/db')
 const { routerPosts } = require('./routes/posts')
 const { routerHome } = require('./routes/home')
-
 
 // Inicializo la aplicación de express
 const app = express()
