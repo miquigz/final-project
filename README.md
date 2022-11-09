@@ -14,7 +14,8 @@ Requisitos para correr el proyecto de forma local: Contar con MongoDB, mongo she
 > > **npm run dev**
 > > > **Abrir localhost:PORT-Especificado/home**
 ### También esta disponible en linea :
-``link project: https://bit.ly/3t4Q3Fi``
+``link project:``
+**https://bit.ly/3t4Q3Fi**
 
 ## Librerías utilizadas y su por que:
 ##### Autenticación y Seguridad:
